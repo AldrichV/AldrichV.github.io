@@ -60,7 +60,7 @@
 
     var canvas = fig.querySelector('canvas');
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    
     renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.outputEncoding = THREE.sRGBEncoding;
     var scene = new THREE.Scene(); scene.background = new THREE.Color(0xf1f4f5);
@@ -184,21 +184,29 @@
     var broken = false, framed = false;
     function draw() {
       queued = false; if (broken) return;
-      try { renderer.render(scene, camera); } catch (e) { broken = true; fail(e); }
+      try { fit(); renderer.render(scene, camera); } catch (e) { broken = true; fail(e); }
+    }
+    // keep the drawing buffer matched to the canvas's on-screen size and the screen's pixel density
+    // (checked every frame, so browser zoom, late layout or a missed resize can't leave it blurry)
+    function quality() { return Math.min(2.5, Math.max(1.5, window.devicePixelRatio || 1)); }
+    function fit() {
+      var w = canvas.clientWidth, hgt = canvas.clientHeight;
+      if (w < 2 || hgt < 2) return false;
+      var pr = quality();
+      if (canvas.width !== Math.round(w * pr) || canvas.height !== Math.round(hgt * pr)) {
+        renderer.setPixelRatio(pr); renderer.setSize(w, hgt, false);
+        camera.aspect = w / hgt; camera.updateProjectionMatrix();
+        if (!framed) { framed = true; setView(view); }
+        note('size ' + w + '×' + hgt + ' @' + pr + ' → ' + canvas.width + '×' + canvas.height);
+      }
+      return true;
     }
     function render() { if (queued) return; queued = true; requestAnimationFrame(draw); }
-    function resize() {
-      var r = canvas.parentElement.getBoundingClientRect(), w = Math.round(r.width), hgt = Math.round(r.height);
-      if (w < 2 || hgt < 2) return;                      // not laid out yet; the observer will call again
-      renderer.setSize(w, hgt, false); camera.aspect = w / hgt; camera.updateProjectionMatrix();
-      if (!framed) { framed = true; setView(view); }      // frame the first time we know the real size
-      note('size ' + w + '×' + hgt + ' @' + renderer.getPixelRatio());
-      render();
-    }
+    function resize() { render(); }                       // draw() re-fits the buffer before every frame
     canvas.addEventListener('webglcontextlost', function (e) { e.preventDefault(); note('context lost'); }, false);
     canvas.addEventListener('webglcontextrestored', function () { note('context restored'); render(); }, false);
     document.addEventListener('visibilitychange', function () { if (!document.hidden) render(); });
-    window.addEventListener('load', resize);
+    window.addEventListener('load', resize); window.addEventListener('resize', resize);
 
     fig.querySelectorAll('[data-view]').forEach(function (b) { b.addEventListener('click', function () { setView(b.dataset.view); }); });
     fig.querySelectorAll('[data-k]').forEach(function (el) {
@@ -212,8 +220,8 @@
     if ('ResizeObserver' in window) new ResizeObserver(resize).observe(canvas.parentElement); else window.addEventListener('resize', resize);
     fig.classList.add('is-live');
     var gl = renderer.getContext(); note('webgl ' + (gl && gl.getParameter(gl.VERSION)));
-    resize(); update();
-    setTimeout(resize, 300);
+    update();
+    setTimeout(resize, 300); setTimeout(resize, 1500);
   }
 })();
 </script>
