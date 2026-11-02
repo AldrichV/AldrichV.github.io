@@ -1,0 +1,43 @@
+---
+layout: default
+title: Journal
+description: The other half of the notebook — everyday things, photos and what's on Aldrich's mind.
+---
+{% assign entries = site.journal | sort: "date" | reverse %}
+
+<section class="wrap journal-head">
+  <p class="hero-hello" aria-hidden="true">the other half of the notebook</p>
+  <h1 class="journal-title">Journal</h1>
+  <svg class="hero-underline" viewBox="0 0 700 22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M4 12 C 140 18, 300 4, 460 12 S 640 16, 696 9"/></svg>
+  <p class="hero-intro">No gear ratios here. Just everyday stuff, photos, and whatever's on my mind.</p>
+</section>
+
+<section class="wrap">
+  {% if entries.size > 0 %}
+  <ul class="scrapwall">
+    {% for e in entries %}
+    {% assign first = e.photos | first %}
+    <li class="scrap {% if first %}scrap-photo{% else %}scrap-note{% endif %} tape-{{ e.tape | default: 'yellow' }}">
+      <a href="{{ e.url | relative_url }}">
+        <time class="stamp" datetime="{{ e.date | date_to_xmlschema }}">{{ e.date | date: "%b %-d" }}<small>{{ e.date | date: "%Y" }}</small></time>
+        {% if first %}
+        <span class="polaroid"><img src="{{ first.src | relative_url }}" alt="{{ first.alt | default: first.caption }}" loading="lazy"><span class="polaroid-cap">{{ first.caption }}</span></span>
+        {% endif %}
+        <span class="scrap-title">{{ e.title }}</span>
+        {% unless first %}<span class="scrap-excerpt">{{ e.content | strip_html | truncatewords: 26 }}</span>{% endunless %}
+        {% if e.mood %}<span class="scrap-mood">feeling {{ e.mood }}</span>{% endif %}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="blank-page">
+    <p class="blank-hand">this page is still blank…</p>
+    <p class="blank-sub">first entry coming soon</p>
+    <svg class="doodle" viewBox="0 0 160 120" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M30 96 L118 24 L134 40 L46 112 L24 118 Z"/><path d="M112 30 L128 46"/><path d="M24 118 L34 108"/>
+      <path d="M8 104 C 20 98, 26 110, 38 104" class="doodle-red"/>
+    </svg>
+  </div>
+  {% endif %}
+</section>

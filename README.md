@@ -67,6 +67,37 @@ The write-up, in Markdown. Use ## for section headings.
 Images go in `assets/images/projects/`. Around 1400–1800 px wide JPGs at ~80% quality keep pages fast.
 Renders and plots sit whole on white plates, so they're never cropped.
 
+## Write a journal entry
+
+The Journal (`/journal/`) is the personal side: a scrapbook wall of entries, each opening as a ruled diary page.
+
+**From a computer or phone (github.com or the GitHub app):**
+
+1. Open the `_journal` folder in the repo and open `2026-11-02-example-entry.md`. It's hidden from the site and shows every option.
+2. Go back to `_journal` and choose **Add file → Create new file**. Name it with the date and a short title, e.g. `2026-11-14-first-snow.md`.
+3. Paste this in and write:
+
+```markdown
+---
+title: First snow
+date: 2026-11-14
+mood: "cozy"              # optional
+where: "Toronto"          # optional
+listening: "an album"     # optional
+tape: pink                # yellow, pink, mint or blue
+photos:                   # optional polaroids at the top
+  - src: /assets/images/journal/first-snow.jpg
+    caption: "out the window"
+---
+
+Whatever you want to say.
+```
+
+4. For photos, open `assets/images/journal`, choose **Add file → Upload files**, and upload your pictures first. Phone photos are big, so resize them to about 1600 px wide if you can.
+5. Commit. The entry shows up on the wall a minute or two later, and the newest three also appear under "From the journal" on the About page.
+
+Entries with photos show as polaroids on the wall; entries without show as notecards. To hide an entry without deleting it, add `published: false`.
+
 ## Write a post
 
 Add `_posts/YYYY-MM-DD-short-title.md`:
@@ -93,5 +124,7 @@ With Ruby installed: `bundle install`, then `bundle exec jekyll serve`, and open
 | `index.html` | Home page |
 | `_projects/` | One Markdown file per project |
 | `_data/coursework.yml` | The reports and research list |
+| `_journal/` | Journal entries (one Markdown file each) |
+| `assets/images/journal/` | Journal photos |
 | `_layouts/`, `_includes/` | Page templates |
 | `assets/css/site.css` | All styling; colours and type sizes are at the top |

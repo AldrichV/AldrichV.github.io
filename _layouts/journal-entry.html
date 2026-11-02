@@ -1,0 +1,54 @@
+---
+layout: default
+---
+{% assign entries = site.journal | sort: "date" %}
+{% for e in entries %}{% if e.url == page.url %}{% assign idx = forloop.index0 %}{% endif %}{% endfor %}
+{% assign prev_i = idx | minus: 1 %}
+{% assign next_i = idx | plus: 1 %}
+
+<article class="wrap diary">
+  <div class="diary-page">
+    <header class="diary-head">
+      <time class="stamp stamp-lg" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d" }}<small>{{ page.date | date: "%Y" }}</small></time>
+      <h1>{{ page.title }}</h1>
+      {% if page.mood or page.listening or page.where %}
+      <ul class="diary-meta">
+        {% if page.where %}<li><span>at</span> {{ page.where }}</li>{% endif %}
+        {% if page.mood %}<li><span>feeling</span> {{ page.mood }}</li>{% endif %}
+        {% if page.listening %}<li><span>on repeat</span> {{ page.listening }}</li>{% endif %}
+      </ul>
+      {% endif %}
+    </header>
+
+    {% if page.photos %}
+    <div class="photo-spread">
+      {% for ph in page.photos %}
+      <figure class="polaroid tape-{{ page.tape | default: 'yellow' }}">
+        <img src="{{ ph.src | relative_url }}" alt="{{ ph.alt | default: ph.caption }}">
+        {% if ph.caption %}<figcaption class="polaroid-cap">{{ ph.caption }}</figcaption>{% endif %}
+      </figure>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="diary-body">
+      {{ content }}
+    </div>
+  </div>
+
+  <nav class="diary-nav" aria-label="More entries">
+    {% if prev_i >= 0 %}{% assign prev = entries[prev_i] %}<a class="older" href="{{ prev.url | relative_url }}"><span>← older</span>{{ prev.title }}</a>{% else %}<span></span>{% endif %}
+    <a class="all" href="{{ '/journal/' | relative_url }}">back to the journal</a>
+    {% if next_i < entries.size %}{% assign next = entries[next_i] %}<a class="newer" href="{{ next.url | relative_url }}"><span>newer →</span>{{ next.title }}</a>{% else %}<span></span>{% endif %}
+  </nav>
+</article>
+
+<script>
+document.querySelectorAll('.diary-body p > img[alt]').forEach(function (img) {
+  if (!img.alt) return;
+  var cap = document.createElement('span');
+  cap.className = 'polaroid-cap';
+  cap.textContent = img.alt;
+  img.insertAdjacentElement('afterend', cap);
+});
+</script>
