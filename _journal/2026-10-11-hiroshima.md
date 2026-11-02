@@ -27,7 +27,7 @@ timeline:
   - time: "1:29 pm"
     title: The aquarium
     photos:
-      - { src: /assets/images/journal/2026-10-11-hiroshima/penguin.jpg, video: /assets/images/journal/2026-10-11-hiroshima/penguin.mp4, caption: "penguin overhead" }
+      - { src: /assets/images/journal/2026-10-11-hiroshima/turtle.jpg, video: /assets/images/journal/2026-10-11-hiroshima/turtle.mp4, caption: "sea turtle swimming overhead" }
       - { src: /assets/images/journal/2026-10-11-hiroshima/goldfish.jpg, video: /assets/images/journal/2026-10-11-hiroshima/goldfish.mp4, caption: "goldfish in a glass bowl" }
       - { src: /assets/images/journal/2026-10-11-hiroshima/lobster.jpg, caption: "up close to the glass" }
       - { src: /assets/images/journal/2026-10-11-hiroshima/tank.jpg, caption: "one of the tanks" }
