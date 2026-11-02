@@ -1,10 +1,11 @@
 # Site settings — edit these first
 title: Aldrich Valloyas
-description: Mechanical engineering projects and notes by Aldrich Valloyas.
+description: Engineering work, passion projects and a journal by Aldrich Valloyas.
 intro: >-
-  I study mechanical engineering at York University. I like taking an idea
-  from a hand sketch to CAD to something that floats, drives or spins — then
-  finding out, on the bench or in the bathtub, whether it actually works.
+  I'm a mechanical engineering graduate, now working in engineering and
+  building passion projects on the side. I like taking an idea from a hand
+  sketch to CAD to something that floats, drives or spins — then finding out,
+  on the bench or in the bathtub, whether it actually works.
 
 # Contact links shown in the footer. Leave a value empty to hide it.
 email: "aldrichkylevalloyas@gmail.com"
