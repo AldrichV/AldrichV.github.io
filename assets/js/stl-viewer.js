@@ -61,7 +61,7 @@
 
     scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8478, 0.6));
     var sun = new THREE.DirectionalLight(0xffffff, 0.7); sun.castShadow = true;
-    sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0005; sun.shadow.normalBias = 0.02;
+    sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0005;
     scene.add(sun, sun.target);
     var fill = new THREE.DirectionalLight(0xffffff, 0.2); scene.add(fill);
 
@@ -78,7 +78,7 @@
         new THREE.GLTFLoader().load(p.src, function (g) {
           var obj = g.scene;
           if (p.scale) obj.scale.setScalar(p.scale);
-          obj.traverse(function (o) { if (o.isMesh) { o.castShadow = o.receiveShadow = true; if (p.color) o.material = new THREE.MeshStandardMaterial({ color: new THREE.Color(p.color).convertSRGBToLinear(), roughness: 0.6 }); } });
+          obj.traverse(function (o) { if (o.isMesh) { o.castShadow = o.receiveShadow = true; [].concat(o.material).forEach(function (mm) { if (mm && mm.metalness > 0.35) { mm.metalness = 0.35; mm.roughness = Math.max(mm.roughness, 0.35); } }); if (p.color) o.material = new THREE.MeshStandardMaterial({ color: new THREE.Color(p.color).convertSRGBToLinear(), roughness: 0.6 }); } });
           model.add(obj); meshes[i] = obj;
           if (--left === 0) ready();
         }, undefined, function (e) { fail(e || new Error('could not load ' + p.src)); });
@@ -93,7 +93,7 @@
       }, undefined, function (e) { fail(e || new Error('could not load ' + p.src)); });
     });
 
-    var center = new THREE.Vector3(), radius = 1, ground, homes = [], dirs = [];
+    var center = new THREE.Vector3(), radius = 1, ground, units = [];
     function ready() {
       startBtn.hidden = true;
       model.updateMatrixWorld(true);
@@ -105,23 +105,36 @@
       box.setFromObject(model); box.getCenter(center);
       ground = new THREE.Mesh(new THREE.CircleGeometry(radius * 2.2, 64), new THREE.ShadowMaterial({ opacity: 0.18 }));
       ground.rotation.x = -Math.PI / 2; ground.position.y = 0; ground.receiveShadow = true; scene.add(ground);
+      sun.shadow.normalBias = radius * 0.002;
       sun.position.set(radius * 1.2, radius * 2.4, radius * 1.6); sun.target.position.copy(center);
       fill.position.set(-radius * 1.5, radius, -radius);
       var sc = sun.shadow.camera; sc.left = sc.bottom = -radius * 1.5; sc.right = sc.top = radius * 1.5; sc.near = radius * 0.5; sc.far = radius * 6; sc.updateProjectionMatrix();
-      // explode directions: from the model centre to each part's centre (in the model's own frame)
+      // explode units: whole STL parts, or named nodes inside a GLB assembly (front matter `groups`)
       var mc = new THREE.Box3().setFromObject(model).getCenter(new THREE.Vector3());
-      meshes.forEach(function (m, i) {
-        homes[i] = m.position.clone();
-        var pc = new THREE.Box3().setFromObject(m).getCenter(new THREE.Vector3()).sub(mc);
-        var d = parts[i].explode ? new THREE.Vector3().fromArray(parts[i].explode) : pc.clone();
-        if (!parts[i].explode) { if (d.lengthSq() < 1e-6) d.set(0, 1, 0); d.normalize(); }
-        // convert world direction into the model group's local frame
-        var inv = new THREE.Matrix4().copy(model.matrixWorld).invert(); inv.setPosition(0, 0, 0);
-        if (!parts[i].explode) d.applyMatrix4(inv);
-        dirs[i] = d;
-      });
+      function toLocal(obj, v) {
+        if (!obj.parent) return v;
+        var q = new THREE.Quaternion(), sc = new THREE.Vector3(); obj.parent.getWorldQuaternion(q); obj.parent.getWorldScale(sc);
+        return v.applyQuaternion(q.invert()).divide(sc);
+      }
+      if (cfg.groups) {
+        var clean = THREE.PropertyBinding && THREE.PropertyBinding.sanitizeNodeName ? THREE.PropertyBinding.sanitizeNodeName : function (n) { return n; };
+        cfg.groups.forEach(function (g, gi) {
+          [].concat(g.match).forEach(function (n) {
+            var node = model.getObjectByName(clean(n)) || model.getObjectByName(n);
+            if (!node) { note('missing node ' + n); return; }
+            var w = g.explode ? new THREE.Vector3().fromArray(g.explode) : new THREE.Box3().setFromObject(node).getCenter(new THREE.Vector3()).sub(mc).normalize();
+            units.push({ obj: node, group: gi, home: node.position.clone(), dir: toLocal(node, w), spread: g.spread || 1 });
+          });
+        });
+      } else {
+        meshes.forEach(function (m, i) {
+          var w = parts[i].explode ? new THREE.Vector3().fromArray(parts[i].explode) : new THREE.Box3().setFromObject(m).getCenter(new THREE.Vector3()).sub(mc);
+          if (!parts[i].explode) { if (w.lengthSq() < 1e-6) w.set(0, 1, 0); w.normalize(); }
+          units.push({ obj: m, part: i, home: m.position.clone(), dir: toLocal(m, w), spread: parts[i].spread || 1 });
+        });
+      }
       fig.classList.add('is-live');
-      note('parts ' + meshes.length + ', radius ' + radius.toFixed(1));
+      note('parts ' + meshes.length + ', units ' + units.length + ', radius ' + radius.toFixed(3));
       render();
     }
 
@@ -162,11 +175,14 @@
     if (ex) ex.addEventListener('input', function () {
       var t = +ex.value; ex.nextElementSibling.textContent = Math.round(t * 100) + '%';
       var amt = t * radius * (cfg.explode || 0.6);
-      meshes.forEach(function (m, i) { m.position.copy(homes[i]).addScaledVector(dirs[i], amt * (parts[i].spread || 1)); });
+      units.forEach(function (u) { u.obj.position.copy(u.home).addScaledVector(u.dir, amt * u.spread); });
       render();
     });
     fig.querySelectorAll('[data-part]').forEach(function (el) {
       el.addEventListener('change', function () { el.dataset.part.split(',').forEach(function (k) { var m = meshes[+k]; if (m) m.visible = el.checked; }); render(); });
+    });
+    fig.querySelectorAll('[data-group]').forEach(function (el) {
+      el.addEventListener('change', function () { units.forEach(function (u) { if (u.group === +el.dataset.group) u.obj.visible = el.checked; }); render(); });
     });
     if ('ResizeObserver' in window) new ResizeObserver(render).observe(canvas.parentElement);
     window.addEventListener('resize', render); window.addEventListener('load', render);

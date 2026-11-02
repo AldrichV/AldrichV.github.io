@@ -10,8 +10,9 @@
   </div>
   <div class="model3d-controls">
     <label class="model3d-lift">pull it apart <input type="range" min="0" max="1" step="0.02" value="0" data-k="explode"><output>0%</output></label>
-    {% for p in m.parts %}{% unless p.toggle == false %}<label><input type="checkbox" checked data-part="{{ forloop.index0 }}{% if p.also %},{{ p.also }}{% endif %}"> {{ p.name }}</label>
-    {% endunless %}{% endfor %}
+    {% if m.groups %}{% for g in m.groups %}<label><input type="checkbox" checked data-group="{{ forloop.index0 }}"> {{ g.name }}</label>
+    {% endfor %}{% else %}{% for p in m.parts %}{% unless p.toggle == false %}<label><input type="checkbox" checked data-part="{{ forloop.index0 }}{% if p.also %},{{ p.also }}{% endif %}"> {{ p.name }}</label>
+    {% endunless %}{% endfor %}{% endif %}
   </div>
   <figcaption>{% if m.caption %}{{ m.caption }} · {% endif %}drag to spin · click, then scroll or pinch to zoom · right-drag to pan</figcaption>
 </figure>
