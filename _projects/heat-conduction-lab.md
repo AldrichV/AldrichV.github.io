@@ -3,7 +3,7 @@ title: Heat conduction experiments
 summary: Measuring the thermal conductivity of a brass bar from steady-state temperature profiles along heated, intermediate and cooled sections.
 cover: /assets/images/projects/heat-profile.jpg
 cover_alt: Temperature against position along the bar with linear fits for three sections
-course: MECH 3504 · Thermofluids lab
+course: Thermofluids lab
 year: 2025
 team: Team of 5
 tools: [Excel, lab instrumentation]

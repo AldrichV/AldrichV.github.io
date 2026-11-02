@@ -3,7 +3,7 @@ title: CPU enclosure cooling CFD
 summary: Simulating airflow through a CPU enclosure in ANSYS Fluent to compare a base design against two alternative vent layouts, then comparing the results with another group that ran a different flow and pressure.
 cover: /assets/images/projects/cfd-base-velocity.jpg
 cover_alt: Velocity streamlines through the base CPU enclosure, with the fastest flow concentrated down the middle of the box
-course: MECH 3202 · Fluid dynamics
+course: Fluid dynamics
 year: 2024
 team: Individual report
 role: Solo

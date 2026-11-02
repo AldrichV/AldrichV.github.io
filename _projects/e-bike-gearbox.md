@@ -3,7 +3,7 @@ title: Two-mode e-bike gearbox
 summary: A compact spur-gear transmission that gives an e-bike a climbing gear and an acceleration gear, sized with a MATLAB script that iterated gear pairs against AGMA bending limits.
 cover: /assets/images/projects/ebike-cad.jpg
 cover_alt: SolidWorks render of the gearbox with a cut-away housing showing the spur gears
-course: MECH 3409 · Machine elements design
+course: Machine elements design
 year: 2025
 team: Team of 4
 role: Team leader

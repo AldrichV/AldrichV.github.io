@@ -3,7 +3,7 @@ title: Generative design of a fuel nozzle lever
 summary: Reverse-engineering a fuel nozzle lever and letting generative design strip out material while keeping the pivot and linkage intact.
 cover: /assets/images/projects/nozzle-gen1.jpg
 cover_alt: Fusion generative design outcome for the lever, coloured by safety factor
-course: MECH 3401 · Mechanical design
+course: Mechanical design
 year: 2026
 team: Individual
 tools: [Autodesk Fusion generative design]

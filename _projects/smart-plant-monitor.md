@@ -3,7 +3,7 @@ title: Automated plant watering system
 summary: Soil moisture and light sensing through custom signal conditioning into LabVIEW, switching a pump and grow LEDs on when the plant needs them.
 cover: /assets/images/projects/plant-circuit.jpg
 cover_alt: Circuit diagram of the phototransistor amplifier stage feeding the DAQ
-course: MECH 2502 · Instrumentation and measurement
+course: Instrumentation and measurement
 year: 2024
 team: Team of 4
 tools: [LabVIEW, NI DAQ, analog circuits]

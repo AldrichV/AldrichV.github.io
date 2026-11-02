@@ -3,7 +3,7 @@ title: Glass vs recycled PET for olive oil
 summary: A life cycle assessment of olive oil packaging, plus a lighter rPET bottle redesign checked with drop-test simulations.
 cover: /assets/images/projects/lca-drop-fea.jpg
 cover_alt: Drop-test simulation stress plot on a bottle model
-course: MECH 4411 · Life cycle and system design
+course: Life cycle and system design
 year: 2026
 team: Team of 5
 role: Team leader

@@ -3,7 +3,7 @@ title: Hospital delivery go-kart
 summary: An Arduino go-kart for carrying food and medication around a ward, driven by joystick, IR remote, phone app or on its own with obstacle avoidance.
 cover: /assets/images/projects/rckart-cad.jpg
 cover_alt: SolidWorks render of the go-kart chassis with suspension and steering linkage
-course: MECH 2412 · Engineering design
+course: Engineering design
 year: 2025
 team: Team of 6
 role: Embodiment design, definitive layout and gearbox design calculations

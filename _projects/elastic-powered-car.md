@@ -3,7 +3,7 @@ title: Elastic-powered car
 summary: A 3D-printed car launched by a lever-stretched elastic, iterated through broken levers, slipping wheels and a switch to tank-style treads.
 cover: /assets/images/projects/elastic-cad.jpg
 cover_alt: SolidWorks render of the elastic car with lever, hook and treaded wheels
-course: MECH 2401 · Engineering design and graphics
+course: Engineering design and graphics
 year: 2023
 team: Team project
 tools: [SolidWorks, FlashPrint, 3D printing]

@@ -3,7 +3,7 @@ title: Floating solar tracking platform
 summary: A self-powered buoy that turns its solar panel toward the brightest light on two axes, keeps its electronics dry, and reports sensor data to a live IoT dashboard.
 cover: /assets/images/projects/solar-cad.jpg
 cover_alt: SolidWorks render of the floating platform with pool-noodle floats, sealed electronics box and tilting solar panel
-course: MECH 3401 · Mechanical design
+course: Mechanical design
 year: 2026
 team: Team of 4
 role: Conceptual design, design calculations, risk assessment (FMEA), final design and testing write-up, bill of materials

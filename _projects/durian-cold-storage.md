@@ -3,7 +3,7 @@ title: Durian cold storage room
 summary: Sizing the refrigeration system for a −20 °C fruit store, selecting compressor and evaporator to meet a 5.7 kW heat load at a COP of about 5.
 cover: /assets/images/projects/durian-cycle.jpg
 cover_alt: Refrigeration cycle schematic with the matching pressure–enthalpy diagram
-course: MECH 3201 · Thermodynamics
+course: Thermodynamics
 year: 2024
 team: Team of 3
 role: Methodology

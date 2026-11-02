@@ -3,7 +3,7 @@ title: Servo motor feedback control
 summary: Modelling a rotary servo from a bump test, then designing PI, PID, lead and cascade controllers in Simulink and running them on the real hardware.
 cover: /assets/images/projects/servo-hw-step.jpg
 cover_alt: Hardware step response of the servo speed under lead control, compared with the setpoint
-course: ENG 4550 · Control systems lab
+course: Control systems lab
 year: 2026
 team: Lab pair
 role: Team leader

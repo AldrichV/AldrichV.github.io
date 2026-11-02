@@ -3,7 +3,7 @@ title: Electrifying York's campus heating
 summary: A retrofit plan for York University's gas-fired central plant — heat pumps for 17 buildings and flue-gas heat recovery for 16 — cutting about 3,430 tonnes of CO₂ a year.
 cover: /assets/images/projects/hvac-cop.jpg
 cover_alt: Chart of heat pump COP against outdoor temperature at different part-load ratios
-course: MECH 2112 · Engineering design
+course: Engineering design
 year: 2025
 team: Team project
 role: Team leader
