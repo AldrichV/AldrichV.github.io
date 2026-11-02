@@ -17,7 +17,7 @@ layout: default
 
     <div class="title-block" aria-label="Project details">
       <div class="tb-cell tb-wide"><span>Project</span>{{ page.title }}</div>
-      <div class="tb-cell tb-span-2"><span>Course</span>{{ page.course }}</div>
+      <div class="tb-cell tb-span-2"><span>{% if page.kind == "work" %}Type{% else %}Course{% endif %}</span>{{ page.course }}</div>
       <div class="tb-cell"><span>Date</span>{{ page.year }}</div>
       <div class="tb-cell tb-end"><span>Team</span>{{ page.team }}</div>
       <div class="tb-cell tb-span-2"><span>My part</span>{{ page.role | default: "Team member" }}</div>

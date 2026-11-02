@@ -1,6 +1,6 @@
 {% assign p = include.project %}
 <dl class="specs">
-  {% if p.course %}<dt>Course</dt><dd>{{ p.course }}{% if p.year %}, {{ p.year }}{% endif %}</dd>{% elsif p.year %}<dt>Year</dt><dd>{{ p.year }}</dd>{% endif %}
+  {% if p.course %}<dt>{% if p.kind == "work" %}Type{% else %}Course{% endif %}</dt><dd>{{ p.course }}{% if p.year %}, {{ p.year }}{% endif %}</dd>{% elsif p.year %}<dt>Year</dt><dd>{{ p.year }}</dd>{% endif %}
   {% if p.team %}<dt>Team</dt><dd>{{ p.team }}</dd>{% endif %}
   {% if p.role and include.full %}<dt>My part</dt><dd>{{ p.role }}</dd>{% endif %}
   {% if p.tools %}<dt>Tools</dt><dd>{{ p.tools | join: ", " }}</dd>{% endif %}

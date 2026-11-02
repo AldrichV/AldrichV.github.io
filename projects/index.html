@@ -4,21 +4,51 @@ title: Projects
 description: Mechanical design, mechatronics and energy projects by Aldrich Valloyas.
 ---
 {% assign projects = site.projects | sort: "order" %}
-{% assign selected = projects | where: "tier", "featured" %}
-{% assign more = projects | where: "tier", "more" %}
+{% assign work = projects | where: "kind", "work" %}
+{% assign school = projects | where_exp: "p", "p.kind != 'work'" %}
+{% assign selected = school | where: "tier", "featured" %}
+{% assign more = school | where: "tier", "more" %}
 
 <section class="wrap article-head">
   <h1>Projects</h1>
-  <p class="lede">Each one gets its own sheet: what the problem was, what I tried, the numbers, and what I'd do differently.</p>
+  <p class="lede">Each one gets its own sheet: what the problem was, what I tried, the numbers, and what I'd do differently. Work for clients comes first, then the projects from school.</p>
 </section>
 
-<section class="wrap" id="work">
+<section class="wrap filter-bar-wrap">
+  <div class="filters" role="group" aria-label="Filter projects by area" hidden>
+    <button type="button" aria-pressed="true" data-filter="all">All</button>
+    {% for t in site.themes %}<button type="button" aria-pressed="false" data-filter="{{ t[0] }}">{{ t[1] }}</button>{% endfor %}
+  </div>
+</section>
+
+{% if work.size > 0 %}
+<section class="wrap group-section" id="work" data-group>
   <div class="section-head">
-    <h2 class="scribble">Selected work</h2>
-    <div class="filters" role="group" aria-label="Filter projects by area" hidden>
-      <button type="button" aria-pressed="true" data-filter="all">All</button>
-      {% for t in site.themes %}<button type="button" aria-pressed="false" data-filter="{{ t[0] }}">{{ t[1] }}</button>{% endfor %}
-    </div>
+    <h2 class="scribble">Work</h2>
+    <p class="group-note">projects for clients · client names and sites left out</p>
+  </div>
+  <div class="project-list">
+    {% for p in work %}
+    <article class="project-row" data-themes="{{ p.themes | join: ' ' }}">
+      <a class="project-media sketch-box" href="{{ p.url | relative_url }}" tabindex="-1" aria-hidden="true">
+        {% include sketches/{{ p.slug }}.svg %}
+      </a>
+      <div class="project-text">
+        <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+        <p>{{ p.summary }}</p>
+        {% if p.note %}<span class="note">{{ p.note }}</span>{% endif %}
+        {% include specs.html project=p %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="wrap group-section" id="school" data-group>
+  <div class="section-head">
+    <h2 class="scribble">School projects</h2>
+    <p class="group-note">mechanical engineering, York University</p>
   </div>
 
   <div class="project-list">
@@ -57,7 +87,7 @@ description: Mechanical design, mechatronics and energy projects by Aldrich Vall
 
 {% if site.data.coursework %}
 <section class="wrap section" id="reports">
-  <div class="section-head"><h2 class="scribble">Reports and research</h2></div>
+  <div class="section-head"><h2 class="scribble">School reports and research</h2></div>
   <ul class="report-list">
     {% for r in site.data.coursework %}
     <li>
@@ -89,6 +119,7 @@ description: Mechanical design, mechatronics and energy projects by Aldrich Vall
       if (on) { shown++; if (el.classList.contains('card')) moreShown++; }
     });
     if (moreHead) moreHead.hidden = moreShown === 0;
+    document.querySelectorAll('[data-group]').forEach(function (g) { g.hidden = !g.querySelector('[data-themes]:not([hidden])'); });
     if (empty) empty.hidden = shown !== 0;
   });
 })();

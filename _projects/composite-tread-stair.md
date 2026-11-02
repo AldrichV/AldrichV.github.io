@@ -3,6 +3,7 @@ title: Steel stair with composite decking treads
 summary: Redesigning an exterior steel stair with Trex composite decking treads so its geometry meets the Ontario Building Code, then turning it into a 3D model and two shop drawings for fabrication.
 cover: /assets/images/projects/stair-profile.jpg
 cover_alt: Stair profile drawing showing eleven tread frames climbing from the walk to the existing deck, with twelve equal risers
+kind: work
 course: Client project · Exterior stair alteration
 year: 2026
 team: Client work

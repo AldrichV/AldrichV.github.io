@@ -3,6 +3,7 @@ title: Septic system sizing
 summary: Sizing a septic tank and leaching bed for a two-bedroom dwelling from Ontario Building Code Part 8, from the daily design flow through tank compartments, chamber length, trench layout and a sensitivity check on soil percolation time.
 cover: /assets/images/projects/septic-layout.jpg
 cover_alt: Layout diagram of a two-compartment 3,600 litre septic tank feeding a level distribution box and six 12.7 metre chamber trenches
+kind: work
 course: Client project · Residential septic design
 year: 2026
 team: Client work
