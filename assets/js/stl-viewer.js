@@ -151,7 +151,7 @@
       render();
     });
     fig.querySelectorAll('[data-part]').forEach(function (el) {
-      el.addEventListener('change', function () { var m = meshes[+el.dataset.part]; if (m) { m.visible = el.checked; render(); } });
+      el.addEventListener('change', function () { el.dataset.part.split(',').forEach(function (k) { var m = meshes[+k]; if (m) m.visible = el.checked; }); render(); });
     });
     if ('ResizeObserver' in window) new ResizeObserver(render).observe(canvas.parentElement);
     window.addEventListener('resize', render); window.addEventListener('load', render);

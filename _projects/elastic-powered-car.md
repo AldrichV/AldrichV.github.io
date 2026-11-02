@@ -15,12 +15,12 @@ model3d:
   label: Interactive 3D model of the elastic-powered car, assembled from its 3D-print files
   caption: assembled from the print files
   up: y
-  explode: 0.7
+  explode: 0.32
   parts:
     - { name: chassis, src: /assets/models/elastic-car/chassis.stl, color: "#c8c3b8", explode: [0, 0, 0] }
     - { name: front grill, src: /assets/models/elastic-car/grill.stl, color: "#b9b3a6", explode: [0, 0, -1] }
-    - { name: wheels, src: /assets/models/elastic-car/wheels-left.stl, color: "#3a3f44", explode: [-1, 0, 0] }
-    - { name: wheels (far side), src: /assets/models/elastic-car/wheels-right.stl, color: "#3a3f44", explode: [1, 0, 0] }
+    - { name: wheels, also: 3, src: /assets/models/elastic-car/wheels-left.stl, color: "#3a3f44", explode: [-1, 0, 0] }
+    - { name: wheels (far side), toggle: false, src: /assets/models/elastic-car/wheels-right.stl, color: "#3a3f44", explode: [1, 0, 0] }
     - { name: axles, src: /assets/models/elastic-car/axles.stl, color: "#8d969c", metal: 0.6, rough: 0.35, explode: [0, -0.6, 0] }
     - { name: lever + hook, src: /assets/models/elastic-car/lever.stl, color: "#7c858c", explode: [0, 1, 0.5] }
 gallery:
