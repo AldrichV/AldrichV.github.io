@@ -72,8 +72,8 @@
     canvas.addEventListener('pointerleave', function () { controls.enableZoom = false; fig.classList.remove('is-active'); });
     scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8478, 0.75));
     var sun = new THREE.DirectionalLight(0xffffff, 0.85);
-    sun.position.set(140, 220, -80); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
-    Object.assign(sun.shadow.camera, { left: -150, right: 150, top: 150, bottom: -150, near: 10, far: 600 });
+    sun.position.set(140, 220, -80); sun.castShadow = true; sun.shadow.mapSize.set(4096, 4096); sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.02;
+    Object.assign(sun.shadow.camera, { left: -110, right: 110, top: 120, bottom: -110, near: 50, far: 500 });
     sun.target.position.set(0, 30, 50); scene.add(sun, sun.target);
 
     var M = {
