@@ -734,7 +734,7 @@ h3 { font-size: var(--step-2); }
 .trip-days {
   list-style: none; margin: 0; padding: 0.4rem 0 0.2rem;
   display: grid; grid-template-columns: repeat(var(--n), minmax(1.9rem, 1fr));
-  position: relative; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; padding-bottom: 1.9rem;
+  position: relative; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; padding-bottom: 3.1rem;
 }
 .trip-days::before {                         /* the hand-drawn line the days hang off */
   content: ""; position: absolute; left: 0.9rem; right: 0.9rem; top: 1.05rem; height: 0;
@@ -747,6 +747,8 @@ h3 { font-size: var(--step-2); }
 .trip-label b { font-weight: 400; font-size: 1.05rem; }
 .trip-label small { font-size: 0.72rem; letter-spacing: .06em; text-transform: lowercase; }
 .trip-place { position: absolute; top: 100%; left: 50%; font-family: var(--hand); font-size: 0.95rem; color: var(--red); white-space: nowrap; transform: translateX(-50%) rotate(-4deg); margin-top: 0.1rem; }
+.trip-day:nth-child(even) .trip-place { margin-top: 1.25rem; }
+.trip-day:nth-child(even) .trip-place::before { content: ""; position: absolute; left: 50%; bottom: 100%; height: 1.05rem; border-left: 1px dashed var(--red); opacity: .6; }
 .trip-day:nth-last-child(-n+2) .trip-place { left: auto; right: 0; transform: rotate(-4deg); }
 .trip-day:nth-child(-n+2) .trip-place { left: 0; transform: rotate(-4deg); }
 .trip-day.has-entry .trip-dot { width: 1.5rem; height: 1.5rem; margin-top: 0; border: 2px solid var(--red); background: var(--t, var(--tape-pink)); }
