@@ -1,0 +1,30 @@
+{% comment %}
+  Day strip for a trip. Usage: {% include trip-timeline.html trip="japan-2026" here=page.date %}
+  Every day of the trip gets a dot; days with an entry become stamped links.
+{% endcomment %}
+{% assign trip = site.data.trips[include.trip] %}
+{% if trip %}
+{% assign t0 = trip.start | date: '%s' | plus: 0 %}
+{% assign t1 = trip.end | date: '%s' | plus: 0 %}
+{% assign ndays = t1 | minus: t0 | divided_by: 86400 %}
+{% assign here_key = include.here | date: '%Y-%m-%d' %}
+{% assign trip_entries = site.journal | where: 'trip', include.trip %}
+<nav class="trip" aria-label="{{ trip.title }} trip timeline">
+  <p class="trip-head"><span class="trip-title">{{ trip.title }}</span> <span class="trip-dates">{{ trip.start | date: '%b %-d' }} – {{ trip.end | date: '%b %-d, %Y' }}</span>{% if trip.blurb %} <span class="trip-blurb">· {{ trip.blurb }}</span>{% endif %}</p>
+  <ol class="trip-days" style="--n: {{ ndays | plus: 1 }}">
+    {% for i in (0..ndays) %}
+    {% assign t = i | times: 86400 | plus: t0 %}
+    {% assign key = t | date: '%Y-%m-%d' %}
+    {% assign hit = nil %}
+    {% for e in trip_entries %}{% assign ek = e.date | date: '%Y-%m-%d' %}{% if ek == key %}{% assign hit = e %}{% endif %}{% endfor %}
+    <li class="trip-day{% if hit %} has-entry{% endif %}{% if key == here_key %} is-here{% endif %}">
+      {% if hit %}<a href="{{ hit.url | relative_url }}" title="{{ hit.title | escape }}"{% if key == here_key %} aria-current="page"{% endif %}>{% endif %}
+        <span class="trip-dot" aria-hidden="true"></span>
+        <span class="trip-label"><b>{{ t | date: '%-d' }}</b><small>{{ t | date: '%a' }}</small></span>
+        {% if hit %}<span class="trip-place">{{ hit.where | default: hit.title }}</span>{% endif %}
+      {% if hit %}</a>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+</nav>
+{% endif %}

@@ -12,11 +12,18 @@ description: The other half of the notebook — everyday things, photos and what
   <p class="hero-intro">No gear ratios here. Just everyday stuff, photos, and whatever's on my mind.</p>
 </section>
 
+{% assign trip_ids = "" | split: "" %}{% for e in entries %}{% if e.trip %}{% unless trip_ids contains e.trip %}{% assign trip_ids = trip_ids | push: e.trip %}{% endunless %}{% endif %}{% endfor %}
+{% if trip_ids.size > 0 %}
+<section class="wrap trips" aria-label="Trips">
+  {% for id in trip_ids %}{% include trip-timeline.html trip=id %}{% endfor %}
+</section>
+{% endif %}
+
 <section class="wrap">
   {% if entries.size > 0 %}
   <ul class="scrapwall">
     {% for e in entries %}
-    {% assign first = e.photos | first %}
+    {% assign first = e.photos | first %}{% unless first %}{% if e.cover %}{% assign first = e.cover %}{% endif %}{% endunless %}
     <li class="scrap {% if first %}scrap-photo{% else %}scrap-note{% endif %} tape-{{ e.tape | default: 'yellow' }}">
       <a href="{{ e.url | relative_url }}">
         <time class="stamp" datetime="{{ e.date | date_to_xmlschema }}">{{ e.date | date: "%b %-d" }}<small>{{ e.date | date: "%Y" }}</small></time>

@@ -123,7 +123,7 @@ layout: default
   </div>
   <ul class="scrapwall scrapwall-peek">
     {% for e in journal limit: 3 %}
-    {% assign first = e.photos | first %}
+    {% assign first = e.photos | first %}{% unless first %}{% if e.cover %}{% assign first = e.cover %}{% endif %}{% endunless %}
     <li class="scrap {% if first %}scrap-photo{% else %}scrap-note{% endif %} tape-{{ e.tape | default: 'yellow' }}">
       <a href="{{ e.url | relative_url }}">
         <time class="stamp" datetime="{{ e.date | date_to_xmlschema }}">{{ e.date | date: "%b %-d" }}<small>{{ e.date | date: "%Y" }}</small></time>

@@ -1,0 +1,9 @@
+# Trips group journal entries onto one timeline.
+# Add `trip: <id>` to an entry's front matter and it shows up on that trip's day strip,
+# on its own date. Days with no entry yet stay as empty dots, ready to be filled in.
+
+japan-2026:
+  title: Japan
+  start: 2026-10-03
+  end: 2026-10-15
+  # blurb: a short line shown next to the dates (optional)

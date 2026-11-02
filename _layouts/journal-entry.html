@@ -20,6 +20,8 @@ layout: default
       {% endif %}
     </header>
 
+    {% if page.trip %}{% include trip-timeline.html trip=page.trip here=page.date %}{% endif %}
+
     {% if page.photos %}
     <div class="photo-spread">
       {% for ph in page.photos %}
@@ -34,6 +36,31 @@ layout: default
     <div class="diary-body">
       {{ content }}
     </div>
+
+    {% if page.timeline %}
+    <ol class="daylog">
+      {% for stop in page.timeline %}
+      <li class="daylog-stop tape-{% cycle 'yellow', 'pink', 'mint', 'blue' %}">
+        <p class="daylog-time"><time>{{ stop.time }}</time></p>
+        <div class="daylog-card">
+          <h2 class="daylog-title">{{ stop.title }}</h2>
+          {% if stop.note %}<p class="daylog-note">{{ stop.note }}</p>{% endif %}
+          {% if stop.photos %}
+          <div class="daylog-photos n{{ stop.photos.size }}">
+            {% for ph in stop.photos %}
+            <figure class="polaroid">
+              {% if ph.video %}<video src="{{ ph.video | relative_url }}" poster="{{ ph.src | relative_url }}" muted playsinline loop autoplay preload="metadata" aria-label="{{ ph.alt | default: ph.caption | escape }}"></video>
+              {% else %}<img src="{{ ph.src | relative_url }}" alt="{{ ph.alt | default: ph.caption | escape }}" loading="lazy">{% endif %}
+              {% if ph.caption %}<figcaption class="polaroid-cap">{{ ph.caption }}</figcaption>{% endif %}
+            </figure>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+    {% endif %}
   </div>
 
   <nav class="diary-nav" aria-label="More entries">
