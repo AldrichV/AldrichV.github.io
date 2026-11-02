@@ -9,6 +9,7 @@ intro: >-
 
 # Contact links shown in the footer. Leave a value empty to hide it.
 email: "aldrichkylevalloyas@gmail.com"
+instagram: "aldrich.kv"   # handle, no @
 linkedin: ""         # full URL
 github: ""           # full URL
 resume: ""           # e.g. /assets/resume.pdf

@@ -779,3 +779,9 @@ h3 { font-size: var(--step-2); }
   .daylog-stop { grid-template-columns: 1fr; }
   .daylog-time { padding-top: 0; }
 }
+
+/* links under the About photo */
+.me-links { list-style: none; margin: 0.9rem 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1rem; font-family: var(--hand); font-size: 1.1rem; }
+.me-links a { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--pen); text-decoration: none; }
+.me-links a:hover, .me-links a:focus-visible { text-decoration: underline wavy var(--red); text-underline-offset: 0.25em; }
+.me-links svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
