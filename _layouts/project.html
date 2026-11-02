@@ -42,6 +42,13 @@ layout: default
     {{ content }}
   </div>
 
+  {% if page.model %}
+  <section class="wrap model-section" aria-labelledby="model-heading">
+    <h2 id="model-heading" class="scribble">Walk around it</h2>
+    {% include {{ page.model }} %}
+  </section>
+  {% endif %}
+
   {% if page.gallery %}
   <section class="wrap gallery" aria-labelledby="files-heading">
     <h2 id="files-heading" class="scribble">From the project files</h2>
