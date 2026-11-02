@@ -24,7 +24,7 @@ model3d:
     - { name: electronics box, match: ["TupperWare-1", "Battery Housing-1", "battery_pack-1"], explode: [0, 0, 0] }
     - { name: lid, match: "TupperWareLid-1", explode: [0, 0.6, 0] }
     - { name: stepper + mast, match: ["NEMA17 Model-1", "StepperMotorClamp-2", "StepperAdapter-2", "Mast-1"], explode: [0, 1.0, 0] }
-    - { name: tracking head, match: "TrackingMechanism", explode: [0, 1.5, 0] }
+    - { name: tracking head, match: "TrackingMechanism", explode: [0, 1.15, 0] }
 process:
   - { label: Sketch, src: /assets/images/projects/solar-sketch.jpg, alt: Annotated hand sketch of the platform layout }
   - { label: Model, src: /assets/images/projects/solar-cad.jpg, alt: SolidWorks render of the full assembly }
