@@ -1,0 +1,9 @@
+<header class="site-header wrap">
+  <a class="home" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+  <nav aria-label="Main">
+    <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>About</a>
+    <a href="{{ '/projects/' | relative_url }}" {% if page.url contains '/projects/' %}aria-current="page"{% endif %}>Projects</a>
+    {% if site.posts.size > 0 %}<a href="{{ '/blog/' | relative_url }}" {% if page.url contains '/blog/' %}aria-current="page"{% endif %}>Notes</a>{% endif %}
+    {% if site.resume != "" %}<a href="{{ site.resume | relative_url }}">Résumé</a>{% endif %}
+  </nav>
+</header>

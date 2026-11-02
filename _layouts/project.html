@@ -1,0 +1,63 @@
+---
+layout: default
+---
+{% assign all = site.projects | sort: "order" %}
+{% assign i = 0 %}
+{% for p in all %}{% if p.url == page.url %}{% assign i = forloop.index0 %}{% endif %}{% endfor %}
+{% assign sheet = i | plus: 1 %}
+{% assign next_i = i | plus: 1 %}{% if next_i >= all.size %}{% assign next_i = 0 %}{% endif %}
+{% assign next = all[next_i] %}
+<article>
+  <header class="wrap article-head project-head">
+    <div>
+      <h1>{{ page.title }}</h1>
+      {% if page.summary %}<p class="lede">{{ page.summary }}</p>{% endif %}
+      {% if page.note %}<span class="note">{{ page.note }}</span>{% endif %}
+    </div>
+
+    <div class="title-block" aria-label="Project details">
+      <div class="tb-cell tb-wide"><span>Project</span>{{ page.title }}</div>
+      <div class="tb-cell tb-span-2"><span>Course</span>{{ page.course }}</div>
+      <div class="tb-cell"><span>Date</span>{{ page.year }}</div>
+      <div class="tb-cell tb-end"><span>Team</span>{{ page.team }}</div>
+      <div class="tb-cell tb-span-2"><span>My part</span>{{ page.role | default: "Team member" }}</div>
+      <div class="tb-cell tb-span-2 tb-end"><span>Tools</span>{{ page.tools | join: ", " }}</div>
+      <div class="tb-cell tb-last"><span>Drawn by</span><em class="tb-hand">A. Valloyas</em></div>
+      <div class="tb-cell tb-last"><span>Scale</span>NTS</div>
+      <div class="tb-cell tb-last tb-span-2 tb-end"><span>Sheet</span>{{ sheet }} of {{ all.size }}</div>
+    </div>
+  </header>
+
+  {% if page.cover %}
+  <figure class="wrap cover-plate">
+    <div class="plate"><img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}"></div>
+  </figure>
+  {% endif %}
+
+  <div class="wrap prose">
+    <figure class="glance">
+      <div class="sketch-box">{% include sketches/{{ page.slug }}.svg %}</div>
+      <figcaption>the system at a glance</figcaption>
+    </figure>
+    {{ content }}
+  </div>
+
+  {% if page.gallery %}
+  <section class="wrap gallery" aria-labelledby="files-heading">
+    <h2 id="files-heading" class="scribble">From the project files</h2>
+    <div class="gallery-grid">
+      {% for g in page.gallery %}
+      <figure>
+        <div class="plate"><img src="{{ g.src | relative_url }}" alt="{{ g.alt | default: g.caption }}" loading="lazy"></div>
+        {% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}
+      </figure>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <nav class="wrap next-project" aria-label="Next project">
+    <a class="back" href="{{ '/projects/' | relative_url }}">All projects</a>
+    <a class="next" href="{{ next.url | relative_url }}"><span>next sheet →</span>{{ next.title }}</a>
+  </nav>
+</article>

@@ -1,0 +1,95 @@
+---
+layout: default
+title: Projects
+description: Mechanical design, mechatronics and energy projects by Aldrich Valloyas.
+---
+{% assign projects = site.projects | sort: "order" %}
+{% assign selected = projects | where: "tier", "featured" %}
+{% assign more = projects | where: "tier", "more" %}
+
+<section class="wrap article-head">
+  <h1>Projects</h1>
+  <p class="lede">Each one gets its own sheet: what the problem was, what I tried, the numbers, and what I'd do differently.</p>
+</section>
+
+<section class="wrap" id="work">
+  <div class="section-head">
+    <h2 class="scribble">Selected work</h2>
+    <div class="filters" role="group" aria-label="Filter projects by area" hidden>
+      <button type="button" aria-pressed="true" data-filter="all">All</button>
+      {% for t in site.themes %}<button type="button" aria-pressed="false" data-filter="{{ t[0] }}">{{ t[1] }}</button>{% endfor %}
+    </div>
+  </div>
+
+  <div class="project-list">
+    {% for p in selected %}
+    <article class="project-row" data-themes="{{ p.themes | join: ' ' }}">
+      <a class="project-media sketch-box" href="{{ p.url | relative_url }}" tabindex="-1" aria-hidden="true">
+        {% include sketches/{{ p.slug }}.svg %}
+      </a>
+      <div class="project-text">
+        <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+        <p>{{ p.summary }}</p>
+        {% if p.note %}<span class="note">{{ p.note }}</span>{% endif %}
+        {% include specs.html project=p %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+  {% if more.size > 0 %}
+  <h3 class="sub-head scribble">More projects</h3>
+  <ul class="card-grid">
+    {% for p in more %}
+    <li class="card" data-themes="{{ p.themes | join: ' ' }}">
+      <a href="{{ p.url | relative_url }}">
+        <div class="sketch-box">{% include sketches/{{ p.slug }}.svg %}</div>
+        <span class="card-title">{{ p.title }}</span>
+        <span class="card-meta">{{ p.course | split: " · " | first }}, {{ p.year }}</span>
+        {% if p.note %}<span class="note">{{ p.note }}</span>{% endif %}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <p class="filter-empty" hidden>Nothing in this area yet.</p>
+</section>
+
+{% if site.data.coursework %}
+<section class="wrap section" id="reports">
+  <div class="section-head"><h2 class="scribble">Reports and research</h2></div>
+  <ul class="report-list">
+    {% for r in site.data.coursework %}
+    <li>
+      <span class="report-title">{% if r.file %}<a href="{{ r.file | relative_url }}">{{ r.title }}</a>{% else %}{{ r.title }}{% endif %}</span>
+      <span class="report-note">{{ r.note }}</span>
+      <span class="report-meta">{{ r.course }}, {{ r.year }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+<script>
+(function () {
+  var bar = document.querySelector('.filters');
+  if (!bar) return;
+  bar.hidden = false;
+  var items = document.querySelectorAll('[data-themes]');
+  var empty = document.querySelector('.filter-empty');
+  var moreHead = document.querySelector('.sub-head');
+  bar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var f = btn.dataset.filter, shown = 0, moreShown = 0;
+    bar.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b === btn); });
+    items.forEach(function (el) {
+      var on = f === 'all' || el.dataset.themes.split(' ').indexOf(f) !== -1;
+      el.hidden = !on;
+      if (on) { shown++; if (el.classList.contains('card')) moreShown++; }
+    });
+    if (moreHead) moreHead.hidden = moreShown === 0;
+    if (empty) empty.hidden = shown !== 0;
+  });
+})();
+</script>

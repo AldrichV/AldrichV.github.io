@@ -1,0 +1,132 @@
+---
+layout: default
+---
+{% assign projects = site.projects | sort: "order" %}
+{% assign hero = projects | where: "featured", true | first %}
+
+<section class="wrap hero hero-grid">
+  <div>
+    <p class="hero-hello" aria-hidden="true">Hi, I'm</p>
+    <h1 class="hero-name">{{ site.title }}</h1>
+    <svg class="hero-underline" viewBox="0 0 700 22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M4 14 C 120 4, 260 18, 400 9 S 620 6, 696 12"/></svg>
+    <p class="hero-intro">{{ site.intro }}</p>
+  </div>
+  <figure class="me">
+    <img src="{{ '/assets/images/aldrich.jpg' | relative_url }}" alt="Aldrich Valloyas, with long hair and glasses, looking down at the camera">
+    <figcaption>that's me</figcaption>
+  </figure>
+</section>
+
+{% if hero.process %}
+<section class="wrap process" aria-labelledby="how-heading">
+  <h2 id="how-heading" class="scribble section-label">How I work</h2>
+  <ol class="process-strip">
+    {% for step in hero.process %}
+    <li>
+      <div class="plate"><img src="{{ step.src | relative_url }}" alt="{{ step.alt }}"></div>
+      <span class="process-label">{{ step.label }}{% unless forloop.last %}<svg class="arrow" viewBox="0 0 60 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15 C 18 5, 38 4, 55 12"/><path d="M47 6 L 55 12 L 46 16"/></svg>{% endunless %}</span>
+    </li>
+    {% endfor %}
+  </ol>
+  <a class="dim" href="{{ hero.url | relative_url }}">
+    <span class="dim-line left" aria-hidden="true"></span>
+    <span class="dim-label">{{ hero.title }}<small>see the whole sheet</small></span>
+    <span class="dim-line right" aria-hidden="true"></span>
+  </a>
+</section>
+{% endif %}
+
+<section class="wrap section" aria-labelledby="threads-heading">
+  <h2 id="threads-heading" class="scribble">What I keep coming back to</h2>
+  <div class="threads">
+    <article class="thread">
+      <h3>Gears and drivetrains</h3>
+      <p>I've sized gear trains for an e-bike gearbox, two go-karts and a 3D-printed elastic car. The one that taught me the most was the one that didn't work: PLA gears that were fine in CAD softened under load once they were actually meshing.</p>
+      <ul class="thread-links">
+        <li><a href="{{ '/projects/e-bike-gearbox/' | relative_url }}">Two-mode e-bike gearbox</a></li>
+        <li><a href="{{ '/projects/hospital-delivery-go-kart/' | relative_url }}">Hospital delivery go-kart</a></li>
+        <li><a href="{{ '/projects/cne-charity-go-kart/' | relative_url }}">Charity race go-kart</a></li>
+      </ul>
+    </article>
+    <article class="thread">
+      <h3>Things that sense and move</h3>
+      <p>Arduino and LabVIEW builds where sensors decide what the motors do: a solar panel that chases the light, a kart with four ways to drive it, a plant that waters itself, and a servo tuned from a bump test all the way to cascade control.</p>
+      <ul class="thread-links">
+        <li><a href="{{ '/projects/floating-solar-tracker/' | relative_url }}">Floating solar tracker</a></li>
+        <li><a href="{{ '/projects/servo-feedback-control/' | relative_url }}">Servo feedback control</a></li>
+        <li><a href="{{ '/projects/smart-plant-monitor/' | relative_url }}">Automated plant watering</a></li>
+      </ul>
+    </article>
+    <article class="thread">
+      <h3>Energy and sustainability</h3>
+      <p>Electrifying York's campus heating, a hand-crank generator for a community centre, a −20 °C cold room, and a life cycle study of olive oil bottles. I like it when the numbers settle the argument, like a heavy glass bottle costing more carbon than its recyclability saves.</p>
+      <ul class="thread-links">
+        <li><a href="{{ '/projects/york-hvac-retrofit/' | relative_url }}">York campus heating retrofit</a></li>
+        <li><a href="{{ '/projects/community-energy-hub/' | relative_url }}">Community energy hub</a></li>
+        <li><a href="{{ '/projects/olive-oil-packaging-lca/' | relative_url }}">Glass vs recycled PET</a></li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section class="wrap section about" id="about" aria-labelledby="about-heading">
+  <h2 id="about-heading" class="scribble">A bit more about me</h2>
+  <div class="about-body">
+    <div>
+      <p>I study mechanical engineering at York University's Lassonde School of Engineering. Most of my projects have been team builds, and I've led five of them, from a gearbox to a campus energy plan. I'm happiest when a project ends with something physical to test, even if the test rig is a bathtub and four pool noodles.</p>
+      <p class="about-aside"><span class="note">and when something breaks, I write down why</span></p>
+      {% if site.email != "" %}
+      <p class="say-hi"><span class="hand">want to talk about any of this?</span><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+      {% endif %}
+    </div>
+    <div class="toolbox">
+      <h3>In my toolbox</h3>
+      <ul>
+        <li>SolidWorks — modelling and FEA</li>
+        <li>Autodesk Fusion — generative design</li>
+        <li>MATLAB and Simulink</li>
+        <li>Arduino</li>
+        <li>LabVIEW and NI DAQ</li>
+        <li>3D printing</li>
+        <li>Danfoss Coolselector</li>
+        <li>Excel for design calculations</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section" aria-labelledby="latest-heading">
+  <div class="section-head">
+    <h2 id="latest-heading" class="scribble">Start with these</h2>
+    <a class="see-all" href="{{ '/projects/' | relative_url }}">all {{ projects.size }} projects →</a>
+  </div>
+  {% assign recent = site.projects | where: "tier", "featured" | sort: "order" %}
+  <ul class="card-grid">
+    {% for p in recent limit: 4 %}
+    <li class="card">
+      <a href="{{ p.url | relative_url }}">
+        <div class="sketch-box">{% include sketches/{{ p.slug }}.svg %}</div>
+        <span class="card-title">{{ p.title }}</span>
+        <span class="card-meta">{{ p.course | split: " · " | first }}, {{ p.year }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% if site.posts.size > 0 %}
+<section class="wrap section" id="writing">
+  <div class="section-head">
+    <h2 class="scribble">Notes</h2>
+    <a class="see-all" href="{{ '/blog/' | relative_url }}">all notes →</a>
+  </div>
+  <ul class="post-list">
+    {% for post in site.posts limit: 5 %}
+    <li><a href="{{ post.url | relative_url }}">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+      <span class="post-title">{{ post.title }}</span>
+    </a></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}

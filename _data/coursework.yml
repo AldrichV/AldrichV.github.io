@@ -1,0 +1,30 @@
+# Shorter pieces shown as a list on the home page (no page of their own).
+# Add, remove or reorder freely. "file" is optional: a PDF in assets/files/ to link to.
+- title: Liver-on-chip platforms for drug safety
+  course: Research project
+  year: 2025
+  note: Literature review of organ-on-chip systems and the standardization gaps holding them back from regulatory use.
+- title: Boeing 737 MAX 7 landing gear manufacturing
+  course: MECH 3503
+  year: 2026
+  note: How the main landing gear is made today and where newer manufacturing methods could change it.
+- title: Morandi Bridge collapse case study
+  course: ENG 3000
+  year: 2024
+  note: Causes of the 2018 Genoa collapse, the corroded stay cables behind it, and who would be found liable.
+- title: U.S. solar energy assessment
+  course: ESSE 2210
+  year: 2024
+  note: Solar's role in U.S. renewable targets, from photovoltaics to concentrated solar power.
+- title: Pollutants in Arctic food webs
+  course: ESSE 2210
+  year: 2024
+  note: How contaminants build up through Arctic ecosystems, using top predators as indicators.
+- title: Solar energy and today's infrastructure
+  course: ENG 2003
+  year: 2023
+  note: Technical report on whether solar can replace or improve existing energy infrastructure.
+- title: Transportation emissions and commuter transit
+  course: ENG 1102
+  year: 2023
+  note: First-year design project on cutting commuter emissions through transit reorganization.

@@ -1,0 +1,44 @@
+# Site settings — edit these first
+title: Aldrich Valloyas
+description: Mechanical engineering projects and notes by Aldrich Valloyas.
+intro: >-
+  I study mechanical engineering at York University. I like taking an idea
+  from a hand sketch to CAD to something that floats, drives or spins — then
+  finding out, on the bench or in the bathtub, whether it actually works.
+
+# Contact links shown in the footer. Leave a value empty to hide it.
+email: "aldrichkylevalloyas@gmail.com"
+linkedin: ""         # full URL
+github: ""           # full URL
+resume: ""           # e.g. /assets/resume.pdf
+
+# If the repo is named <username>.github.io, leave baseurl empty.
+# If it's any other name (e.g. "portfolio"), set baseurl: "/portfolio".
+url: ""
+baseurl: ""
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+# Filter labels for the project index (key: label)
+themes:
+  drivetrains: Drivetrains & machines
+  mechatronics: Mechatronics & control
+  energy: Energy & thermal
+  sustainability: Sustainability
+
+defaults:
+  - scope: { path: "", type: projects }
+    values: { layout: project }
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+
+permalink: /blog/:year/:title/
+markdown: kramdown
+kramdown:
+  input: GFM
+plugins:
+  - jekyll-seo-tag
+exclude: [README.md, Gemfile, Gemfile.lock, preview]
