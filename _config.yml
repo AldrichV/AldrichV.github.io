@@ -31,6 +31,7 @@ themes:
   mechatronics: Mechatronics & control
   energy: Energy & thermal
   sustainability: Sustainability
+  building: Building code design
 
 defaults:
   - scope: { path: "", type: projects }
