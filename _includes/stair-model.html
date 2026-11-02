@@ -14,7 +14,7 @@
     <label><input type="checkbox" checked data-k="glass"> glass</label>
     <label><input type="checkbox" checked data-k="near"> near-side guard</label>
   </div>
-  <figcaption>drag to spin · scroll or pinch to zoom · right-drag to pan</figcaption>
+  <figcaption>drag to spin · click, then scroll or pinch to zoom · right-drag to pan</figcaption>
 </figure>
 
 <script>
@@ -61,7 +61,10 @@
     var scene = new THREE.Scene(); scene.background = new THREE.Color(0xf1f4f5);
     var camera = new THREE.PerspectiveCamera(38, 1, 1, 3000);
     var controls = new THREE.OrbitControls(camera, canvas);
-    controls.enableDamping = false; controls.addEventListener('change', render);
+    controls.enableDamping = false; controls.enableZoom = false; controls.addEventListener('change', render);
+    // the page keeps scrolling until the model is clicked; then the wheel zooms until the pointer leaves
+    canvas.addEventListener('pointerdown', function () { controls.enableZoom = true; fig.classList.add('is-active'); });
+    canvas.addEventListener('pointerleave', function () { controls.enableZoom = false; fig.classList.remove('is-active'); });
     scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8478, 0.75));
     var sun = new THREE.DirectionalLight(0xffffff, 0.85);
     sun.position.set(140, 220, -80); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
@@ -165,7 +168,8 @@
     var TGT = new THREE.Vector3(0, 40, 58);
     var VIEWS = { iso: [165, 125, -70], side: [250, 48, 58], front: [10, 55, -180], under: [34, 6, 110] };
     function setView(id) {
-      var v = VIEWS[id]; camera.position.set(v[0], v[1], v[2]);
+      var v = VIEWS[id], f = 1.12 * Math.max(1, 1.5 / camera.aspect);
+      camera.position.set(TGT.x + (v[0] - TGT.x) * f, TGT.y + (v[1] - TGT.y) * f, TGT.z + (v[2] - TGT.z) * f);
       controls.target.copy(id === 'under' ? new THREE.Vector3(0, 40, 30) : TGT); controls.update(); render();
     }
     var queued = false;
@@ -186,7 +190,7 @@
     });
     if ('ResizeObserver' in window) new ResizeObserver(resize).observe(canvas.parentElement); else window.addEventListener('resize', resize);
     fig.classList.add('is-live');
-    setView('iso'); resize(); update();
+    resize(); setView('iso'); update();
   }
 })();
 </script>
