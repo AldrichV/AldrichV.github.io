@@ -56,11 +56,12 @@
 
     function mat(hex, o) { o = o || {}; return new THREE.MeshStandardMaterial(Object.assign({ color: new THREE.Color(hex).convertSRGBToLinear(), roughness: 0.6, metalness: 0.05 }, o)); }
     var M = {
-      alu: mat('#b8bec3', { metalness: 0.55, roughness: 0.35 }), pla: mat('#2f4a6b'), purple: mat('#6b3a73'),
+      alu: mat('#b3b9be', { metalness: 0.25, roughness: 0.5 }), pla: mat('#2f4a6b'), purple: mat('#6b3a73'),
       wheel: mat('#2e5a4c', { roughness: 0.75 }), hub: mat('#9aa3a8', { metalness: 0.5, roughness: 0.4 }),
       steel: mat('#8d969c', { metalness: 0.65, roughness: 0.35 }), dark: mat('#33383d'), board: mat('#1f6f8b'),
       gear: mat('#8f97c9', { metalness: 0.3, roughness: 0.45 }), red: mat('#c9372c'), spring: mat('#c8ccd0', { metalness: 0.7, roughness: 0.3 })
     };
+    var ghost = mat('#b8bec3', { transparent: true, opacity: 0.18, depthWrite: false });
     var root = new THREE.Group(); scene.add(root);
     function add(m, g) { m.castShadow = m.receiveShadow = true; (g || root).add(m); return m; }
     function box(w, h, d, x, y, z, m, g) { var o = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); o.position.set(x, y, z); return add(o, g); }
@@ -212,7 +213,7 @@
         var k = el.dataset.k;
         if (k === 'spin') spinning = el.checked;
         if (k === 'bed') bed.visible = el.checked;
-        if (k === 'xray') { housingMat.opacity = el.checked ? 0.18 : 1; housingMat.depthWrite = !el.checked; housingMat.needsUpdate = true; plates.children[0].material = el.checked ? mat('#b8bec3', { transparent: true, opacity: 0.25, depthWrite: false }) : M.alu; }
+        if (k === 'xray') { housingMat.opacity = el.checked ? 0.18 : 1; housingMat.depthWrite = !el.checked; housingMat.needsUpdate = true; var pm = el.checked ? ghost : M.alu; plates.children[0].material = pm; plates.children[1].material = pm; deck.visible = !el.checked; }
         render();
       });
     });
