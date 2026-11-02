@@ -182,8 +182,9 @@
     }
     var queued = false;
     var broken = false, framed = false;
+    var raf = 0, tmo = 0;
     function draw() {
-      queued = false; if (broken) return;
+      cancelAnimationFrame(raf); clearTimeout(tmo); queued = false; if (broken) return;
       try { fit(); renderer.render(scene, camera); } catch (e) { broken = true; fail(e); }
     }
     // keep the drawing buffer matched to the canvas's on-screen size and the screen's pixel density
@@ -201,7 +202,7 @@
       }
       return true;
     }
-    function render() { if (queued) return; queued = true; requestAnimationFrame(draw); }
+    function render() { if (queued) return; queued = true; raf = requestAnimationFrame(draw); tmo = setTimeout(draw, 150); }
     function resize() { render(); }                       // draw() re-fits the buffer before every frame
     canvas.addEventListener('webglcontextlost', function (e) { e.preventDefault(); note('context lost'); }, false);
     canvas.addEventListener('webglcontextrestored', function () { note('context restored'); render(); }, false);

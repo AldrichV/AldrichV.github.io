@@ -134,9 +134,13 @@
       if (!framed && meshes.length === parts.length && fig.classList.contains('is-live')) { framed = true; setView(view); }
       return true;
     }
-    var queued = false, broken = false;
-    function draw() { queued = false; if (broken) return; try { fit(); renderer.render(scene, camera); } catch (e) { broken = true; fail(e); } }
-    function render() { if (queued) return; queued = true; requestAnimationFrame(draw); }
+    var queued = false, broken = false, raf = 0, tmo = 0;
+    function draw() {
+      cancelAnimationFrame(raf); clearTimeout(tmo); queued = false; if (broken) return;
+      try { fit(); renderer.render(scene, camera); } catch (e) { broken = true; fail(e); }
+    }
+    // animation frames can be paused (background tabs, some embedded views); a timer backs them up
+    function render() { if (queued) return; queued = true; raf = requestAnimationFrame(draw); tmo = setTimeout(draw, 150); }
 
     fig.querySelectorAll('[data-view]').forEach(function (b) { b.addEventListener('click', function () { setView(b.dataset.view); }); });
     var ex = fig.querySelector('[data-k=explode]');
