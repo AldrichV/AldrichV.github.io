@@ -98,6 +98,12 @@ Whatever you want to say.
 
 Entries with photos show as polaroids on the wall; entries without show as notecards. To hide an entry without deleting it, add `published: false`.
 
+### Trips and day-by-day entries
+
+Trips live in `_data/trips.yml` (id, title, start and end dates). Add `trip: japan-2026` to an entry and it appears on that trip's day strip at the top of the journal, on its own date. Days without an entry stay as empty dots, so you can fill in earlier days later in any order: just make `_journal/2026-10-05-whatever.md` with `trip: japan-2026`.
+
+For a stop-by-stop day like `_journal/2026-10-12-miyajima.md`, use `timeline:` instead of `photos:`: each stop has a `time`, a `title`, an optional `note` and its `photos` (`src`, `caption`, and optionally `video` for a short looping clip). Give the entry a `cover:` photo for the journal wall. Strip location data from photos before uploading (phones store GPS in them).
+
 ## Write a post
 
 Add `_posts/YYYY-MM-DD-short-title.md`:
