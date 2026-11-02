@@ -11,6 +11,18 @@ themes: [drivetrains]
 note: "the lever snapped on run 3"
 tier: more
 order: 20
+model3d:
+  label: Interactive 3D model of the elastic-powered car, assembled from its 3D-print files
+  caption: assembled from the print files
+  up: y
+  explode: 0.7
+  parts:
+    - { name: chassis, src: /assets/models/elastic-car/chassis.stl, color: "#d8d4cb", explode: [0, 0, 0] }
+    - { name: front grill, src: /assets/models/elastic-car/grill.stl, color: "#c9c4b8", explode: [0, 0, -1] }
+    - { name: wheels, src: /assets/models/elastic-car/wheels-left.stl, color: "#3a3f44", explode: [-1, 0, 0] }
+    - { name: wheels (far side), src: /assets/models/elastic-car/wheels-right.stl, color: "#3a3f44", explode: [1, 0, 0] }
+    - { name: axles, src: /assets/models/elastic-car/axles.stl, color: "#8d969c", metal: 0.6, rough: 0.35, explode: [0, -0.6, 0] }
+    - { name: lever + hook, src: /assets/models/elastic-car/lever.stl, color: "#7c858c", explode: [0, 1, 0.5] }
 gallery:
   - { src: /assets/images/projects/elastic-sketch.jpg, caption: "Launch mechanism concept: lever pulls the elastic back to a front hook." }
   - { src: /assets/images/projects/elastic-print.jpg, caption: "Printed prototype." }
@@ -26,3 +38,5 @@ A first-year build: a car with no motor, launched by an elastic band that a leve
 **Wheels.** Moulded treads, made with a cut and a circular pattern around the rim, gave grip without relying on spare elastic bands.
 
 **What testing showed.** The car moved, but inefficiently, and on the third run the lever broke because energy was going straight into it rather than the wheels. The wheels also seized from lack of grip. The second iteration moved to tank-style treads, and the next step proposed was a raised lever with gearing to spread the load.
+
+The model below is put together from the STL print files in the project folder.

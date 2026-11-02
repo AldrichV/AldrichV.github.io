@@ -47,6 +47,11 @@ layout: default
     <h2 id="model-heading" class="scribble">Walk around it</h2>
     {% include {{ page.model }} %}
   </section>
+  {% elsif page.model3d %}
+  <section class="wrap model-section" aria-labelledby="model-heading">
+    <h2 id="model-heading" class="scribble">Walk around it</h2>
+    {% include stl-model.html %}
+  </section>
   {% endif %}
 
   {% if page.gallery %}

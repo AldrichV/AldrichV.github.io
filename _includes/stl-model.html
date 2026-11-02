@@ -1,0 +1,18 @@
+{% assign m = page.model3d %}
+<figure class="model3d" id="model3d" data-config='{{ m | jsonify | escape }}'>
+  <div class="model3d-stage">
+    <canvas aria-label="{{ m.label | default: 'Interactive 3D model' | escape }}"></canvas>
+    <button type="button" class="model3d-start">tap to load the 3D model</button>
+    <p class="model3d-err" hidden>The 3D model couldn't load here, but the pictures below show the same design.</p>
+    <div class="model3d-views" role="group" aria-label="Camera views">
+      <button type="button" data-view="iso">iso</button><button type="button" data-view="side">side</button><button type="button" data-view="front">front</button><button type="button" data-view="top">top</button>
+    </div>
+  </div>
+  <div class="model3d-controls">
+    <label class="model3d-lift">pull it apart <input type="range" min="0" max="1" step="0.02" value="0" data-k="explode"><output>0%</output></label>
+    {% for p in m.parts %}<label><input type="checkbox" checked data-part="{{ forloop.index0 }}"> {{ p.name }}</label>
+    {% endfor %}
+  </div>
+  <figcaption>{% if m.caption %}{{ m.caption }} · {% endif %}drag to spin · click, then scroll or pinch to zoom · right-drag to pan</figcaption>
+</figure>
+<script src="{{ '/assets/js/stl-viewer.js' | relative_url }}" defer></script>
