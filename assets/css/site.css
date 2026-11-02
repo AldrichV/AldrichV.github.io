@@ -492,7 +492,7 @@ h3 { font-size: var(--step-2); }
 .me img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; }
 .me::before { content: ""; position: absolute; top: -0.8rem; left: 50%; width: 5.5rem; height: 1.5rem; background: var(--tape); transform: translateX(-50%) rotate(-5deg); }
 .me figcaption { position: absolute; left: 0; right: 0; bottom: 0.55rem; text-align: center; font-family: var(--hand); font-size: 1.2rem; color: var(--ink); }
-.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) clamp(12rem, 22vw, 17rem); gap: 2rem clamp(2rem, 5vw, 4rem); align-items: center; }
+.hero-grid { padding-bottom: 2.5rem; display: grid; grid-template-columns: minmax(0, 1fr) clamp(12rem, 22vw, 17rem); gap: 2rem clamp(2rem, 5vw, 4rem); align-items: center; }
 @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } .me { width: min(70%, 15rem); margin-inline: auto 0; } }
 .card .sketch-box, .project-media.sketch-box { aspect-ratio: 4 / 3; }
 .project-media.sketch-box:hover, .card a:hover .sketch-box { border-color: var(--red); }
@@ -781,7 +781,7 @@ h3 { font-size: var(--step-2); }
 }
 
 /* links under the About photo */
-.me-links { list-style: none; margin: 0.9rem 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1rem; font-family: var(--hand); font-size: 1.1rem; }
+.me-links { position: absolute; top: calc(100% + 0.8rem); left: -1rem; right: -1rem; transform: rotate(-2.5deg); list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1rem; font-family: var(--hand); font-size: 1.1rem; }
 .me-links a { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--pen); text-decoration: none; }
 .me-links a:hover, .me-links a:focus-visible { text-decoration: underline wavy var(--red); text-underline-offset: 0.25em; }
 .me-links svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
