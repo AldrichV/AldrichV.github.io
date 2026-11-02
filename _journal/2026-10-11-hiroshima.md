@@ -16,7 +16,7 @@ timeline:
       - { src: /assets/images/journal/2026-10-11-hiroshima/festival-food.jpg, caption: "noodles from one of the festival stalls" }
   - time: "12:42 pm"
     title: Peace Memorial Park
-    note: "The Atomic Bomb Dome, the last building left standing near the hypocentre, and the monument to the children."
+    note: "The Atomic Bomb Dome, the building that was left standing, and the monument to the children."
     photos:
       - { src: /assets/images/journal/2026-10-11-hiroshima/dome.jpg, caption: "the Atomic Bomb Dome" }
       - { src: /assets/images/journal/2026-10-11-hiroshima/dome-river.jpg, caption: "the Dome from across the river" }
