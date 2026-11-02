@@ -704,3 +704,4 @@ h3 { font-size: var(--step-2); }
 .model3d-lift output { font-family: var(--draft); min-width: 2.5ch; }
 .model3d figcaption { font-family: var(--hand); color: var(--red); font-size: 1.05rem; margin-top: 0.4rem; }
 @media (max-width: 600px) { .model3d-stage { aspect-ratio: 4 / 5; } }
+.model3d-debug { font: 12px/1.4 ui-monospace, monospace; color: var(--ink); background: var(--plate); border: 1px dashed var(--rule); padding: 0.5rem; white-space: pre-wrap; }
