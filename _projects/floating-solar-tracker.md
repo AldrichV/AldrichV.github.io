@@ -16,11 +16,11 @@ order: 1
 model3d:
   label: Interactive 3D model of the floating solar tracking platform, exported from the final SolidWorks assembly
   caption: the final SolidWorks assembly
-  explode: 0.9
+  explode: 0.3
   parts:
     - { name: assembly, src: /assets/models/solar-tracker/final-assembly.glb }
   groups:
-    - { name: float frame, match: "Final Frame Assembly", explode: [0, -0.5, 0] }
+    - { name: float frame, match: "Final Frame Assembly", explode: [0, -0.6, 0] }
     - { name: electronics box, match: ["TupperWare-1", "Battery Housing-1", "battery_pack-1"], explode: [0, 0, 0] }
     - { name: lid, match: "TupperWareLid-1", explode: [0, 0.6, 0] }
     - { name: stepper + mast, match: ["NEMA17 Model-1", "StepperMotorClamp-2", "StepperAdapter-2", "Mast-1"], explode: [0, 1.0, 0] }
