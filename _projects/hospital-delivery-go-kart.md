@@ -12,6 +12,7 @@ themes: [drivetrains, mechatronics]
 note: "lesson learned: PLA gears soften under load"
 tier: featured
 order: 2
+model: kart-model.html
 gallery:
   - { src: /assets/images/projects/rckart-gearbox-section.jpg, caption: "Section through the two-speed gearbox as designed." }
   - { src: /assets/images/projects/rckart-chassis-print.jpg, caption: "Printed chassis plate and steering parts." }
@@ -64,6 +65,8 @@ The team sized the chassis plates by hand for steel, aluminium and PLA. PLA at 7
 | Obstacle avoidance | Stopped and turned away from objects inside 20 cm |
 | Steering | Hit 53°, 90° and 135° reliably, with minimal backlash |
 | Two-speed gearbox | Not included in the final build |
+
+At the bottom of this page there's a 3D model of the kart built from the dimensioned layout: you can steer it to the three tested servo angles, run the drive, and look through the gearbox housing at the bevel and spur pairs as designed.
 
 ## What went wrong
 
