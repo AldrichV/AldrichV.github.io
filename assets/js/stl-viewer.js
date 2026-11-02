@@ -48,14 +48,14 @@
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
     renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.outputEncoding = THREE.sRGBEncoding;
-    var scene = new THREE.Scene(); scene.background = new THREE.Color(0xf1f4f5);
+    var scene = new THREE.Scene(); scene.background = new THREE.Color(0xf1f4f5).convertSRGBToLinear();
     var camera = new THREE.PerspectiveCamera(36, 1, 0.5, 5000);
     var controls = new THREE.OrbitControls(camera, canvas);
     controls.enableZoom = false; controls.addEventListener('change', render);
     canvas.addEventListener('pointerdown', function () { controls.enableZoom = true; });
     canvas.addEventListener('pointerleave', function () { controls.enableZoom = false; });
 
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8478, 0.5));
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8478, 0.6));
     var sun = new THREE.DirectionalLight(0xffffff, 0.7); sun.castShadow = true;
     sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0005; sun.shadow.normalBias = 0.02;
     scene.add(sun, sun.target);
@@ -71,7 +71,7 @@
     parts.forEach(function (p, i) {
       loader.load(p.src, function (geo) {
         geo.computeVertexNormals();
-        var mat = new THREE.MeshStandardMaterial({ color: new THREE.Color(p.color || '#c9c6bf'), roughness: p.rough != null ? p.rough : 0.6, metalness: p.metal || 0.05, flatShading: !!p.flat });
+        var mat = new THREE.MeshStandardMaterial({ color: new THREE.Color(p.color || '#c9c6bf').convertSRGBToLinear(), roughness: p.rough != null ? p.rough : 0.6, metalness: p.metal || 0.05, flatShading: !!p.flat });
         var mesh = new THREE.Mesh(geo, mat); mesh.castShadow = mesh.receiveShadow = true;
         model.add(mesh); meshes[i] = mesh;
         if (--left === 0) ready();
@@ -115,7 +115,7 @@
     function setView(id) {
       view = id;
       var v = VIEWS[id] || VIEWS.iso, asp = camera.aspect > 0.2 && isFinite(camera.aspect) ? camera.aspect : 1.6;
-      var dist = radius / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2)) * 1.0 * Math.min(2.5, Math.max(1, 1.5 / asp));
+      var dist = radius / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2)) * 0.72 * Math.min(2.5, Math.max(1, 1.5 / asp));
       var dir = new THREE.Vector3(v[0], v[1], v[2]).normalize();
       camera.position.copy(center).addScaledVector(dir, dist);
       camera.near = dist / 50; camera.far = dist * 20; camera.updateProjectionMatrix();
