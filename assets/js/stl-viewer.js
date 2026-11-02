@@ -35,6 +35,10 @@
     chain
       .then(function () { return THREE.OrbitControls ? null : loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js'); })
       .then(function () { return THREE.STLLoader ? null : loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js'); })
+      .then(function () {
+        var needsGltf = (cfg.parts || []).some(function (p) { return /\.(glb|gltf)$/i.test(p.src); });
+        return needsGltf && !THREE.GLTFLoader ? loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js') : null;
+      })
       .then(function () { note('three ' + THREE.REVISION); try { init(); } catch (e) { fail(e); } })
       .catch(fail);
   }
@@ -69,6 +73,17 @@
     if (!left) { fail(new Error('no parts listed')); return; }
 
     parts.forEach(function (p, i) {
+      if (/\.(glb|gltf)$/i.test(p.src)) {
+        // glTF/GLB (e.g. SolidWorks "Extended Reality" export) keeps its own colours and parts
+        new THREE.GLTFLoader().load(p.src, function (g) {
+          var obj = g.scene;
+          if (p.scale) obj.scale.setScalar(p.scale);
+          obj.traverse(function (o) { if (o.isMesh) { o.castShadow = o.receiveShadow = true; if (p.color) o.material = new THREE.MeshStandardMaterial({ color: new THREE.Color(p.color).convertSRGBToLinear(), roughness: 0.6 }); } });
+          model.add(obj); meshes[i] = obj;
+          if (--left === 0) ready();
+        }, undefined, function (e) { fail(e || new Error('could not load ' + p.src)); });
+        return;
+      }
       loader.load(p.src, function (geo) {
         geo.computeVertexNormals();
         var mat = new THREE.MeshStandardMaterial({ color: new THREE.Color(p.color || '#c9c6bf').convertSRGBToLinear(), roughness: p.rough != null ? p.rough : 0.6, metalness: p.metal || 0.05, flatShading: !!p.flat });
