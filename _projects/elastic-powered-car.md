@@ -17,8 +17,8 @@ model3d:
   up: y
   explode: 0.7
   parts:
-    - { name: chassis, src: /assets/models/elastic-car/chassis.stl, color: "#d8d4cb", explode: [0, 0, 0] }
-    - { name: front grill, src: /assets/models/elastic-car/grill.stl, color: "#c9c4b8", explode: [0, 0, -1] }
+    - { name: chassis, src: /assets/models/elastic-car/chassis.stl, color: "#c8c3b8", explode: [0, 0, 0] }
+    - { name: front grill, src: /assets/models/elastic-car/grill.stl, color: "#b9b3a6", explode: [0, 0, -1] }
     - { name: wheels, src: /assets/models/elastic-car/wheels-left.stl, color: "#3a3f44", explode: [-1, 0, 0] }
     - { name: wheels (far side), src: /assets/models/elastic-car/wheels-right.stl, color: "#3a3f44", explode: [1, 0, 0] }
     - { name: axles, src: /assets/models/elastic-car/axles.stl, color: "#8d969c", metal: 0.6, rough: 0.35, explode: [0, -0.6, 0] }

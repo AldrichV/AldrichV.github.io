@@ -55,11 +55,11 @@
     canvas.addEventListener('pointerdown', function () { controls.enableZoom = true; });
     canvas.addEventListener('pointerleave', function () { controls.enableZoom = false; });
 
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8478, 0.8));
-    var sun = new THREE.DirectionalLight(0xffffff, 0.8); sun.castShadow = true;
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8478, 0.5));
+    var sun = new THREE.DirectionalLight(0xffffff, 0.7); sun.castShadow = true;
     sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0005; sun.shadow.normalBias = 0.02;
     scene.add(sun, sun.target);
-    var fill = new THREE.DirectionalLight(0xffffff, 0.25); scene.add(fill);
+    var fill = new THREE.DirectionalLight(0xffffff, 0.2); scene.add(fill);
 
     var model = new THREE.Group(); scene.add(model);
     // CAD files are usually Z-up; the site's models say which axis is up
@@ -115,7 +115,7 @@
     function setView(id) {
       view = id;
       var v = VIEWS[id] || VIEWS.iso, asp = camera.aspect > 0.2 && isFinite(camera.aspect) ? camera.aspect : 1.6;
-      var dist = radius / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2)) * 0.62 * Math.min(2.5, Math.max(1, 1.5 / asp));
+      var dist = radius / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2)) * 1.0 * Math.min(2.5, Math.max(1, 1.5 / asp));
       var dir = new THREE.Vector3(v[0], v[1], v[2]).normalize();
       camera.position.copy(center).addScaledVector(dir, dist);
       camera.near = dist / 50; camera.far = dist * 20; camera.updateProjectionMatrix();
@@ -126,7 +126,7 @@
       var w = canvas.clientWidth, h = canvas.clientHeight;
       if (w < 2 || h < 2) return false;
       var pr = quality();
-      if (canvas.width !== Math.round(w * pr) || canvas.height !== Math.round(h * pr)) {
+      if (canvas.width !== Math.floor(w * pr) || canvas.height !== Math.floor(h * pr)) {
         renderer.setPixelRatio(pr); renderer.setSize(w, h, false);
         camera.aspect = w / h; camera.updateProjectionMatrix();
         note('size ' + w + '×' + h + ' @' + pr);

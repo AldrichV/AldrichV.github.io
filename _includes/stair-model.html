@@ -194,7 +194,7 @@
       var w = canvas.clientWidth, hgt = canvas.clientHeight;
       if (w < 2 || hgt < 2) return false;
       var pr = quality();
-      if (canvas.width !== Math.round(w * pr) || canvas.height !== Math.round(hgt * pr)) {
+      if (canvas.width !== Math.floor(w * pr) || canvas.height !== Math.floor(hgt * pr)) {
         renderer.setPixelRatio(pr); renderer.setSize(w, hgt, false);
         camera.aspect = w / hgt; camera.updateProjectionMatrix();
         if (!framed) { framed = true; setView(view); }
