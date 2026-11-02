@@ -30,6 +30,15 @@ process:
   - { label: Model, src: /assets/images/projects/solar-cad.jpg, alt: SolidWorks render of the full assembly }
   - { label: Analyse, src: /assets/images/projects/solar-fea.jpg, alt: FEA displacement plot of the panel tilt mount }
   - { label: Test, src: /assets/images/projects/solar-stability.jpg, alt: Prototype being pushed during a stability test in a bathtub }
+videos:
+  - { src: /assets/video/solar-tracking.mp4, poster: /assets/video/solar-tracking.jpg, caption: "Tracking test: chasing a phone flashlight around the panel." }
+  - { src: /assets/video/solar-test-float.mp4, poster: /assets/video/solar-test-float.jpg, caption: "Test 1: does it float with the payload on board?" }
+  - { src: /assets/video/solar-test-stability.mp4, poster: /assets/video/solar-test-stability.jpg, caption: "Test 2: stability." }
+  - { src: /assets/video/solar-test-push.mp4, poster: /assets/video/solar-test-push.jpg, caption: "Test 3: push it, let go, watch it settle." }
+  - { src: /assets/video/solar-test-slosh.mp4, poster: /assets/video/solar-test-slosh.jpg, caption: "Test 4: slosh and waves." }
+  - { src: /assets/video/solar-test-ingress.mp4, poster: /assets/video/solar-test-ingress.jpg, caption: "Test 6: water ingress and durability." }
+  - { src: /assets/video/solar-test-margin.mp4, poster: /assets/video/solar-test-margin.jpg, caption: "Safety margin test." }
+  - { src: /assets/video/solar-test-camera.mp4, poster: /assets/video/solar-test-camera.jpg, caption: "Camera module streaming to the laptop." }
 gallery:
   - { src: /assets/images/projects/solar-tracking.jpg, caption: "Tracking test: the panel follows a phone flashlight as it moves." }
   - { src: /assets/images/projects/solar-tracking2.jpg, caption: "Same test, light moved to the other side: the panel turns to follow." }

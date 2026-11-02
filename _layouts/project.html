@@ -54,9 +54,24 @@ layout: default
   </section>
   {% endif %}
 
+  {% if page.videos %}
+  <section class="wrap reel" aria-labelledby="reel-heading">
+    <h2 id="reel-heading" class="scribble">Caught on camera</h2>
+    <p class="reel-note">tap a clip to play · clips are muted</p>
+    <div class="reel-grid">
+      {% for v in page.videos %}
+      <figure class="clip tape-{% cycle 'yellow', 'pink', 'mint', 'blue' %}">
+        <div class="clip-frame"><video src="{{ v.src | relative_url }}" poster="{{ v.poster | relative_url }}" preload="none" muted playsinline loop controls aria-label="{{ v.caption | escape }}"></video></div>
+        <figcaption>{{ v.caption }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
   {% if page.gallery %}
   <section class="wrap gallery" aria-labelledby="files-heading">
-    <h2 id="files-heading" class="scribble">From the project files</h2>
+    <h2 id="files-heading" class="scribble">Scraps from the build</h2>
     <div class="gallery-grid">
       {% for g in page.gallery %}
       <figure>

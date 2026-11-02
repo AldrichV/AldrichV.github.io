@@ -13,6 +13,9 @@ note: "lesson learned: PLA gears soften under load"
 tier: featured
 order: 2
 model: kart-model.html
+videos:
+  - { src: /assets/video/rckart-floor-demo.mp4, poster: /assets/video/rckart-floor-demo.jpg, caption: "Prototype floor demo." }
+  - { src: /assets/video/rckart-phone-demo.mp4, poster: /assets/video/rckart-phone-demo.jpg, caption: "Bench demo: driving the motors from the phone app." }
 gallery:
   - { src: /assets/images/projects/rckart-gearbox-section.jpg, caption: "Section through the two-speed gearbox as designed." }
   - { src: /assets/images/projects/rckart-chassis-print.jpg, caption: "Printed chassis plate and steering parts." }
