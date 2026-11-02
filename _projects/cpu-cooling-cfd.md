@@ -55,7 +55,12 @@ The base design is a plain box with long straight faces, so a hexahedral mesh su
 
 ## 3. Inputs
 
-Group 2's conditions were **16 CFM** of flow (about 0.00755 m³/s) at an inlet pressure of **1.1 mm H₂O** (about 10.8 Pa), through a 30 × 20 mm inlet (600 mm²). I worked out the inlet velocity from continuity, ṁ = ρvA, and set it as the Fluent inlet condition.
+Group 2 had **16 CFM** of flow at an inlet pressure of **1.1 mm H₂O**, through a 30 × 20 mm inlet. Fluent needs an inlet velocity, which comes from continuity:
+
+- **Flow:** 16 CFM ≈ 0.00755 m³/s
+- **Pressure:** 1.1 mm H₂O ≈ 10.8 Pa
+- **Inlet area:** A = 30 mm × 20 mm = 600 mm² = 0.0006 m²
+- **Inlet velocity:** v = Q / A = 0.00755 / 0.0006 ≈ **12.6 m/s**
 
 ## 4. Results
 

@@ -7,7 +7,7 @@ course: Client project · Exterior stair alteration
 year: 2026
 team: Client work
 role: Leader
-tools: [SolidWorks, STEP models, shop drawings, OBC 2024 Part 3]
+tools: [SolidWorks, interactive 3D model (three.js), shop drawings, OBC 2024 Part 3]
 themes: [building]
 note: "the code moved the stair"
 tier: featured
@@ -30,9 +30,11 @@ Composite decking isn't meant to span like wood, so each tread got its own welde
 - **Tray frame:** angle lips on all four sides with the boards dropped in flush, and a 1-3/4" steel nosing.
 - **Boards on top:** angles with the top leg as the board seat and the boards screwed up from below, so no screws show on the walking surface.
 - **Closed risers:** the version that went to drawings, with a 3/16" riser plate on every frame.
-- **Riser boards:** a variant with a 9/16" Trex fascia board over the riser plate.
+- **Riser boards:** a 9/16" Trex fascia board on each riser line, sitting 1/8" above the tread below and screwed to the riser plate from behind. The plate is set back 9/16" to make room, so the tread still overhangs the riser face by 1/4".
 
-Each frame is L2x2x1/4 angles on all four sides, with three L1-1/2x1-1/2x3/16 bearers between them. That gives five supports per tread at 10-1/2" on centre. Each tread is two Trex Select 2x6 boards (1.3" × 5-1/2") with a 3/8" gap, so 2 × 5-1/2" + 3/8" = 11-3/8" of tread. The boards are fastened from below with #12 stainless self-drilling screws, 18 holes per frame.
+To compare versions I built an interactive 3D model of the stair. It has sliders for the clear width between stringers and the maximum bearer spacing. As the width changes, it re-spaces the bearers, checks rise, run and support spacing, and updates the cut list. A "lift boards" control raises the treads so you can see the frame underneath. A second model put the existing porch and the proposed work over a laser scan of the site, so the longer stair could be checked against where it would actually land.
+
+Each frame is L2x2x1/4 angles on all four sides, with three L1-1/2x1-1/2x3/16 bearers between them. That gives five supports per tread at 10-1/2" on centre, inside the 12" maximum spacing I set for the boards. The 44" clear width between stringers wasn't dimensioned on the drawings, so I assumed it (giving a 43-3/4" frame) and flagged it to be verified on site. Each tread is two Trex Select 2x6 boards (1.3" × 5-1/2") with a 3/8" gap, so 2 × 5-1/2" + 3/8" = 11-3/8" of tread. The boards are fastened from below with #12 stainless self-drilling screws, 18 holes per frame.
 
 ## 2. The code check that changed the stair
 
