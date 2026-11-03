@@ -2,6 +2,8 @@
 title: Hiroshima
 date: 2026-10-11
 trip: japan-2026
+pin: [34.395, 132.455]
+pin_label: above
 where: "Hiroshima"
 tape: mint
 cover: { src: /assets/images/journal/2026-10-11-hiroshima/dome-river.jpg, caption: "the Atomic Bomb Dome across the river" }

@@ -889,3 +889,21 @@ h3 { font-size: var(--step-2); }
 .redpen:hover .redpen-note, .redpen:focus .redpen-note, .redpen:focus-within .redpen-note { opacity: 1; transform: translateX(-50%) rotate(-2deg); }
 @media (prefers-reduced-motion: reduce) { .redpen-note { transition: none; } }
 @media print { .redpen { text-decoration: none; } .redpen-note { display: none; } }
+picture { display: contents; }
+
+/* related projects */
+.related { padding-top: clamp(2.5rem, 6vw, 4rem); }
+.related h2 { font-size: var(--step-2); margin-bottom: 1.25rem; }
+.related-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); }
+
+/* trip route map */
+.trip-block { display: grid; gap: 0.5rem 2.5rem; align-items: start; }
+@media (min-width: 900px) { .trip-block { grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem); } .trip-block .trip-map-fig { grid-row: 1 / span 2; grid-column: 2; } }
+.trip-map-fig { margin: 0; max-width: 22rem; }
+.trip-map { overflow: hidden; width: 100%; height: auto; background: var(--lined); border: 1.5px solid var(--plate-edge); border-radius: var(--sketch); padding: 0.4rem; }
+.trip-map .pin { fill: var(--t, var(--tape-pink)); stroke-width: 2.2; }
+.trip-map .pin-link text.h { font-size: 24px; }
+.trip-map .pin-link text.tsm { font-size: 15px; }
+.trip-map .pin-link:hover text.h, .trip-map .pin-link:focus text.h { text-decoration: underline; }
+.trip-map .map-ref { fill: var(--ink-soft); font-size: 15px; }
+.trip-map-fig figcaption { font-family: var(--hand); color: var(--red); font-size: 1rem; margin-top: 0.3rem; }

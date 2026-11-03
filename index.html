@@ -12,7 +12,7 @@ layout: default
     <p class="hero-intro">{{ site.intro }}</p>
   </div>
   <figure class="me">
-    <img src="{{ '/assets/images/aldrich.jpg' | relative_url }}" alt="Aldrich Valloyas, with long hair and glasses, looking down at the camera">
+    {% include img.html src="/assets/images/aldrich.jpg" alt="Aldrich Valloyas, with long hair and glasses, looking down at the camera" sizes="(max-width: 860px) 70vw, 17rem" %}
     <figcaption>that's me</figcaption>
     {% if site.instagram != "" or site.linkedin != "" %}
     <ul class="me-links">
@@ -29,7 +29,7 @@ layout: default
   <ol class="process-strip">
     {% for step in hero.process %}
     <li>
-      <div class="plate"><img src="{{ step.src | relative_url }}" alt="{{ step.alt }}"></div>
+      <div class="plate">{% include img.html src=step.src alt=step.alt sizes="(max-width: 640px) 46vw, 22vw" %}</div>
       <span class="process-label">{{ step.label }}{% unless forloop.last %}<svg class="arrow" viewBox="0 0 60 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15 C 18 5, 38 4, 55 12"/><path d="M47 6 L 55 12 L 46 16"/></svg>{% endunless %}</span>
     </li>
     {% endfor %}
@@ -129,7 +129,7 @@ layout: default
     <li class="scrap {% if first %}scrap-photo{% else %}scrap-note{% endif %} tape-{{ e.tape | default: 'yellow' }}">
       <a href="{{ e.url | relative_url }}">
         <time class="stamp" datetime="{{ e.date | date_to_xmlschema }}">{{ e.date | date: "%b %-d" }}<small>{{ e.date | date: "%Y" }}</small></time>
-        {% if first %}<span class="polaroid"><img src="{{ first.src | relative_url }}" alt="{{ first.alt | default: first.caption }}" loading="lazy"><span class="polaroid-cap">{{ first.caption }}</span></span>{% endif %}
+        {% if first %}<span class="polaroid">{% assign _alt = first.alt | default: first.caption %}{% include img.html src=first.src alt=_alt loading="lazy" sizes="(max-width: 640px) 92vw, 20rem" %}<span class="polaroid-cap">{{ first.caption }}</span></span>{% endif %}
         <span class="scrap-title">{{ e.title }}</span>
       </a>
     </li>

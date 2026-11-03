@@ -1,0 +1,13 @@
+{%- comment -%}
+  Photo with WebP versions for faster loading (made next to each JPG/PNG: name.webp and name-700.webp).
+  {% include img.html src=... alt=... sizes="..." loading="lazy" class="..." %}
+{%- endcomment -%}
+{%- assign _src = include.src -%}
+{%- assign _ext = _src | split: '.' | last | downcase -%}
+{%- assign _n = _src | size | minus: 4 -%}
+{%- assign _base = _src | slice: 0, _n -%}
+{%- if _src contains '/assets/images/' and _ext == 'jpg' or _src contains '/assets/images/' and _ext == 'png' -%}
+<picture><source type="image/webp" srcset="{{ _base | append: '-700.webp' | relative_url }} 700w, {{ _base | append: '.webp' | relative_url }} 1400w" sizes="{{ include.sizes | default: '(max-width: 640px) 92vw, 34vw' }}"><img src="{{ _src | relative_url }}" alt="{{ include.alt | escape }}"{% if include.loading %} loading="{{ include.loading }}"{% endif %}{% if include.class %} class="{{ include.class }}"{% endif %} data-full="{{ _base | append: '.webp' | relative_url }}" decoding="async"></picture>
+{%- else -%}
+<img src="{{ _src | relative_url }}" alt="{{ include.alt | escape }}"{% if include.loading %} loading="{{ include.loading }}"{% endif %}{% if include.class %} class="{{ include.class }}"{% endif %} decoding="async">
+{%- endif -%}

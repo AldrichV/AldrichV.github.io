@@ -12,6 +12,7 @@ email: "aldrichkylevalloyas@gmail.com"
 instagram: "aldrich.kv"   # handle, no @
 linkedin: ""         # full URL
 github: ""           # full URL
+goatcounter: ""      # your GoatCounter code (the part before .goatcounter.com) for private visit counts
 resume: "/resume/"   # the printable résumé page (or a PDF path)
 
 # If the repo is named <username>.github.io, leave baseurl empty.

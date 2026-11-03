@@ -1,0 +1,35 @@
+{%- comment -%}
+  Hand-drawn route map for a trip. Entries with `pin: [lat, lon]` become pins, joined in date order.
+  Optional `pin_label: left` or `above` moves an entry's label (default: right of the pin).
+  Usage: {% include trip-map.html trip="japan-2026" %}
+{%- endcomment -%}
+{%- assign _entries = site.journal | where: 'trip', include.trip | sort: 'date' -%}
+{%- assign _d = "" -%}
+{%- for e in _entries -%}{%- if e.pin -%}
+  {%- assign _x = e.pin[1] | minus: 129.4 | times: 48.541 | plus: 8 | round: 1 -%}
+  {%- assign _y = 41.7 | minus: e.pin[0] | times: 60 | plus: 8 | round: 1 -%}
+  {%- if _d == "" -%}{%- assign _d = "M" | append: _x | append: " " | append: _y -%}{%- else -%}{%- assign _d = _d | append: " L" | append: _x | append: " " | append: _y -%}{%- endif -%}
+{%- endif -%}{%- endfor -%}
+{%- if _d != "" -%}
+<figure class="trip-map-fig">
+  <svg class="sketch-svg trip-map" viewBox="0 170 600 480" role="img" aria-label="Sketch map of Japan with the trip's stops pinned and joined by a dashed route" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#rough)">
+      {% include japan-outline.svg %}
+      <path class="r dash" d="{{ _d }}"/>
+      {%- for e in _entries -%}{%- if e.pin -%}
+      {%- assign _x = e.pin[1] | minus: 129.4 | times: 48.541 | plus: 8 | round: 1 -%}
+      {%- assign _y = 41.7 | minus: e.pin[0] | times: 60 | plus: 8 | round: 1 -%}
+      <circle class="r pin" cx="{{ _x }}" cy="{{ _y }}" r="6"/>
+      {%- endif -%}{%- endfor -%}
+    </g>
+    {% include japan-labels.svg %}
+    {%- for e in _entries -%}{%- if e.pin -%}
+    {%- assign _x = e.pin[1] | minus: 129.4 | times: 48.541 | plus: 8 | round: 1 -%}
+    {%- assign _y = 41.7 | minus: e.pin[0] | times: 60 | plus: 8 | round: 1 -%}
+    {%- if e.pin_label == "left" -%}{%- assign _lx = _x | minus: 11 -%}{%- assign _anchor = "end" -%}{%- assign _ly = _y | plus: 14 -%}{%- elsif e.pin_label == "above" -%}{%- assign _lx = _x -%}{%- assign _anchor = "middle" -%}{%- assign _ly = _y | minus: 30 -%}{%- else -%}{%- assign _lx = _x | plus: 11 -%}{%- assign _anchor = "start" -%}{%- assign _ly = _y | plus: 1 -%}{%- endif -%}
+    <a href="{{ e.url | relative_url }}" class="pin-link"><text class="h" x="{{ _lx }}" y="{{ _ly }}" text-anchor="{{ _anchor }}">{{ e.title }}</text><text class="tsm" x="{{ _lx }}" y="{{ _ly | plus: 16 }}" text-anchor="{{ _anchor }}">{{ e.date | date: '%b %-d' }}</text></a>
+    {%- endif -%}{%- endfor -%}
+  </svg>
+  <figcaption>where the days so far happened · tap a name to open it</figcaption>
+</figure>
+{%- endif -%}

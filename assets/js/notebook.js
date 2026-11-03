@@ -75,7 +75,7 @@
     function show(i) {
       cur = (i + pics.length) % pics.length;
       var p = pics[cur];
-      img.src = p.currentSrc || p.src;
+      img.src = p.dataset.full || p.currentSrc || p.src;
       img.alt = p.alt || '';
       cap.textContent = captionFor(p);
       count.textContent = (cur + 1) + ' / ' + pics.length;

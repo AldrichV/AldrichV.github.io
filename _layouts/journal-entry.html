@@ -26,7 +26,7 @@ layout: default
     <div class="photo-spread">
       {% for ph in page.photos %}
       <figure class="polaroid tape-{{ page.tape | default: 'yellow' }}">
-        <img src="{{ ph.src | relative_url }}" alt="{{ ph.alt | default: ph.caption }}">
+        {% assign _alt = ph.alt | default: ph.caption %}{% include img.html src=ph.src alt=_alt %}
         {% if ph.caption %}<figcaption class="polaroid-cap">{{ ph.caption }}</figcaption>{% endif %}
       </figure>
       {% endfor %}
@@ -50,7 +50,7 @@ layout: default
             {% for ph in stop.photos %}
             <figure class="polaroid">
               {% if ph.video %}<video src="{{ ph.video | relative_url }}" poster="{{ ph.src | relative_url }}" muted playsinline loop autoplay preload="metadata" aria-label="{{ ph.alt | default: ph.caption | escape }}"></video>
-              {% else %}<img src="{{ ph.src | relative_url }}" alt="{{ ph.alt | default: ph.caption | escape }}" loading="lazy">{% endif %}
+              {% else %}{% assign _alt = ph.alt | default: ph.caption %}{% include img.html src=ph.src alt=_alt loading="lazy" sizes="(max-width: 640px) 46vw, 15rem" %}{% endif %}
               {% if ph.caption %}<figcaption class="polaroid-cap">{{ ph.caption }}</figcaption>{% endif %}
             </figure>
             {% endfor %}

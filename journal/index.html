@@ -15,7 +15,12 @@ description: The other half of the notebook — everyday things, photos and what
 {% assign trip_ids = "" | split: "" %}{% for e in entries %}{% if e.trip %}{% unless trip_ids contains e.trip %}{% assign trip_ids = trip_ids | push: e.trip %}{% endunless %}{% endif %}{% endfor %}
 {% if trip_ids.size > 0 %}
 <section class="wrap trips" aria-label="Trips">
-  {% for id in trip_ids %}{% include trip-timeline.html trip=id %}{% endfor %}
+  {% for id in trip_ids %}
+  <div class="trip-block">
+    {% include trip-timeline.html trip=id %}
+    {% include trip-map.html trip=id %}
+  </div>
+  {% endfor %}
 </section>
 {% endif %}
 
@@ -28,7 +33,7 @@ description: The other half of the notebook — everyday things, photos and what
       <a href="{{ e.url | relative_url }}">
         <time class="stamp" datetime="{{ e.date | date_to_xmlschema }}">{{ e.date | date: "%b %-d" }}<small>{{ e.date | date: "%Y" }}</small></time>
         {% if first %}
-        <span class="polaroid"><img src="{{ first.src | relative_url }}" alt="{{ first.alt | default: first.caption }}" loading="lazy"><span class="polaroid-cap">{{ first.caption }}</span></span>
+        <span class="polaroid">{% assign _alt = first.alt | default: first.caption %}{% include img.html src=first.src alt=_alt loading="lazy" sizes="(max-width: 640px) 92vw, 20rem" %}<span class="polaroid-cap">{{ first.caption }}</span></span>
         {% endif %}
         <span class="scrap-title">{{ e.title }}</span>
         {% unless first %}<span class="scrap-excerpt">{{ e.content | strip_html | truncatewords: 26 }}</span>{% endunless %}

@@ -1,0 +1,29 @@
+{%- comment -%} Up to three other projects that share the most themes with this one. {%- endcomment -%}
+{%- assign _strong = "" | split: "" -%}
+{%- assign _weak = "" | split: "" -%}
+{%- assign _pool = site.projects | sort: "order" -%}
+{%- for p in _pool -%}
+  {%- if p.url != page.url -%}
+    {%- assign _n = 0 -%}
+    {%- for t in p.themes -%}{%- if page.themes contains t -%}{%- assign _n = _n | plus: 1 -%}{%- endif -%}{%- endfor -%}
+    {%- if _n >= 2 -%}{%- assign _strong = _strong | push: p -%}{%- elsif _n == 1 -%}{%- assign _weak = _weak | push: p -%}{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign _rel = _strong | concat: _weak -%}
+{%- if _rel.size > 0 -%}
+<section class="wrap related" aria-labelledby="related-heading">
+  <h2 id="related-heading" class="scribble">If you liked this sheet</h2>
+  <ul class="card-grid related-grid">
+    {%- for p in _rel limit: 3 %}
+    <li class="card">
+      <a href="{{ p.url | relative_url }}">
+        <div class="sketch-box">{% include sketches/{{ p.slug }}.svg %}</div>
+        <span class="card-title">{{ p.title }}</span>
+        <span class="card-meta">{{ p.course | split: " · " | first }}, {{ p.year }}</span>
+        {% if p.note %}<span class="note">{{ p.note }}</span>{% endif %}
+      </a>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif -%}
