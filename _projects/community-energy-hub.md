@@ -10,6 +10,7 @@ role: Team leader
 tools: [SolidWorks, 3D printing, electronics prototyping]
 themes: [energy, sustainability]
 note: "7–8 V, by hand"
+resume: "Led a capstone team on a hand-crank generator and feasibility study for turning everyday motion in community spaces into electricity."
 tier: featured
 order: 7
 gallery:

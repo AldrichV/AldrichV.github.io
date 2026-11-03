@@ -10,6 +10,7 @@ role: Team leader
 tools: [Excel, thermodynamic modelling]
 themes: [energy, sustainability]
 note: "≈ 3,430 t of CO₂ a year"
+resume: "Led a retrofit plan to move a campus central heating plant to heat pumps and flue-gas heat recovery, cutting about 3,430 t CO₂ a year."
 tier: featured
 order: 4
 gallery:

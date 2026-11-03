@@ -11,6 +11,7 @@ role: Leader
 tools: [SolidWorks, interactive 3D model (three.js), shop drawings, OBC 2024 Part 3]
 themes: [building]
 note: "the code moved the stair"
+resume: "Redesigned an exterior steel stair to meet OBC 2024 Part 3 (12 risers at 6-7/8\", 11 treads at 11-1/8\"); modelled the composite-tread frames and produced two shop drawings with a full code-check table and cut list."
 tier: featured
 order: 9
 model: stair-model.html
@@ -47,7 +48,7 @@ The issued drawings had 11 risers at 7-1/2" and 10 treads at a 10" run. Checked 
 | Rise | 7-1/2" = 190.5 mm | 125–180 mm | too tall |
 | Run | 10" = 254 mm | 280–355 mm | too short |
 
-The total height is fixed by the deck, so I re-divided it. The new design has **12 risers at 6-7/8" (174.6 mm)**, which adds up to 6'-10 1/2" of rise. It has **11 treads at 11-1/8" (282.6 mm)**, for a total run of 10'-2 3/8". That puts both values inside the limits. The cost is that the stair grows by about 1'-10 3/8" along the walk, so the stringers, the pier and the walk all had to be flagged for the engineer of record to redesign.
+The total height is fixed by the deck, so I re-divided it. The new design has **12 risers at 6-7/8" ({% include pen.html v='174.6 mm' n='6.875 in × 25.4 mm/in' %})**, which adds up to {% include pen.html v='6′-10 1/2″' n='12 × 6-7/8″ = 82-1/2″' %} of rise. It has **11 treads at 11-1/8" (282.6 mm)**, for a total run of {% include pen.html v='10′-2 3/8″' n='11 × 11-1/8″ = 122-3/8″' %}. That puts both values inside the limits. The cost is that the stair grows by about {% include pen.html v='1′-10 3/8″' n='122-3/8″ new run − 10 × 10″ old run = 22-3/8″' %} along the walk, so the stringers, the pier and the walk all had to be flagged for the engineer of record to redesign.
 
 The rest of the checks went into a table on the drawing:
 

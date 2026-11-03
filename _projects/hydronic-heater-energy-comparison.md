@@ -11,6 +11,7 @@ role: Leader
 tools: [Excel, manufacturer output schedules, Ontario electricity tariffs]
 themes: [energy, building]
 note: "uses more energy, costs a third as much"
+resume: "Compared electric furnaces with gas-fired hydronic unit heaters: capacity from manufacturer schedules, seasonal energy and demand charges; showed a 67% (≈ $5,800/season) operating-cost saving and a break-even gas price."
 tier: featured
 order: 12
 gallery:
@@ -42,7 +43,7 @@ I converted the manufacturer's output schedules to kilowatts (kW = MBH ÷ 3.412)
 
 | Space | Proposed | Output | vs. 15 kW | Water flow |
 |---|---|---|---|---|
-| First crawl space | one large unit | 18.64 kW | +24.3% | 6.5 gpm |
+| First crawl space | one large unit | 18.64 kW | {% include pen.html v='+24.3%' n='18.64 ÷ 15 − 1 = 0.243' %} | 6.5 gpm |
 | Second crawl space | two smaller units | 21.34 kW | +42.2% | 7.4 gpm |
 | Both | three units | 39.98 kW | +33.3% | 13.9 gpm |
 
@@ -71,7 +72,7 @@ I modelled a 2,000-hour season, split evenly between the two recorded conditions
 | Heat pump hydronic (COP 3) | 16,916 kWh | — | 16.9 MWh |
 | Electric boiler hydronic | 48,495 kWh | — | 48.5 MWh |
 
-The gas system buys about 19% *more* energy than the furnaces, because of flue and piping losses. Yet it cuts electricity by 97%, down to the three fans at their 0.564 kVA combined draw. The heat pump looks best on paper, but it would need to make 180°F water to match these capacities, and most can't do that efficiently.
+The gas system buys about {% include pen.html v='19% *more*' n='53.8 MWh ÷ 45.0 MWh = 1.196' %} energy than the furnaces, because of flue and piping losses. Yet it cuts electricity by 97%, down to the three fans at their 0.564 kVA combined draw. The heat pump looks best on paper, but it would need to make 180°F water to match these capacities, and most can't do that efficiently.
 
 ## 4. Cost, and the charge nobody sees
 
@@ -80,14 +81,14 @@ Electricity was priced from the Ontario forecasts and the local utility's publis
 - **Energy:** an all-in rate of about **13.4¢/kWh**. That's the market price plus the Global Adjustment, regulatory charges and the disposition rider, with a 1.036 line-loss factor applied.
 - **Delivery:** **$14.43 per kW-month**, charged on monthly peak demand.
 
-That second line is the hidden cost. 30 kW of resistance heat adds about **$2,600 a season** in demand charges, over six winter billing months. The new fans draw under 1 kW.
+That second line is the hidden cost. 30 kW of resistance heat adds about **{% include pen.html v='$2,600 a season' n='30 kW × $14.43 per kW-month × 6 months = $2,597' %}** in demand charges, over six winter billing months. The new fans draw under 1 kW.
 
 | Seasonal cost | Existing | Proposed | Savings |
 |---|---|---|---|
 | Electricity, energy | $6,011 | $151 | $5,860 |
 | Electricity, demand | $2,598 | $49 | $2,549 |
 | Natural gas | — | $2,632 | −$2,632 |
-| **Total** | **$8,608** | **$2,831 + pump** | **$5,777 (67%)** |
+| **Total** | **$8,608** | **$2,831 + pump** | **{% include pen.html v='$5,777 (67%)' n='$8,608 − $2,831 = $5,777, and $5,777 ÷ $8,608 = 0.67' %}** |
 
 The savings hold across mild and severe winters:
 

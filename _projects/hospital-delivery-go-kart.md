@@ -10,6 +10,7 @@ role: Embodiment design, definitive layout and gearbox design calculations
 tools: [SolidWorks, SolidWorks Simulation, Arduino, Blynk, 3D printing]
 themes: [drivetrains, mechatronics]
 note: "lesson learned: PLA gears soften under load"
+resume: "Arduino delivery go-kart with four control modes and obstacle avoidance; owned embodiment design, the definitive layout and the two-speed gearbox calculations."
 tier: featured
 order: 2
 model: kart-model.html

@@ -10,6 +10,7 @@ role: Team leader
 tools: [SolidWorks Simulation, LCA]
 themes: [sustainability]
 note: "glass bottle: 7× heavier"
+resume: "Led a life cycle assessment of glass vs. recycled-PET olive oil bottles, plus a lighter rPET redesign checked with drop-test simulation."
 tier: featured
 order: 6
 gallery:

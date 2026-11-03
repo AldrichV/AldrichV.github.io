@@ -10,6 +10,7 @@ role: Solo
 tools: [ANSYS Fluent, DesignModeler, ANSYS Meshing]
 themes: [energy]
 note: "even beats fast"
+resume: "CFD study in ANSYS Fluent comparing three CPU-enclosure vent layouts under two different flow and pressure conditions."
 tier: featured
 order: 11
 gallery:
@@ -57,8 +58,8 @@ The base design is a plain box with long straight faces, so a hexahedral mesh su
 
 Group 2 had **16 CFM** of flow at an inlet pressure of **1.1 mm H₂O**, through a 30 × 20 mm inlet. Fluent needs an inlet velocity, which comes from continuity:
 
-- **Flow:** 16 CFM ≈ 0.00755 m³/s
-- **Pressure:** 1.1 mm H₂O ≈ 10.8 Pa
+- **Flow:** 16 CFM ≈ {% include pen.html v='0.00755 m³/s' n='16 ft³/min × 0.02832 m³/ft³ ÷ 60 s/min' %}
+- **Pressure:** 1.1 mm H₂O ≈ {% include pen.html v='10.8 Pa' n='1.1 mm × 9.81 Pa per mm of water' %}
 - **Inlet area:** A = 30 mm × 20 mm = 600 mm² = 0.0006 m²
 - **Inlet velocity:** v = Q / A = 0.00755 / 0.0006 ≈ **12.6 m/s**
 

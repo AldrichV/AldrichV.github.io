@@ -90,14 +90,8 @@ layout: default
     <div class="toolbox">
       <h3>In my toolbox</h3>
       <ul>
-        <li>SolidWorks — modelling and FEA</li>
-        <li>Autodesk Fusion — generative design</li>
-        <li>MATLAB and Simulink</li>
-        <li>Arduino</li>
-        <li>LabVIEW and NI DAQ</li>
-        <li>3D printing</li>
-        <li>Danfoss Coolselector</li>
-        <li>Excel for design calculations</li>
+        {% for t in site.data.toolbox %}<li>{{ t }}</li>
+        {% endfor %}
       </ul>
     </div>
   </div>

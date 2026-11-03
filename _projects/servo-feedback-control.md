@@ -10,6 +10,7 @@ role: Team leader
 tools: [MATLAB, Simulink, Quanser SRV02]
 themes: [mechatronics]
 note: "simulation ≠ hardware"
+resume: "Modelled a rotary servo from a bump test and designed PI, PID, lead and cascade controllers in Simulink, then ran them on hardware."
 tier: featured
 order: 5
 gallery:

@@ -10,6 +10,7 @@ role: Team leader
 tools: [SolidWorks, MATLAB, Excel]
 themes: [drivetrains]
 note: "let MATLAB do the iterating"
+resume: "Led a team designing a two-mode spur-gear transmission, using a MATLAB script to iterate gear pairs against AGMA bending limits."
 tier: featured
 order: 3
 gallery:
@@ -41,8 +42,8 @@ We wanted two modes: one for climbing and one for accelerating. Our first layout
 
 | Mode | Gear pair | Ratio | Result |
 | --- | --- | --- | --- |
-| Climbing | 14T → 35T | 2.5 : 1 | 260 rpm out, about 34 km/h |
-| Acceleration | 13T → 32T | 2.46 : 1 | about 19.7 N·m at the wheel |
+| Climbing | 14T → 35T | {% include pen.html v='2.5 : 1' n='35 teeth ÷ 14 teeth' %} | 260 rpm out, about 34 km/h |
+| Acceleration | 13T → 32T | {% include pen.html v='2.46 : 1' n='32 teeth ÷ 13 teeth' %} | about 19.7 N·m at the wheel |
 
 All gears use a 2 mm module and 15 mm face width on 15 mm shafts.
 

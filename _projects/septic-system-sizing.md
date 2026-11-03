@@ -11,6 +11,7 @@ role: Leader
 tools: [OBC 2024 Part 8, Excel, CAD model review]
 themes: [building, sustainability]
 note: "T = 20 is right on the edge"
+resume: "Sized a residential septic tank and leaching bed to OBC Part 8 (3,600 L two-compartment tank, 76.2 m of Type II chamber in six trenches) and flagged the design's sensitivity to the soil percolation time."
 tier: featured
 order: 10
 gallery:
@@ -87,7 +88,7 @@ The catch is that T = 20 sits right at the upper edge of that loading band. So I
 | 30 | 110.0 m | 8 | 137.5 m² |
 | 36 | 132.0 m | 6 | 183.33 m² |
 
-If the accepted T comes back even slightly above 20, the minimum fill area jumps 25% and the 76.2 m of chamber no longer covers the required length. That warning went in the report in bold.
+If the accepted T comes back even slightly above 20, the minimum fill area {% include pen.html v='jumps 25%' n='137.5 m² ÷ 110 m² = 1.25' %} and the 76.2 m of chamber {% include pen.html v='no longer covers' n='at T = 21: 1,100 × 21 ÷ 300 = 77.0 m, more than the 76.2 m provided' %} the required length. That warning went in the report in bold.
 
 ## 6. Clearances
 

@@ -840,3 +840,52 @@ h3 { font-size: var(--step-2); }
 .torn .big { font-family: var(--draft); font-size: 4.5rem; line-height: 1; color: var(--red); margin-bottom: 0.4rem; transform: rotate(-4deg); display: inline-block; }
 .torn ul { list-style: none; padding: 0; margin: 0.5rem 0 0; font-family: var(--hand); font-size: 1.25rem; line-height: var(--line-step); }
 .torn li::before { content: "→ "; color: var(--red); }
+
+/* ---------- Résumé ---------- */
+.resume-wrap { padding-block: clamp(1.5rem, 4vw, 2.5rem); }
+.resume-tools { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: center; margin: 0 0 1.25rem; }
+.resume-print { font: 1.1rem var(--hand); color: var(--pen); background: var(--plate); border: 1.5px dashed var(--pen); border-radius: 6px 3px 7px 3px; padding: 0.3rem 0.9rem; cursor: pointer; }
+.resume-print:hover { border-style: solid; }
+.resume-tools .hand { font-family: var(--hand); color: var(--ink-soft); }
+.resume { max-width: 52rem; background: #fff; padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.25rem, 4vw, 3rem); box-shadow: 0 1px 2px rgba(20,30,40,.10), 0 14px 36px rgba(20,30,40,.12); font-size: 0.98rem; line-height: 1.45; }
+.cv-head { border-bottom: 2px solid var(--ink); padding-bottom: 0.8rem; margin-bottom: 1rem; }
+.cv-head h1 { font-family: var(--draft); font-size: clamp(2rem, 5vw, 2.6rem); line-height: 1.1; margin: 0; }
+.cv-tag { margin: 0.25rem 0 0.5rem; color: var(--ink-soft); }
+.cv-contact { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.2rem 1.25rem; font-size: 0.92rem; }
+.cv-contact a, .cv-row a { color: var(--ink); }
+.cv-sec { margin: 0 0 1rem; }
+.cv-sec h2 { font-family: var(--draft); font-size: 1.15rem; letter-spacing: .04em; text-transform: uppercase; color: var(--red); margin: 0 0 0.45rem; border-bottom: 1px dashed var(--rule); padding-bottom: 0.15rem; }
+.cv-item { margin: 0 0 0.6rem; break-inside: avoid; }
+.cv-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 1rem; margin: 0; }
+.cv-row span { color: var(--ink-soft); font-size: 0.9rem; }
+.cv-desc { margin: 0.1rem 0 0; }
+.cv-skills p { margin: 0; }
+.cv-foot { margin: 0.8rem 0 0; font-size: 0.85rem; color: var(--ink-soft); }
+@media print {
+  @page { size: letter; margin: 0.55in 0.6in; }
+  html, body { background: #fff !important; }
+  body * { visibility: hidden; }
+  .resume, .resume * { visibility: visible; }
+  .resume { position: absolute; left: 0; top: 0; width: 100%; max-width: none; box-shadow: none; padding: 0; font-size: 9.6pt; line-height: 1.35; }
+  .cv-head h1 { font-size: 22pt; }
+  .cv-sec { margin-bottom: 8pt; }
+  .cv-item { margin-bottom: 4.5pt; }
+  .cv-row a, .cv-contact a { text-decoration: none; }
+  .no-print, body > header, body > footer, .site-header, .site-footer, .read-progress, .sheet-index { display: none !important; }
+}
+
+/* ---------- red-pen working notes on key numbers ---------- */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.redpen { position: relative; cursor: help; text-decoration: underline wavy var(--red); text-decoration-thickness: 1.3px; text-underline-offset: 0.22em; border-radius: 2px; outline: none; }
+.redpen:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
+.redpen-note {
+  position: absolute; left: 50%; bottom: calc(100% + 0.55rem); transform: translateX(-50%) rotate(-2deg) translateY(4px);
+  width: max-content; max-width: min(18rem, 80vw); padding: 0.35rem 0.6rem 0.4rem;
+  font-family: var(--hand); font-weight: 400; font-size: 1.05rem; line-height: 1.3; color: var(--red); text-align: center; white-space: normal;
+  background: var(--lined); border: 1.5px solid var(--red); border-radius: 10px 4px 12px 5px; box-shadow: 0 6px 16px rgba(20,30,40,.14);
+  opacity: 0; pointer-events: none; z-index: 30; transition: opacity .18s ease, transform .18s ease;
+}
+.redpen-note::after { content: ""; position: absolute; left: 50%; top: 100%; width: 1.5px; height: 0.55rem; background: var(--red); }
+.redpen:hover .redpen-note, .redpen:focus .redpen-note, .redpen:focus-within .redpen-note { opacity: 1; transform: translateX(-50%) rotate(-2deg); }
+@media (prefers-reduced-motion: reduce) { .redpen-note { transition: none; } }
+@media print { .redpen { text-decoration: none; } .redpen-note { display: none; } }

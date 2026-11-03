@@ -12,7 +12,7 @@ email: "aldrichkylevalloyas@gmail.com"
 instagram: "aldrich.kv"   # handle, no @
 linkedin: ""         # full URL
 github: ""           # full URL
-resume: ""           # e.g. /assets/resume.pdf
+resume: "/resume/"   # the printable résumé page (or a PDF path)
 
 # If the repo is named <username>.github.io, leave baseurl empty.
 # If it's any other name (e.g. "portfolio"), set baseurl: "/portfolio".

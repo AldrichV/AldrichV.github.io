@@ -10,6 +10,7 @@ role: Conceptual design, design calculations, risk assessment (FMEA), final desi
 tools: [SolidWorks, SolidWorks Simulation, Arduino, IoT dashboard, 3D printing]
 themes: [mechatronics, energy]
 note: "tested in a bathtub, with pool noodles"
+resume: "Two-axis floating solar tracker with sealed electronics and an IoT dashboard; owned conceptual design, design calculations, FMEA, the final design write-up and BOM."
 tier: featured
 featured: true
 order: 1
