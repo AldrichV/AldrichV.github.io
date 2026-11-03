@@ -12,5 +12,6 @@
 {{ content }}
 </main>
 {% include footer.html %}
+<script src="{{ '/assets/js/notebook.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 </body>
 </html>
