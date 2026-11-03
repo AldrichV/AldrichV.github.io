@@ -135,10 +135,6 @@ With Ruby installed: `bundle install`, then `bundle exec jekyll serve`, and open
 | `_layouts/`, `_includes/` | Page templates |
 | `assets/css/site.css` | All styling; colours and type sizes are at the top |
 
-## Visit counts (optional)
-
-Sign up free at goatcounter.com, pick a code (for example `aldrichv`), and put it in `_config.yml` as `goatcounter: "aldrichv"`. The counter script then loads on every page. GoatCounter doesn't use cookies, so no cookie banner is needed.
-
 ## Photos load as WebP
 
 Every JPG/PNG in `assets/images/` has a `name.webp` and `name-700.webp` next to it, and pages serve those automatically through `_includes/img.html`. When you add new photos, make the WebP copies too (any image tool can export WebP), or ask Claude to run the conversion. If a WebP copy is missing, the browser falls back to the original photo.
