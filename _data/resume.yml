@@ -1,0 +1,95 @@
+# Everything on /resume/ comes from this file (plus email/LinkedIn from _config.yml).
+# Edit freely: each list prints in the order written here.
+
+summary: >-
+  Mechanical engineering graduate skilled in CAD, project support and client
+  coordination, focused on practical problem-solving and efficient design.
+
+education:
+  - school: York University, Lassonde School of Engineering
+    credential: Bachelor of Engineering, Mechanical Engineering
+    dates: 2022 – 2026
+    detail: "GPA: 3.35 · Led five team design projects, from a two-mode e-bike gearbox to a campus heating retrofit plan"
+  - school: Tech Stewardship Practice Program
+    credential: Certification
+    dates: 2025 – Present
+
+experience:
+  - role: Operations Intern
+    org: GO2 Mechanical
+    dates: Jun 2026
+    points:
+      - Maintained HVAC assets across multiple facilities
+      - Helped develop proprietary software using field data
+      - Helped with the installation of industrial HVAC systems
+      - Modelled and built custom machinery for manufacturing lines
+  - role: General Contractor Assistant
+    org: VA Contracting
+    dates: Dec 2025
+    points:
+      - Created 3D CAD models from client specifications (SolidWorks)
+      - Prepared quotations estimating project costs and budgets for clients
+      - Developed marketing materials to support service promotion
+  - role: Event Coordinator
+    org: Captive Escape Rooms
+    dates: Apr 2020
+    points:
+      - Managed client interactions and team coordination to improve the customer experience
+      - Scheduled and facilitated corporate events in the facility
+  - role: Station Chef
+    org: Longo's
+    dates: Sep 2019
+    points:
+      - Prepared stations with the equipment and supplies needed for kitchen operations
+      - Kept stations efficient in a high-volume, high-demand service environment
+  - role: Tournament Coordinator
+    org: Canlan Ice Sports
+    dates: Jun 2018
+    points:
+      - Tracked and recorded live game statistics and standings across multiple events
+      - Communicated with players, coaches and staff to keep operations running smoothly
+
+# Project highlights are pulled from the project pages (their `resume:` line).
+# List the project file names to show, in order.
+projects:
+  - hydronic-heater-energy-comparison
+  - composite-tread-stair
+  - septic-system-sizing
+  - floating-solar-tracker
+  - hospital-delivery-go-kart
+  - e-bike-gearbox
+
+skills:
+  - group: Technical
+    list:
+      - "SolidWorks (3D modelling, assemblies, FEA)"
+      - "MATLAB and Simulink"
+      - "Arduino and microcontrollers"
+      - "LabVIEW and NI DAQ"
+      - "Autodesk Fusion (generative design)"
+      - "Danfoss Coolselector"
+      - "Excel for design calculations"
+  - group: Design and manufacturing
+    list:
+      - "CAD modelling and technical drawings"
+      - "3D printing"
+      - "Lathe and mill"
+      - "CNC machining"
+      - "Mechanical assembly"
+  - group: Core
+    list:
+      - "Problem solving"
+      - "Team collaboration"
+      - "Project coordination"
+
+activities:
+  - group: Extracurriculars
+    list:
+      - "Student tutoring"
+      - "York University Robotics Society (2022 – 2026)"
+      - "Lassonde Engineering Society (2022 – 2026)"
+  - group: Interests
+    list:
+      - "Robotics projects (Arduino, sensors)"
+      - "BattleBots and competitive robotics"
+      - "Model kit building and assembly"

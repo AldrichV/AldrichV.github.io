@@ -1,61 +1,86 @@
 ---
 layout: default
 title: Résumé
-description: One-page résumé of Aldrich Valloyas, mechanical engineering graduate.
+description: Résumé of Aldrich Valloyas, mechanical engineering graduate.
 ---
-{% assign all = site.projects | sort: "order" %}
-{% assign work = all | where: "kind", "work" %}
-{% assign school = all | where_exp: "p", "p.kind != 'work'" | where: "tier", "featured" %}
+{% assign r = site.data.resume %}
 <div class="wrap resume-wrap">
   <p class="resume-tools no-print">
     <button type="button" class="resume-print" onclick="window.print()">print / save as PDF</button>
-    <span class="hand">built from the projects on this site, so it stays up to date</span>
+    <span class="hand">one page, Letter size</span>
   </p>
 
   <article class="resume" aria-label="Résumé">
     <header class="cv-head">
-      <h1>{{ site.title }}</h1>
-      <p class="cv-tag">Mechanical engineering graduate · engineering work and passion projects</p>
+      <div>
+        <h1>{{ site.title }}</h1>
+        <p class="cv-tag">Mechanical Engineering Graduate</p>
+      </div>
       <ul class="cv-contact">
         {% if site.email != "" %}<li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>{% endif %}
         <li><a href="{{ site.url }}{{ site.baseurl }}/">{{ site.url | remove: "https://" }}{{ site.baseurl }}</a></li>
-        {% if site.linkedin != "" %}<li><a href="{{ site.linkedin }}">LinkedIn</a></li>{% endif %}
+        {% if site.linkedin != "" %}<li><a href="{{ site.linkedin }}">{{ site.linkedin | remove: "https://" | remove: "www." }}</a></li>{% endif %}
       </ul>
     </header>
 
-    <section class="cv-sec">
-      <h2>Education</h2>
-      <div class="cv-item"><p class="cv-row"><strong>Bachelor of Engineering, Mechanical Engineering</strong><span>York University · Lassonde School of Engineering</span></p>
-      <p class="cv-desc">Led five team design projects, from a two-mode e-bike gearbox to a campus heating retrofit plan.</p></div>
-    </section>
+    {% if r.summary %}<p class="cv-summary">{{ r.summary }}</p>{% endif %}
 
-    {% if work.size > 0 %}
-    <section class="cv-sec">
-      <h2>Engineering work</h2>
-      {% for p in work %}
-      <div class="cv-item">
-        <p class="cv-row"><strong><a href="{{ p.url | absolute_url }}">{{ p.title }}</a></strong><span>{{ p.course | split: " · " | first }}, {{ p.year }}</span></p>
-        <p class="cv-desc">{{ p.resume | default: p.summary }}</p>
+    <div class="cv-cols">
+      <div class="cv-main">
+        <section class="cv-sec">
+          <h2>Experience</h2>
+          {% for x in r.experience %}
+          <div class="cv-item">
+            <p class="cv-row"><strong>{{ x.role }}</strong><span class="cv-date">{{ x.dates }}</span></p>
+            <p class="cv-org">{{ x.org }}</p>
+            <ul class="cv-points">{% for pt in x.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+          </div>
+          {% endfor %}
+        </section>
+
+        <section class="cv-sec">
+          <h2>Selected projects</h2>
+          {% for slug in r.projects %}{% assign hit = site.projects | where: "slug", slug | first %}
+          {% if hit %}
+          <div class="cv-item">
+            <p class="cv-row"><strong><a href="{{ hit.url | absolute_url }}">{{ hit.title }}</a></strong><span class="cv-date">{% if hit.kind == "work" %}Work{% else %}{{ hit.course | split: " · " | first }}{% endif %}, {{ hit.year }}</span></p>
+            <p class="cv-desc">{{ hit.resume | default: hit.summary }}</p>
+          </div>
+          {% endif %}{% endfor %}
+        </section>
       </div>
-      {% endfor %}
-    </section>
-    {% endif %}
 
-    <section class="cv-sec">
-      <h2>Selected projects</h2>
-      {% for p in school limit: 6 %}
-      <div class="cv-item">
-        <p class="cv-row"><strong><a href="{{ p.url | absolute_url }}">{{ p.title }}</a></strong><span>{{ p.course | split: " · " | first }}, {{ p.year }}</span></p>
-        <p class="cv-desc">{{ p.resume | default: p.summary }}</p>
-      </div>
-      {% endfor %}
-    </section>
+      <aside class="cv-side">
+        <section class="cv-sec">
+          <h2>Education</h2>
+          {% for e in r.education %}
+          <div class="cv-item">
+            <p class="cv-strong">{{ e.credential }}</p>
+            <p class="cv-org">{{ e.school }}</p>
+            <p class="cv-date">{{ e.dates }}</p>
+            {% if e.detail %}<p class="cv-desc">{{ e.detail }}</p>{% endif %}
+          </div>
+          {% endfor %}
+        </section>
 
-    <section class="cv-sec cv-skills">
-      <h2>Tools</h2>
-      <p>{{ site.data.toolbox | join: " · " }}</p>
-    </section>
+        <section class="cv-sec">
+          <h2>Skills</h2>
+          {% for g in r.skills %}
+          <p class="cv-strong">{{ g.group }}</p>
+          <ul class="cv-list">{% for i in g.list %}<li>{{ i }}</li>{% endfor %}</ul>
+          {% endfor %}
+        </section>
 
-    <p class="cv-foot">More detail, drawings, 3D models and test videos for every project: {{ site.url | remove: "https://" }}{{ site.baseurl }}/projects/</p>
+        <section class="cv-sec">
+          <h2>Activities</h2>
+          {% for g in r.activities %}
+          <p class="cv-strong">{{ g.group }}</p>
+          <ul class="cv-list">{% for i in g.list %}<li>{{ i }}</li>{% endfor %}</ul>
+          {% endfor %}
+        </section>
+      </aside>
+    </div>
+
+    <p class="cv-foot">Drawings, 3D models and test videos for every project: {{ site.url | remove: "https://" }}{{ site.baseurl }}/projects/</p>
   </article>
 </div>

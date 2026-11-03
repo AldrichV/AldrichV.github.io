@@ -847,29 +847,40 @@ h3 { font-size: var(--step-2); }
 .resume-print { font: 1.1rem var(--hand); color: var(--pen); background: var(--plate); border: 1.5px dashed var(--pen); border-radius: 6px 3px 7px 3px; padding: 0.3rem 0.9rem; cursor: pointer; }
 .resume-print:hover { border-style: solid; }
 .resume-tools .hand { font-family: var(--hand); color: var(--ink-soft); }
-.resume { max-width: 52rem; background: #fff; padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.25rem, 4vw, 3rem); box-shadow: 0 1px 2px rgba(20,30,40,.10), 0 14px 36px rgba(20,30,40,.12); font-size: 0.98rem; line-height: 1.45; }
-.cv-head { border-bottom: 2px solid var(--ink); padding-bottom: 0.8rem; margin-bottom: 1rem; }
-.cv-head h1 { font-family: var(--draft); font-size: clamp(2rem, 5vw, 2.6rem); line-height: 1.1; margin: 0; }
-.cv-tag { margin: 0.25rem 0 0.5rem; color: var(--ink-soft); }
-.cv-contact { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.2rem 1.25rem; font-size: 0.92rem; }
+.resume { max-width: 56rem; background: #fff; color: var(--ink); padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.25rem, 4vw, 3rem); box-shadow: 0 1px 2px rgba(20,30,40,.10), 0 14px 36px rgba(20,30,40,.12); font-family: var(--body); font-size: 0.95rem; line-height: 1.42; }
+.resume p { margin: 0; }
+.cv-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 0.4em 1.5em; border-bottom: 2px solid var(--ink); padding-bottom: 0.7em; }
+.cv-head h1 { font-family: var(--draft); font-size: clamp(2em, 5vw, 2.6em); line-height: 1.05; margin: 0; }
+.cv-tag { margin-top: 0.2em !important; color: var(--red); font-weight: 500; letter-spacing: .02em; }
+.cv-contact { list-style: none; margin: 0; padding: 0; text-align: right; font-size: 0.9em; display: grid; gap: 0.1em; }
 .cv-contact a, .cv-row a { color: var(--ink); }
-.cv-sec { margin: 0 0 1rem; }
-.cv-sec h2 { font-family: var(--draft); font-size: 1.15rem; letter-spacing: .04em; text-transform: uppercase; color: var(--red); margin: 0 0 0.45rem; border-bottom: 1px dashed var(--rule); padding-bottom: 0.15rem; }
-.cv-item { margin: 0 0 0.6rem; break-inside: avoid; }
-.cv-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 1rem; margin: 0; }
-.cv-row span { color: var(--ink-soft); font-size: 0.9rem; }
-.cv-desc { margin: 0.1rem 0 0; }
-.cv-skills p { margin: 0; }
-.cv-foot { margin: 0.8rem 0 0; font-size: 0.85rem; color: var(--ink-soft); }
+.cv-summary { margin: 0.75em 0 0.9em !important; color: var(--ink-soft); }
+.cv-cols { display: grid; grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr); gap: 0 1.75em; }
+.cv-side { border-left: 1px dashed var(--rule); padding-left: 1.25em; }
+.cv-sec { margin: 0 0 0.9em; }
+.cv-sec h2 { font-family: var(--draft); font-size: 1.05em; letter-spacing: .06em; text-transform: uppercase; color: var(--red); margin: 0 0 0.45em; border-bottom: 1px dashed var(--rule); padding-bottom: 0.15em; }
+.cv-item { margin: 0 0 0.6em; break-inside: avoid; }
+.cv-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0 0.75em; }
+.cv-date { color: var(--ink-soft); font-size: 0.86em; white-space: nowrap; }
+.cv-org { color: var(--ink-soft); font-size: 0.9em; }
+.cv-strong { font-weight: 700; }
+.cv-points, .cv-list { margin: 0.15em 0 0; padding-left: 1.05em; }
+.cv-points li, .cv-list li { margin: 0 0 0.05em; }
+.cv-list { margin-bottom: 0.45em; }
+.cv-desc { margin-top: 0.1em !important; }
+.cv-side .cv-item .cv-desc { font-size: 0.88em; }
+.cv-foot { margin-top: 0.4em !important; font-size: 0.82em; color: var(--ink-soft); border-top: 1px dashed var(--rule); padding-top: 0.4em; }
+@media (max-width: 720px) { .cv-cols { grid-template-columns: 1fr; } .cv-side { border-left: 0; padding-left: 0; } .cv-contact { text-align: left; } }
 @media print {
-  @page { size: letter; margin: 0.55in 0.6in; }
+  @page { size: letter; margin: 0.45in 0.5in; }
   html, body { background: #fff !important; }
   body * { visibility: hidden; }
   .resume, .resume * { visibility: visible; }
-  .resume { position: absolute; left: 0; top: 0; width: 100%; max-width: none; box-shadow: none; padding: 0; font-size: 9.6pt; line-height: 1.35; }
-  .cv-head h1 { font-size: 22pt; }
-  .cv-sec { margin-bottom: 8pt; }
-  .cv-item { margin-bottom: 4.5pt; }
+  .resume { position: absolute; left: 0; top: 0; width: 100%; max-width: none; box-shadow: none; padding: 0; font-size: 8.6pt; line-height: 1.3; }
+  .cv-head h1 { font-size: 21pt; }
+  .cv-cols { grid-template-columns: 1.85fr 1fr; }
+  .cv-sec { margin-bottom: 6pt; }
+  .cv-item { margin-bottom: 4pt; }
   .cv-row a, .cv-contact a { text-decoration: none; }
   .no-print, body > header, body > footer, .site-header, .site-footer, .read-progress, .sheet-index { display: none !important; }
 }
