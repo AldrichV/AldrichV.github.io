@@ -3,6 +3,24 @@
    2. a photo lightbox for galleries and journal polaroids
    3. on long project pages: an "on this sheet" index and a pencil-line reading progress bar */
 (function () {
+  /* ---------- 0. night mode switch ---------- */
+  var tgl = document.querySelector('.night-toggle');
+  if (tgl) {
+    var root = document.documentElement, mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+    function isNight() { var t = root.getAttribute('data-theme'); return t ? t === 'night' : !!(mq && mq.matches); }
+    function sync() { tgl.setAttribute('aria-pressed', isNight()); }
+    tgl.hidden = false; sync();
+    if (mq && mq.addEventListener) mq.addEventListener('change', sync);
+    tgl.addEventListener('click', function () {
+      var next = isNight() ? 'day' : 'night';
+      root.classList.add('theme-shift');
+      root.setAttribute('data-theme', next);
+      setTimeout(function () { root.classList.remove('theme-shift'); }, 350);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      sync();
+    });
+  }
+
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- 1. sketches that draw themselves ---------- */

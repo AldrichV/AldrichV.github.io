@@ -14,6 +14,7 @@
   --red: #c9372c;                       /* red pen: notes, dimensions */
   --tape: rgba(240, 210, 120, 0.55);
   --on-pen: #ffffff;
+  --card: #ffffff;                      /* photo borders, résumé sheet */
 
   --draft: "Architects Daughter", "Segoe Print", "Bradley Hand", cursive;
   --hand: "Kalam", "Segoe Print", "Bradley Hand", cursive;
@@ -526,7 +527,7 @@ h3 { font-size: var(--step-2); }
   justify-self: start;
   position: relative;
   width: 100%;
-  background: #fff;
+  background: var(--card);
   padding: 0.7rem 0.7rem 2.6rem;
   box-shadow: 0 1px 2px rgba(20,30,40,.10), 0 10px 26px rgba(20,30,40,.14);
   transform: rotate(2.5deg);
@@ -582,7 +583,7 @@ h3 { font-size: var(--step-2); }
 .polaroid {
   display: block;
   position: relative;
-  background: #fff;
+  background: var(--card);
   padding: 0.6rem 0.6rem 0;
   box-shadow: 0 1px 2px rgba(20,30,40,.10), 0 10px 24px rgba(20,30,40,.13);
   margin: 0;
@@ -701,7 +702,7 @@ h3 { font-size: var(--step-2); }
 .diary-body a { color: var(--pen); }
 .diary-body p:has(> img) {             /* inline photos become polaroids */
   display: inline-block;
-  background: #fff;
+  background: var(--card);
   padding: 0.6rem 0.6rem 0;
   box-shadow: 0 1px 2px rgba(20,30,40,.10), 0 10px 24px rgba(20,30,40,.13);
   transform: rotate(-1.5deg);
@@ -730,7 +731,7 @@ h3 { font-size: var(--step-2); }
 /* ---------- 3D model viewer (project pages) ---------- */
 .model-section { margin-block: clamp(2rem, 5vw, 3.5rem); }
 .model3d { margin: 0; max-width: 60rem; }
-.model3d-stage { position: relative; aspect-ratio: 16 / 10; min-height: 18rem; background: var(--paper); border: 1.5px solid var(--plate-edge); border-radius: var(--sketch); overflow: hidden; }
+.model3d-stage { position: relative; aspect-ratio: 16 / 10; min-height: 18rem; background: #f1f4f5; border: 1.5px solid var(--plate-edge); border-radius: var(--sketch); overflow: hidden; }
 .model3d-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
 .model3d-stage canvas:active { cursor: grabbing; }
 .model3d-start { position: absolute; inset: 0; margin: auto; width: max-content; height: max-content; font: 1.15rem var(--hand); color: var(--pen); background: var(--plate); border: 1.5px dashed var(--pen); border-radius: var(--sketch); padding: 0.6rem 1.1rem; cursor: pointer; }
@@ -840,7 +841,7 @@ h3 { font-size: var(--step-2); }
 .lightbox { border: 0; padding: 0; margin: auto; background: transparent; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; overflow: hidden; }
 .lightbox::backdrop { background: rgba(28, 33, 38, 0.82); }
 .lightbox[open] { display: grid; place-items: center; }
-.lb-frame { margin: 0; background: #fff; padding: 0.8rem 0.8rem 0; box-shadow: 0 20px 60px rgba(0,0,0,.4); transform: rotate(-0.8deg); max-width: min(92vw, 70rem); }
+.lb-frame { margin: 0; background: var(--card); padding: 0.8rem 0.8rem 0; box-shadow: 0 20px 60px rgba(0,0,0,.4); transform: rotate(-0.8deg); max-width: min(92vw, 70rem); }
 .lb-frame img { display: block; max-width: 100%; max-height: calc(100vh - 9rem); width: auto; height: auto; margin: 0 auto; object-fit: contain; }
 .lb-frame figcaption { font-family: var(--hand); font-size: 1.25rem; color: var(--ink); text-align: center; padding: 0.6rem 0.5rem 0.9rem; min-height: 1rem; }
 .lb-btn { position: fixed; top: 50%; transform: translateY(-50%); width: 3rem; height: 3rem; border-radius: 50%; border: 2px solid #fff; background: rgba(255,255,255,.12); color: #fff; font: 2rem/1 var(--draft); cursor: pointer; }
@@ -889,7 +890,7 @@ h3 { font-size: var(--step-2); }
 .resume-print { font: 1.1rem var(--hand); color: var(--pen); background: var(--plate); border: 1.5px dashed var(--pen); border-radius: 6px 3px 7px 3px; padding: 0.3rem 0.9rem; cursor: pointer; }
 .resume-print:hover { border-style: solid; }
 .resume-tools .hand { font-family: var(--hand); color: var(--ink-soft); }
-.resume { max-width: 56rem; background: #fff; color: var(--ink); padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.25rem, 4vw, 3rem); box-shadow: 0 1px 2px rgba(20,30,40,.10), 0 14px 36px rgba(20,30,40,.12); font-family: var(--body); font-size: 0.95rem; line-height: 1.42; }
+.resume { max-width: 56rem; background: var(--card); color: var(--ink); padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.25rem, 4vw, 3rem); box-shadow: 0 1px 2px rgba(20,30,40,.10), 0 14px 36px rgba(20,30,40,.12); font-family: var(--body); font-size: 0.95rem; line-height: 1.42; }
 .resume p { margin: 0; }
 .cv-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 0.4em 1.5em; border-bottom: 2px solid var(--ink); padding-bottom: 0.7em; }
 .cv-head h1 { font-family: var(--draft); font-size: clamp(2em, 5vw, 2.6em); line-height: 1.05; margin: 0; }
@@ -960,3 +961,108 @@ picture { display: contents; }
 .trip-map .pin-link:hover text.h, .trip-map .pin-link:focus text.h { text-decoration: underline; }
 .trip-map .map-ref { fill: var(--ink-soft); font-size: 15px; }
 .trip-map-fig figcaption { font-family: var(--hand); color: var(--red); font-size: 1rem; margin-top: 0.3rem; }
+
+/* =========================================================
+   Night mode: a cyanotype blueprint. The page turns deep blue with white linework;
+   anything that is a physical piece of paper (photos, journal pages, the résumé,
+   plots and renders, 3D viewers) keeps its daytime colours, as if taped onto the print.
+   Follows the device setting unless the header switch picks day or night.
+   ========================================================= */
+@media screen {
+:root[data-theme="night"] {
+  --paper: #173f69;
+  --grid: rgba(214, 232, 255, 0.10);
+  --grid-major: rgba(214, 232, 255, 0.05);
+  --plate: #f2f5f8;
+  --plate-edge: #87a6c8;
+  --ink: #eef4fb;
+  --ink-soft: #b7cbe0;
+  --rule: #6189b3;
+  --pen: #ffd97a;
+  --red: #ff9f8a;
+  --on-pen: #173f69;
+  --card: #f3f5f7;
+  --lined: #f4f1e6;
+  --tape: rgba(240, 210, 120, 0.85);
+  --tape-yellow: rgba(240, 210, 120, 0.88);
+  --tape-pink: rgba(240, 170, 188, 0.88);
+  --tape-mint: rgba(150, 214, 186, 0.88);
+  --tape-blue: rgba(160, 196, 238, 0.9);
+  color-scheme: dark;
+}
+:root[data-theme="night"] :is(.plate, .me, .polaroid, .stamp, .scrap-note, .blank-page, .diary-page, .diary-body p:has(> img), .torn, .resume, .lb-frame, .sheet-index, .redpen-note, .trip-map, .model3d-stage, .clip-frame) {
+  --paper: #f1f4f5;
+  --grid: rgba(64, 112, 160, 0.11);
+  --ink: #22292f;
+  --ink-soft: #55616d;
+  --rule: #aab4bd;
+  --pen: #2449c9;
+  --red: #c9372c;
+  --on-pen: #ffffff;
+  color-scheme: light;
+}
+:root[data-theme="night"] .index-tabs button, .filed-under a { color: #16283b; }
+:root[data-theme="night"] .index-tabs .tab-n { color: #34495f; }
+:root[data-theme="night"] .index-tabs [aria-pressed="true"] .tab-n { color: #b3261e; border-color: #b3261e; }
+:root[data-theme="night"] .tab-all { --t: rgba(205, 215, 226, 0.9); }
+:root[data-theme="night"] .tab-energy { --t: rgba(244, 178, 132, 0.9); }
+:root[data-theme="night"] .me-links a { color: #ffd97a; }
+:root[data-theme="night"] .resume-print { background: transparent; }
+}
+@media screen and (prefers-color-scheme: dark) {
+:root:not([data-theme="day"]) {
+  --paper: #173f69;
+  --grid: rgba(214, 232, 255, 0.10);
+  --grid-major: rgba(214, 232, 255, 0.05);
+  --plate: #f2f5f8;
+  --plate-edge: #87a6c8;
+  --ink: #eef4fb;
+  --ink-soft: #b7cbe0;
+  --rule: #6189b3;
+  --pen: #ffd97a;
+  --red: #ff9f8a;
+  --on-pen: #173f69;
+  --card: #f3f5f7;
+  --lined: #f4f1e6;
+  --tape: rgba(240, 210, 120, 0.85);
+  --tape-yellow: rgba(240, 210, 120, 0.88);
+  --tape-pink: rgba(240, 170, 188, 0.88);
+  --tape-mint: rgba(150, 214, 186, 0.88);
+  --tape-blue: rgba(160, 196, 238, 0.9);
+  color-scheme: dark;
+}
+:root:not([data-theme="day"]) :is(.plate, .me, .polaroid, .stamp, .scrap-note, .blank-page, .diary-page, .diary-body p:has(> img), .torn, .resume, .lb-frame, .sheet-index, .redpen-note, .trip-map, .model3d-stage, .clip-frame) {
+  --paper: #f1f4f5;
+  --grid: rgba(64, 112, 160, 0.11);
+  --ink: #22292f;
+  --ink-soft: #55616d;
+  --rule: #aab4bd;
+  --pen: #2449c9;
+  --red: #c9372c;
+  --on-pen: #ffffff;
+  color-scheme: light;
+}
+:root:not([data-theme="day"]) .index-tabs button, .filed-under a { color: #16283b; }
+:root:not([data-theme="day"]) .index-tabs .tab-n { color: #34495f; }
+:root:not([data-theme="day"]) .index-tabs [aria-pressed="true"] .tab-n { color: #b3261e; border-color: #b3261e; }
+:root:not([data-theme="day"]) .tab-all { --t: rgba(205, 215, 226, 0.9); }
+:root:not([data-theme="day"]) .tab-energy { --t: rgba(244, 178, 132, 0.9); }
+:root:not([data-theme="day"]) .me-links a { color: #ffd97a; }
+:root:not([data-theme="day"]) .resume-print { background: transparent; }
+}
+
+/* the switch in the header */
+.night-toggle {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font: 1rem var(--hand); color: var(--ink); background: transparent;
+  border: 1.5px dashed var(--ink-soft); border-radius: 6px 3px 7px 3px;
+  padding: 0.12rem 0.6rem; cursor: pointer;
+}
+.night-toggle:hover { border-style: solid; }
+.night-toggle:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
+.night-toggle svg { width: 1.05rem; height: 1.05rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.night-toggle[aria-pressed="true"] { color: var(--pen); border-color: var(--pen); }
+.night-toggle .moon { display: inline; } .night-toggle .sun { display: none; }
+.night-toggle[aria-pressed="true"] .moon { display: none; } .night-toggle[aria-pressed="true"] .sun { display: inline; }
+html.theme-shift, html.theme-shift * { transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease !important; }
+@media print { .night-toggle { display: none; } }
