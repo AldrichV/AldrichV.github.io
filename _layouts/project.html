@@ -13,6 +13,7 @@ layout: default
       <h1>{{ page.title }}</h1>
       {% if page.summary %}<p class="lede">{{ page.summary }}</p>{% endif %}
       {% if page.note %}<span class="note">{{ page.note }}</span>{% endif %}
+      {% include filed-under.html project=page %}
     </div>
 
     <div class="title-block" aria-label="Project details">

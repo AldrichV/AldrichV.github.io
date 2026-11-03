@@ -1,0 +1,4 @@
+{%- assign _p = include.project -%}
+{%- if _p.themes and _p.themes.size > 0 -%}
+<p class="filed-under"><span>filed under</span>{% for t in _p.themes %}<a class="tab-{{ t }}" href="{{ '/projects/' | relative_url }}?area={{ t }}" data-area="{{ t }}">{{ site.themes[t] | default: t }}</a>{% endfor %}</p>
+{%- endif -%}

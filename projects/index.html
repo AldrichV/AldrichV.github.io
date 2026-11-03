@@ -15,10 +15,11 @@ description: Mechanical design, mechatronics and energy projects by Aldrich Vall
 </section>
 
 <section class="wrap filter-bar-wrap">
-  <div class="filters" role="group" aria-label="Filter projects by area" hidden>
-    <button type="button" aria-pressed="true" data-filter="all">All</button>
-    {% for t in site.themes %}<button type="button" aria-pressed="false" data-filter="{{ t[0] }}">{{ t[1] }}</button>{% endfor %}
+  <div class="index-tabs" role="group" aria-label="Filter projects by area" hidden>
+    <button type="button" class="tab-all" aria-pressed="true" data-filter="all">All<span class="tab-n">{{ projects.size }}</span></button>
+    {% for t in site.themes %}{% assign k = t[0] %}{% assign n = 0 %}{% for p in projects %}{% if p.themes contains k %}{% assign n = n | plus: 1 %}{% endif %}{% endfor %}<button type="button" class="tab-{{ t[0] }}" aria-pressed="false" data-filter="{{ t[0] }}">{{ t[1] }}<span class="tab-n">{{ n }}</span></button>{% endfor %}
   </div>
+  <p class="tab-status" aria-live="polite"></p>
 </section>
 
 {% if work.size > 0 %}
@@ -38,6 +39,7 @@ description: Mechanical design, mechatronics and energy projects by Aldrich Vall
         <p>{{ p.summary }}</p>
         {% if p.note %}<span class="note">{{ p.note }}</span>{% endif %}
         {% include specs.html project=p %}
+        {% include filed-under.html project=p %}
       </div>
     </article>
     {% endfor %}
@@ -62,6 +64,7 @@ description: Mechanical design, mechatronics and energy projects by Aldrich Vall
         <p>{{ p.summary }}</p>
         {% if p.note %}<span class="note">{{ p.note }}</span>{% endif %}
         {% include specs.html project=p %}
+        {% include filed-under.html project=p %}
       </div>
     </article>
     {% endfor %}
@@ -82,8 +85,8 @@ description: Mechanical design, mechatronics and energy projects by Aldrich Vall
     {% endfor %}
   </ul>
   {% endif %}
-  <p class="filter-empty" hidden>Nothing in this area yet.</p>
 </section>
+<p class="wrap filter-empty" hidden>Nothing filed under this one yet.</p>
 
 {% if site.data.coursework %}
 <section class="wrap section" id="reports">
@@ -102,25 +105,58 @@ description: Mechanical design, mechatronics and energy projects by Aldrich Vall
 
 <script>
 (function () {
-  var bar = document.querySelector('.filters');
+  var bar = document.querySelector('.index-tabs');
   if (!bar) return;
   bar.hidden = false;
+  var btns = Array.prototype.slice.call(bar.querySelectorAll('button'));
   var items = document.querySelectorAll('[data-themes]');
   var empty = document.querySelector('.filter-empty');
   var moreHead = document.querySelector('.sub-head');
-  bar.addEventListener('click', function (e) {
-    var btn = e.target.closest('button');
-    if (!btn) return;
-    var f = btn.dataset.filter, shown = 0, moreShown = 0;
-    bar.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b === btn); });
+  var status = document.querySelector('.tab-status');
+  var reports = document.getElementById('reports');
+  var names = {}; btns.forEach(function (b) { names[b.dataset.filter] = b.firstChild.textContent; });
+
+  function apply(f, push) {
+    if (!names[f]) f = 'all';
+    var shown = 0, moreShown = 0;
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.filter === f); });
     items.forEach(function (el) {
       var on = f === 'all' || el.dataset.themes.split(' ').indexOf(f) !== -1;
       el.hidden = !on;
+      el.classList.toggle('just-filed', on && f !== 'all');
       if (on) { shown++; if (el.classList.contains('card')) moreShown++; }
     });
     if (moreHead) moreHead.hidden = moreShown === 0;
     document.querySelectorAll('[data-group]').forEach(function (g) { g.hidden = !g.querySelector('[data-themes]:not([hidden])'); });
     if (empty) empty.hidden = shown !== 0;
+    if (reports) reports.hidden = f !== 'all';
+    status.textContent = f === 'all' ? '' : shown + (shown === 1 ? ' project' : ' projects') + ' filed under ' + names[f].toLowerCase();
+    // the tab lives in the address bar, so a filtered list can be shared or bookmarked
+    if (push) {
+      var url = location.pathname + (f === 'all' ? '' : '?area=' + f);
+      history.replaceState(null, '', url);
+    }
+  }
+  bar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (btn) apply(btn.dataset.filter, true);
   });
+  // arrow keys move along the tabs
+  bar.addEventListener('keydown', function (e) {
+    var i = btns.indexOf(document.activeElement);
+    if (i < 0 || (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft')) return;
+    var j = (i + (e.key === 'ArrowRight' ? 1 : -1) + btns.length) % btns.length;
+    btns[j].focus(); e.preventDefault();
+  });
+  // "filed under" tags on each row switch tabs in place instead of reloading
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('.filed-under a');
+    if (!a) return;
+    e.preventDefault();
+    apply(a.dataset.area, true);
+    bar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  var q = new URLSearchParams(location.search).get('area');
+  if (q) apply(q, false);
 })();
 </script>

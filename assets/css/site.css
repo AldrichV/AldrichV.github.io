@@ -222,19 +222,61 @@ h3 { font-size: var(--step-2); }
 .section { padding-block: clamp(4.5rem, 9vw, 7.5rem) 0; }
 .section-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 1.25rem 2rem; margin-bottom: clamp(1.5rem, 3vw, 2.5rem); }
 
-.filters { display: flex; flex-wrap: wrap; gap: 0.55rem; }
-.filters button {
-  font-family: var(--draft);
-  font-size: 1rem;
-  color: var(--ink);
-  background: transparent;
-  border: 1.5px solid var(--ink-soft);
-  border-radius: var(--sketch);
-  padding: 0.3rem 0.95rem;
-  cursor: pointer;
+/* Index tabs: binder dividers along the top of the list, one tape colour per area */
+.tab-all { --t: rgba(170, 180, 190, 0.45); }
+.tab-drivetrains { --t: var(--tape-yellow); }
+.tab-mechatronics { --t: var(--tape-blue); }
+.tab-energy { --t: rgba(240, 160, 110, 0.55); }
+.tab-sustainability { --t: var(--tape-mint); }
+.tab-building { --t: var(--tape-pink); }
+.index-tabs {
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.3rem 0.35rem;
+  border-bottom: 2px solid var(--ink); padding: 0 0.25rem;
 }
-.filters button:hover { border-color: var(--ink); }
-.filters button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.index-tabs button {
+  position: relative; display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--draft); font-size: 1rem; line-height: 1.2; color: var(--ink);
+  background: linear-gradient(var(--t), var(--t)), var(--paper);
+  border: 1.5px solid var(--ink-soft); border-bottom: 0;
+  border-radius: 0.7rem 0.9rem 0 0 / 0.6rem 0.8rem 0 0;
+  padding: 0.4rem 0.9rem 0.35rem; margin-bottom: -2px;
+  cursor: pointer; transform: translateY(4px);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.index-tabs button:nth-child(odd) { rotate: -0.6deg; }
+.index-tabs button:nth-child(even) { rotate: 0.5deg; }
+.index-tabs button:hover { transform: translateY(0); }
+.index-tabs button:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
+.index-tabs button[aria-pressed="true"] {
+  transform: translateY(0); rotate: 0deg; z-index: 1;
+  border-color: var(--ink); border-width: 2px; border-bottom: 2px solid var(--paper);
+  padding-bottom: 0.55rem; font-weight: 700;
+  box-shadow: 0 -3px 0 0 var(--t) inset;
+}
+.tab-n {
+  font-family: var(--hand); font-size: 0.85rem; min-width: 1.4rem; text-align: center;
+  border: 1.2px solid currentColor; border-radius: 50%; padding: 0 0.25rem; color: var(--ink-soft);
+}
+[aria-pressed="true"] .tab-n { color: var(--red); border-color: var(--red); }
+.tab-status { min-height: 1.6rem; margin: 0.6rem 0 0; font-family: var(--hand); font-size: 1.15rem; color: var(--red); }
+
+/* "filed under" tags on project rows and project pages */
+.filed-under { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.45rem; margin: 0.9rem 0 0; font-size: var(--step--1); }
+.filed-under span { font-family: var(--hand); color: var(--ink-soft); margin-right: 0.15rem; }
+.filed-under a {
+  font-family: var(--draft); font-size: 0.92rem; color: var(--ink); text-decoration: none;
+  background: var(--t); padding: 0.05rem 0.55rem; border-radius: 2px;
+  clip-path: polygon(2% 8%, 98% 0, 100% 92%, 0 100%);
+}
+.filed-under a:hover, .filed-under a:focus-visible { text-decoration: underline wavy var(--red); text-underline-offset: 0.2em; }
+.project-head .filed-under { margin-top: 1.1rem; }
+
+/* rows that come back into view after a tab change ease in */
+@media (prefers-reduced-motion: no-preference) {
+  .just-filed { animation: filed-in 320ms ease-out both; }
+  @keyframes filed-in { from { opacity: 0; transform: translateY(8px); } }
+}
+@media print { .index-tabs, .tab-status, .filed-under { display: none; } }
 
 /* Project rows: big image, text beside, alternating */
 .project-row {
@@ -272,7 +314,7 @@ h3 { font-size: var(--step-2); }
 .card-meta { font-size: var(--step--1); color: var(--ink-soft); }
 .card .note { font-size: 1.05rem; }
 .card a:hover .card-title { text-decoration: underline wavy var(--red); text-underline-offset: 0.25em; }
-.filter-empty { color: var(--ink-soft); font-family: var(--hand); font-size: 1.2rem; }
+.filter-empty { color: var(--ink-soft); font-family: var(--hand); font-size: 1.2rem; padding-block: 2rem; }
 
 /* Reports list */
 .report-list { list-style: none; margin: 0; padding: 0; }
