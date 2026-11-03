@@ -110,6 +110,10 @@
   /* ---------- 3. "on this sheet" + reading progress (project pages) ---------- */
   var article = document.querySelector('.project-head') && document.querySelector('main article');
   if (article) {
+    article.querySelectorAll('.prose h2:not([id])').forEach(function (h) {      // give headings an anchor if the build didn't
+      var id = h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      if (id && !document.getElementById(id)) h.id = id;
+    });
     var heads = Array.prototype.slice.call(article.querySelectorAll('.prose h2[id], section > h2[id]'));
     if (heads.length >= 3) {
       var nav = document.createElement('nav');
@@ -131,8 +135,17 @@
       }, { rootMargin: '-15% 0px -70% 0px' });
       heads.forEach(function (h) { spy.observe(h); });
       // only show it once the title block has scrolled away
-      var head = document.querySelector('.project-head');
-      new IntersectionObserver(function (es) { nav.classList.toggle('is-shown', !es[0].isIntersecting); }).observe(head);
+      // show it once the title block has scrolled away, and step aside while a full-width section
+      // (cover, 3D model, videos, gallery) is on screen so it never sits on top of them
+      var head = document.querySelector('.project-head'), wide = article.querySelectorAll('.cover-plate, .model-section, .reel, .gallery');
+      var headGone = false, wideOn = new Set();
+      function sync() { nav.classList.toggle('is-shown', headGone && wideOn.size === 0); }
+      new IntersectionObserver(function (es) { headGone = !es[0].isIntersecting; sync(); }).observe(head);
+      var wo = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) wideOn.add(e.target); else wideOn.delete(e.target); });
+        sync();
+      }, { rootMargin: '-96px 0px -40% 0px' });
+      wide.forEach(function (w) { wo.observe(w); });
     }
 
     var bar = document.createElement('div');
