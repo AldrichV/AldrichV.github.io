@@ -16,7 +16,7 @@ resume: "/resume/"   # the printable résumé page (or a PDF path)
 
 # If the repo is named <username>.github.io, leave baseurl empty.
 # If it's any other name (e.g. "portfolio"), set baseurl: "/portfolio".
-url: "https://aldrichv.github.io"
+url: "https://aldrichvalloyas.ca"
 baseurl: ""
 
 collections:
