@@ -7,45 +7,13 @@
   if (!fig) return;
   var cfg = {};
   try { cfg = JSON.parse(fig.getAttribute('data-config') || '{}'); } catch (e) {}
-  var startBtn = fig.querySelector('.model3d-start');
-  var started = false;
-  var DEBUG = /debug/.test(location.hash);
-  var BASE = (document.querySelector('link[rel=canonical]') || {}).href ? '' : '';
-
-  function note(msg) {
-    if (!DEBUG) return;
-    var d = fig.querySelector('.model3d-debug');
-    if (!d) { d = document.createElement('pre'); d.className = 'model3d-debug'; fig.appendChild(d); }
-    d.textContent += msg + '\n';
-  }
-  function fail(e) {
-    fig.querySelector('.model3d-err').hidden = false; startBtn.hidden = true;
-    if (e) { console.error('[model3d]', e); note('error: ' + (e.message || e.type || e)); }
-  }
-  function loadScript(src) {
-    return new Promise(function (res, rej) {
-      var s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = function () { rej(new Error('could not load ' + src)); };
-      document.head.appendChild(s);
-    });
-  }
-  function start() {
-    if (started) return; started = true;
-    startBtn.textContent = 'loading…';
-    var chain = window.THREE ? Promise.resolve() : loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js');
-    chain
-      .then(function () { return THREE.OrbitControls ? null : loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js'); })
-      .then(function () { return THREE.STLLoader ? null : loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js'); })
-      .then(function () {
-        var needsGltf = (cfg.parts || []).some(function (p) { return /\.(glb|gltf)$/i.test(p.src); });
-        return needsGltf && !THREE.GLTFLoader ? loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js') : null;
-      })
-      .then(function () { note('three ' + THREE.REVISION); try { init(); } catch (e) { fail(e); } })
-      .catch(fail);
-  }
-  startBtn.addEventListener('click', start);
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { o.disconnect(); start(); } }, { rootMargin: '200px' }).observe(fig);
-  }
+  function isGltf(part) { return /\.(glb|gltf)$/i.test(part.src); }
+  var parts = cfg.parts || [];
+  var loaders = [];
+  if (parts.some(isGltf)) loaders.push('GLTFLoader');
+  if (parts.some(function (part) { return !isGltf(part); })) loaders.push('STLLoader');
+  var viewer = ModelViewer(fig, init, loaders);
+  var note = viewer.note, fail = viewer.fail, startBtn = viewer.button;
 
   function init() {
     var canvas = fig.querySelector('canvas');
@@ -68,12 +36,12 @@
     var model = new THREE.Group(); scene.add(model);
     // CAD files are usually Z-up; the site's models say which axis is up
     if ((cfg.up || 'y') === 'z') model.rotation.x = -Math.PI / 2;
-    var loader = new THREE.STLLoader();
-    var parts = cfg.parts || [], meshes = [], left = parts.length;
+    var loader = THREE.STLLoader ? new THREE.STLLoader() : null;
+    var meshes = [], left = parts.length;
     if (!left) { fail(new Error('no parts listed')); return; }
 
     parts.forEach(function (p, i) {
-      if (/\.(glb|gltf)$/i.test(p.src)) {
+      if (isGltf(p)) {
         // glTF/GLB (e.g. SolidWorks "Extended Reality" export) keeps its own colours and parts
         new THREE.GLTFLoader().load(p.src, function (g) {
           var obj = g.scene;

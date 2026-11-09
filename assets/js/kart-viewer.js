@@ -1,0 +1,202 @@
+(function () {
+  var fig = document.getElementById('kart3d');
+  if (!fig) return;
+  var viewer = ModelViewer(fig, init);
+  var note = viewer.note, fail = viewer.fail;
+
+  function init() {
+    viewer.button.hidden = true;
+    // ---- dimensions (mm) from the concept layout: 300 × 200 plates 50 mm apart, Ø80 wheels, 150 × 100 bed ----
+    var L = 300, W = 200, PT = 4, Y1 = 46, Y2 = Y1 + PT + 50, WR = 40, WW = 26, AXF = 105, AXR = -105, TRK = W / 2 + 4 + WW / 2;
+    var canvas = fig.querySelector('canvas');
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.outputEncoding = THREE.sRGBEncoding;
+    var scene = new THREE.Scene(); scene.background = new THREE.Color(0xf1f4f5).convertSRGBToLinear();
+    var camera = new THREE.PerspectiveCamera(36, 1, 5, 6000);
+    var controls = new THREE.OrbitControls(camera, canvas);
+    controls.enableZoom = false; controls.addEventListener('change', render);
+    canvas.addEventListener('pointerdown', function () { controls.enableZoom = true; });
+    canvas.addEventListener('pointerleave', function () { controls.enableZoom = false; });
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8478, 0.6));
+    var sun = new THREE.DirectionalLight(0xffffff, 0.75); sun.position.set(260, 520, 300); sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0005; sun.shadow.normalBias = 0.5;
+    Object.assign(sun.shadow.camera, { left: -320, right: 320, top: 320, bottom: -320, near: 100, far: 1400 });
+    scene.add(sun, sun.target); var fill = new THREE.DirectionalLight(0xffffff, 0.2); fill.position.set(-300, 200, -300); scene.add(fill);
+
+    function mat(hex, o) { o = o || {}; return new THREE.MeshStandardMaterial(Object.assign({ color: new THREE.Color(hex).convertSRGBToLinear(), roughness: 0.6, metalness: 0.05 }, o)); }
+    var M = {
+      alu: mat('#b3b9be', { metalness: 0.25, roughness: 0.5 }), pla: mat('#2f4a6b'), purple: mat('#6b3a73'),
+      wheel: mat('#2e5a4c', { roughness: 0.75 }), hub: mat('#9aa3a8', { metalness: 0.5, roughness: 0.4 }),
+      steel: mat('#8d969c', { metalness: 0.65, roughness: 0.35 }), dark: mat('#33383d'), board: mat('#1f6f8b'),
+      gear: mat('#8f97c9', { metalness: 0.3, roughness: 0.45 }), red: mat('#c9372c'), spring: mat('#c8ccd0', { metalness: 0.7, roughness: 0.3 })
+    };
+    var ghost = mat('#b8bec3', { transparent: true, opacity: 0.18, depthWrite: false });
+    var root = new THREE.Group(); scene.add(root);
+    function add(m, g) { m.castShadow = m.receiveShadow = true; (g || root).add(m); return m; }
+    function box(w, h, d, x, y, z, m, g) { var o = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); o.position.set(x, y, z); return add(o, g); }
+    function cylX(r, len, x, y, z, m, g, seg) { var o = new THREE.Mesh(new THREE.CylinderGeometry(r, r, len, seg || 24), m); o.rotation.z = Math.PI / 2; o.position.set(x, y, z); return add(o, g); }
+    function rod(a, b, r, m, g) {
+      var d = new THREE.Vector3().subVectors(b, a), o = new THREE.Mesh(new THREE.CylinderGeometry(r, r, d.length(), 12), m);
+      o.position.copy(a).addScaledVector(d, 0.5); o.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize()); return add(o, g);
+    }
+
+    // plates (aluminium) and PLA supports
+    var plates = new THREE.Group(); root.add(plates);
+    box(W, PT, L, 0, Y1 + PT / 2, 0, M.alu, plates);
+    box(W, PT, L, 0, Y2 + PT / 2, 0, M.alu, plates);
+    [[-1, -1], [1, -1], [-1, 1], [1, 1], [-1, 0], [1, 0]].forEach(function (p) { box(10, 50, 10, p[0] * (W / 2 - 8), Y1 + PT + 25, p[1] * (L / 2 - 8), M.pla, plates); });
+
+    // gearbox (PLA housing) with motor, bevel pair turning the drive 90°, then a spur pair to the rear axle
+    var gbox = new THREE.Group(); root.add(gbox);
+    var housingMat = mat('#6b3a73', { transparent: true, opacity: 1 });
+    var SY = 71, SZ = AXR;                                                     // intermediate shaft sits 31 mm above the axle
+    var housing = box(84, Y2 - 14, 64, -4, 14 + (Y2 - 14) / 2, AXR - 6, housingMat, gbox);
+    var motor = new THREE.Mesh(new THREE.CylinderGeometry(17, 17, 62, 28), M.dark); motor.rotation.x = Math.PI / 2; motor.position.set(24, SY, -40); add(motor, gbox);
+    box(36, 4, 12, 24, Y1 + PT + 2, -40, M.pla, gbox);
+    var gears = new THREE.Group(); gbox.add(gears);
+    function gear(r, w, teeth, m) {
+      var g = new THREE.Group(), body = new THREE.Mesh(new THREE.CylinderGeometry(r - 2, r - 2, w, 32), m); g.add(body);
+      for (var i = 0; i < teeth; i++) { var t = new THREE.Mesh(new THREE.BoxGeometry(3, w, 4), m), a = i / teeth * Math.PI * 2; t.position.set(Math.cos(a) * (r - 0.5), 0, Math.sin(a) * (r - 0.5)); t.rotation.y = -a; g.add(t); }
+      g.traverse(function (o) { if (o.isMesh) o.castShadow = true; }); return g;
+    }
+    function bevel(r, h, m) { var o = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.5, r, h, 28), m); o.castShadow = true; return o; }
+    var pinion = new THREE.Group(); pinion.position.set(24, SY, SZ + 12); gears.add(pinion);           // bevel pinion on the motor shaft (axis along the kart)
+    var pc = bevel(9, 8, M.gear); pc.rotation.x = -Math.PI / 2; pinion.add(pc);
+    rod(new THREE.Vector3(24, SY, SZ + 16), new THREE.Vector3(24, SY, -71), 2, M.steel, gears);
+    var crown = new THREE.Group(); crown.position.set(12, SY, SZ); gears.add(crown);                   // bevel gear turning the drive 90°
+    var cc = bevel(14, 8, M.gear); cc.rotation.z = -Math.PI / 2; crown.add(cc);
+    var spur1 = new THREE.Group(); spur1.position.set(-24, SY, SZ); gears.add(spur1);
+    var s1 = gear(10, 8, 14, M.gear); s1.rotation.z = Math.PI / 2; spur1.add(s1);
+    var spur2 = new THREE.Group(); spur2.position.set(-24, WR, AXR); gears.add(spur2);
+    var s2 = gear(21, 8, 28, M.gear); s2.rotation.z = Math.PI / 2; spur2.add(s2);
+    rod(new THREE.Vector3(-36, SY, SZ), new THREE.Vector3(30, SY, SZ), 2.2, M.steel, gears);           // intermediate shaft
+    // rear axle + wheels
+    var spinners = [];
+    cylX(4, 2 * TRK + 12, 0, WR, AXR, M.steel);
+    function wheel(x, z) {
+      var g = new THREE.Group(); g.position.set(x, WR, z); root.add(g);
+      var spin = new THREE.Group(); g.add(spin);
+      var tyre = new THREE.Mesh(new THREE.CylinderGeometry(WR, WR, WW, 40), M.wheel); tyre.rotation.z = Math.PI / 2; add(tyre, spin);
+      var hub = new THREE.Mesh(new THREE.CylinderGeometry(12, 12, WW + 2, 24), M.hub); hub.rotation.z = Math.PI / 2; add(hub, spin);
+      for (var i = 0; i < 5; i++) { var s = new THREE.Mesh(new THREE.BoxGeometry(WW + 1, 4, 2 * WR - 12), M.hub); s.rotation.x = i / 5 * Math.PI; s.scale.set(0.3, 1, 1); add(s, spin); }
+      spinners.push(spin); return g;
+    }
+    wheel(-TRK, AXR); wheel(TRK, AXR);
+
+    // front: servo-steered knuckles on double wishbones with coil springs, tie rods to the servo horn
+    var front = new THREE.Group(); root.add(front);
+    var servo = box(40, 20, 38, 0, Y1 - 10, AXF + 14, M.dark, front);
+    var horn = box(26, 3, 5, 0, Y1 - 21, AXF + 14, M.red, front);
+    var knuckles = [];
+    [-1, 1].forEach(function (s) {
+      var kx = s * (W / 2 + 2);
+      var k = new THREE.Group(); k.position.set(kx, WR, AXF); root.add(k); knuckles.push(k);
+      box(10, 34, 14, 0, 0, 0, M.pla, k);
+      cylX(4, 16, s * 10, 0, 0, M.steel, k);
+      var wg = wheel(0, 0); root.remove(wg); wg.position.set(s * (TRK - (W / 2 + 2)), 0, 0); k.add(wg);
+      // wishbones and spring
+      rod(new THREE.Vector3(s * (W / 2 - 28), Y1 + 2, AXF - 14), new THREE.Vector3(kx, WR + 14, AXF), 2.2, M.steel, front);
+      rod(new THREE.Vector3(s * (W / 2 - 28), Y1 + 2, AXF + 14), new THREE.Vector3(kx, WR + 14, AXF), 2.2, M.steel, front);
+      rod(new THREE.Vector3(s * (W / 2 - 28), 24, AXF - 14), new THREE.Vector3(kx, WR - 14, AXF), 2.2, M.steel, front);
+      rod(new THREE.Vector3(s * (W / 2 - 28), 24, AXF + 14), new THREE.Vector3(kx, WR - 14, AXF), 2.2, M.steel, front);
+      var pts = [], top = new THREE.Vector3(s * (W / 2 - 14), Y2, AXF), bot = new THREE.Vector3(kx - s * 2, WR + 16, AXF);
+      for (var i = 0; i <= 120; i++) { var t = i / 120, a = t * Math.PI * 2 * 7; pts.push(new THREE.Vector3(bot.x + (top.x - bot.x) * t + Math.cos(a) * 6, bot.y + (top.y - bot.y) * t, bot.z + Math.sin(a) * 6)); }
+      add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 240, 1.1, 6), M.spring), front);
+    });
+    var tieRods = [rod(new THREE.Vector3(), new THREE.Vector3(1, 0, 0), 1.6, M.steel, front), rod(new THREE.Vector3(), new THREE.Vector3(1, 0, 0), 1.6, M.steel, front)];
+    var frontAxleSpin = [];
+
+    // deck: PLA bed on legs, joystick, Arduino + driver, ultrasonic sensor
+    var bed = new THREE.Group(); root.add(bed);
+    var BY = Y2 + PT + 50;
+    [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(function (p) { box(8, 50, 8, p[0] * 66, Y2 + PT + 25, -10 + p[1] * 42, M.pla, bed); });
+    box(150, 3, 100, 0, BY + 1.5, -10, M.pla, bed);
+    box(150, 40, 3, 0, BY + 20, -10 - 48.5, M.pla, bed); box(150, 40, 3, 0, BY + 20, -10 + 48.5, M.pla, bed);
+    box(3, 40, 100, -73.5, BY + 20, -10, M.pla, bed); box(3, 40, 100, 73.5, BY + 20, -10, M.pla, bed);
+    var deck = new THREE.Group(); root.add(deck);
+    box(24, 10, 24, -62, Y2 + PT + 5, 105, M.dark, deck);
+    rod(new THREE.Vector3(-62, Y2 + PT + 10, 105), new THREE.Vector3(-62, Y2 + PT + 40, 105), 2.5, M.dark, deck);
+    var knob = new THREE.Mesh(new THREE.SphereGeometry(8, 20, 14), M.red); knob.position.set(-62, Y2 + PT + 44, 105); add(knob, deck);
+    box(53, 4, 68, 58, Y2 + PT + 2, -110, M.board, deck); box(30, 12, 30, 58, Y2 + PT + 10, -60, M.dark, deck);
+    box(45, 20, 4, 0, Y1 + PT + 26, L / 2 + 2, M.board, deck);
+    [-12, 12].forEach(function (x) { var c = new THREE.Mesh(new THREE.CylinderGeometry(8, 8, 12, 20), M.hub); c.rotation.x = Math.PI / 2; c.position.set(x, Y1 + PT + 26, L / 2 + 10); add(c, deck); });
+
+    // ground shadow catcher
+    var ground = new THREE.Mesh(new THREE.PlaneGeometry(1400, 1400), new THREE.ShadowMaterial({ opacity: 0.17 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+
+    // ---- steering: servo angle 53° = straight, 90° = left, 135° = right (from testing) ----
+    var steerTarget = 0, steer = 0, wheelAng = 0, spinning = false, last = 0;
+    function servoToSteer(a) { return a === 53 ? 0 : (a < 53 ? -1 : (a === 90 ? 1 : -1)) * THREE.MathUtils.degToRad(24); }
+    function applySteer() {
+      knuckles.forEach(function (k) { k.rotation.y = steer; });
+      horn.rotation.y = steer * 1.4;
+      [-1, 1].forEach(function (s, i) {
+        var hx = s * 13, hz = AXF + 14;
+        var c = Math.cos(steer * 1.4), sn = Math.sin(steer * 1.4);
+        var hp = new THREE.Vector3(hx * c, Y1 - 21, hz - hx * sn);
+        var kx = s * (W / 2 + 2), arm = new THREE.Vector3(0, 0, 14).applyAxisAngle(new THREE.Vector3(0, 1, 0), steer);
+        var kp = new THREE.Vector3(kx + arm.x, Y1 - 21 + 0, AXF + arm.z);
+        var r = tieRods[i], d = new THREE.Vector3().subVectors(kp, hp);
+        r.position.copy(hp).addScaledVector(d, 0.5); r.scale.set(1, d.length(), 1); r.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.clone().normalize());
+      });
+    }
+    applySteer();
+
+    var TGT = new THREE.Vector3(0, 70, 0);
+    var VIEWS = { iso: [1, 0.7, 1.05], side: [1.6, 0.22, 0], front: [0, 0.3, 1.6], top: [0.01, 1.7, 0.01] };
+    var view = 'iso', framed = false;
+    function setView(id) {
+      view = id; var v = VIEWS[id], asp = camera.aspect > 0.2 && isFinite(camera.aspect) ? camera.aspect : 1.6;
+      var dist = 560 * Math.min(2.5, Math.max(1, 1.5 / asp)), dir = new THREE.Vector3(v[0], v[1], v[2]).normalize();
+      camera.position.copy(TGT).addScaledVector(dir, dist); controls.target.copy(TGT); controls.update(); render();
+    }
+    function quality() { return Math.min(2.5, Math.max(1.5, window.devicePixelRatio || 1)); }
+    function fit() {
+      var w = canvas.clientWidth, h = canvas.clientHeight; if (w < 2 || h < 2) return false;
+      var pr = quality();
+      if (canvas.width !== Math.floor(w * pr) || canvas.height !== Math.floor(h * pr)) { renderer.setPixelRatio(pr); renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); note('size ' + w + '×' + h + ' @' + pr); }
+      if (!framed) { framed = true; setView(view); }
+      return true;
+    }
+    var queued = false, broken = false, raf = 0, tmo = 0, onScreen = true;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (entries) {
+      onScreen = entries[0].isIntersecting;
+      if (onScreen) render();
+    }).observe(fig);
+    function draw(t) {
+      cancelAnimationFrame(raf); clearTimeout(tmo); queued = false; if (broken) return;
+      if (document.hidden || !onScreen) { last = 0; return; }
+      var now = performance.now(), dt = last ? Math.min(0.05, (now - last) / 1000) : 0; last = now;
+      var moving = false;
+      if (Math.abs(steerTarget - steer) > 1e-3) { steer += (steerTarget - steer) * Math.min(1, dt * 8 || 0.2); applySteer(); moving = true; }
+      if (spinning) { wheelAng -= dt * 6; spinners.forEach(function (s) { s.rotation.x = wheelAng; }); spur2.rotation.x = wheelAng; spur1.rotation.x = -wheelAng * 2.1; crown.rotation.x = -wheelAng * 2.1; pinion.rotation.z = wheelAng * 4.1; moving = true; }
+      try { fit(); renderer.render(scene, camera); } catch (e) { broken = true; fail(e); return; }
+      if (moving && !document.hidden) render(); else last = 0;
+    }
+    function render() { if (queued) return; queued = true; raf = requestAnimationFrame(draw); tmo = setTimeout(draw, 150); }
+
+    fig.querySelectorAll('[data-view]').forEach(function (b) { b.addEventListener('click', function () { setView(b.dataset.view); }); });
+    fig.querySelectorAll('[data-steer]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        fig.querySelectorAll('[data-steer]').forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+        steerTarget = servoToSteer(+b.dataset.steer); render();
+      });
+    });
+    fig.querySelectorAll('[data-k]').forEach(function (el) {
+      el.addEventListener('change', function () {
+        var k = el.dataset.k;
+        if (k === 'spin') spinning = el.checked;
+        if (k === 'bed') bed.visible = el.checked;
+        if (k === 'xray') { housingMat.opacity = el.checked ? 0.18 : 1; housingMat.depthWrite = !el.checked; housingMat.needsUpdate = true; var pm = el.checked ? ghost : M.alu; plates.children[0].material = pm; plates.children[1].material = pm; deck.visible = !el.checked; }
+        render();
+      });
+    });
+    if ('ResizeObserver' in window) new ResizeObserver(render).observe(canvas.parentElement);
+    window.addEventListener('resize', render); window.addEventListener('load', render);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) render(); });
+    canvas.addEventListener('webglcontextlost', function (e) { e.preventDefault(); }, false);
+    canvas.addEventListener('webglcontextrestored', render, false);
+    fig.classList.add('is-live'); note('kart built');
+    render();
+  }
+})();
