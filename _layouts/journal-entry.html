@@ -69,13 +69,3 @@ layout: default
     {% if next_i < entries.size %}{% assign next = entries[next_i] %}<a class="newer" href="{{ next.url | relative_url }}"><span>newer →</span>{{ next.title }}</a>{% else %}<span></span>{% endif %}
   </nav>
 </article>
-
-<script>
-document.querySelectorAll('.diary-body p > img[alt]').forEach(function (img) {
-  if (!img.alt) return;
-  var cap = document.createElement('span');
-  cap.className = 'polaroid-cap';
-  cap.textContent = img.alt;
-  img.insertAdjacentElement('afterend', cap);
-});
-</script>

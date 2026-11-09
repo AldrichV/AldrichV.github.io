@@ -134,6 +134,17 @@ With Ruby installed: `bundle install`, then `bundle exec jekyll serve`, and open
 | `assets/images/journal/` | Journal photos |
 | `_layouts/`, `_includes/` | Page templates |
 | `assets/css/site.css` | All styling; colours and type sizes are at the top |
+| `assets/js/notebook.js` | Theme switch, sketch animations, photo captions/lightbox, and reading progress |
+| `assets/js/project-filters.js` | Project filters and shareable area links |
+| `assets/js/model-viewer.js` | Shared lazy loading and error reporting for the 3D viewers |
+| `assets/js/{stair,kart,stl}-viewer.js` | Model geometry, camera views, and interactive controls |
+
+The model includes contain the controls' HTML and load their scripts through
+`_includes/model-scripts.html`. Keep the shared loader before the viewer script;
+both use `defer` so they run in order after the page is parsed. Three.js and its
+required loaders download when the model approaches the viewport (or its load
+button is clicked). The go-kart drive animation pauses off screen and resumes
+when it returns. The site still needs no Node build step.
 
 ## Photos load as WebP
 

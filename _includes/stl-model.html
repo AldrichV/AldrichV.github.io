@@ -16,4 +16,4 @@
   </div>
   <figcaption>{% if m.caption %}{{ m.caption }} · {% endif %}drag to spin · click, then scroll or pinch to zoom · right-drag to pan</figcaption>
 </figure>
-<script src="{{ '/assets/js/stl-viewer.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+{% include model-scripts.html viewer='stl' %}

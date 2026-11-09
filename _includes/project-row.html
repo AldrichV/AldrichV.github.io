@@ -1,0 +1,13 @@
+{% assign p = include.project %}
+<article class="project-row" data-themes="{{ p.themes | join: ' ' }}">
+  <a class="project-media sketch-box" href="{{ p.url | relative_url }}" tabindex="-1" aria-hidden="true">
+    {% include sketches/{{ p.slug }}.svg %}
+  </a>
+  <div class="project-text">
+    <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+    <p>{{ p.summary }}</p>
+    {% if p.note %}<span class="note">{{ p.note }}</span>{% endif %}
+    {% include specs.html project=p %}
+    {% include filed-under.html project=p %}
+  </div>
+</article>

@@ -66,6 +66,15 @@
     window.addEventListener('beforeprint', function () { sketches.forEach(drawOn); });
   }
 
+  /* Captions for inline journal photos. */
+  document.querySelectorAll('.diary-body p > img[alt]').forEach(function (img) {
+    if (!img.alt) return;
+    var cap = document.createElement('span');
+    cap.className = 'polaroid-cap';
+    cap.textContent = img.alt;
+    img.insertAdjacentElement('afterend', cap);
+  });
+
   /* ---------- 2. lightbox ---------- */
   var sel = '.gallery .plate img, .daylog .polaroid img, .photo-spread .polaroid img, .diary-body p > img, .process-strip .plate img';
   var pics = Array.prototype.slice.call(document.querySelectorAll(sel));
@@ -133,7 +142,7 @@
       if (id && !document.getElementById(id)) h.id = id;
     });
     var heads = Array.prototype.slice.call(article.querySelectorAll('.prose h2[id], section > h2[id]'));
-    if (heads.length >= 3) {
+    if (heads.length >= 3 && 'IntersectionObserver' in window) {
       var nav = document.createElement('nav');
       nav.className = 'sheet-index';
       nav.setAttribute('aria-label', 'On this sheet');
@@ -152,7 +161,6 @@
         });
       }, { rootMargin: '-15% 0px -70% 0px' });
       heads.forEach(function (h) { spy.observe(h); });
-      // only show it once the title block has scrolled away
       // show it once the title block has scrolled away, and step aside while a full-width section
       // (cover, 3D model, videos, gallery) is on screen so it never sits on top of them
       var head = document.querySelector('.project-head'), wide = article.querySelectorAll('.cover-plate, .model-section, .reel, .gallery, .short-version');
