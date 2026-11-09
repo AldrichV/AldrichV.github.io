@@ -29,7 +29,7 @@ Read through the project pages too — they were written from your reports, and 
   directly in `index.html`.
 - **The strip** comes from the `process:` list in whichever project has `featured: true`.
 - **Projects (`projects/index.html`)**: every project with `tier: featured` as a large row, `tier: more` as
-  smaller cards, then the reports list from `_data/coursework.yml` (add `file: /assets/files/x.pdf` to link a PDF).
+  smaller cards, then the reports list, which links to a page for each report in `_reports/`.
 - **Project pages** use `_layouts/project.html`; the drawing title block fills itself from front matter.
 - **Notebook look**: colours, fonts and the grid paper live at the top of `assets/css/site.css`.
 - **Your photo** is `assets/images/aldrich.jpg`. Swap in another JPG with the same name to change it.
@@ -129,7 +129,7 @@ With Ruby installed: `bundle install`, then `bundle exec jekyll serve`, and open
 | --- | --- |
 | `index.html` | Home page |
 | `_projects/` | One Markdown file per project |
-| `_data/coursework.yml` | The reports and research list |
+| `_reports/` | One page per school report: the question, what was done, the data, what it showed (layout `_layouts/report.html`) |
 | `_journal/` | Journal entries (one Markdown file each) |
 | `assets/images/journal/` | Journal photos |
 | `_layouts/`, `_includes/` | Page templates |

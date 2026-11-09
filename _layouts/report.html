@@ -1,0 +1,58 @@
+---
+layout: default
+---
+{%- comment -%}
+  One school report or research piece, written up as a short lab-book sheet:
+  the question → what was done → the data → what it showed.
+  Front matter: title, summary, course, year, team, role, type, finding, order, sources: [{ title, by }]
+{%- endcomment -%}
+{% assign all = site.reports | sort: "order" %}
+{% assign i = 0 %}
+{% for r in all %}{% if r.url == page.url %}{% assign i = forloop.index0 %}{% endif %}{% endfor %}
+{% assign next_i = i | plus: 1 %}{% if next_i >= all.size %}{% assign next_i = 0 %}{% endif %}
+{% assign next = all[next_i] %}
+<article class="report">
+  <header class="wrap article-head project-head">
+    <div>
+      <p class="kicker">{{ page.type | default: "Report" }}</p>
+      <h1>{{ page.title }}</h1>
+      {% if page.summary %}<p class="lede">{{ page.summary }}</p>{% endif %}
+    </div>
+
+    <div class="title-block" aria-label="Report details">
+      <div class="tb-cell tb-wide"><span>Report</span>{{ page.title }}</div>
+      <div class="tb-cell tb-span-2"><span>Course</span>{{ page.course }}</div>
+      <div class="tb-cell"><span>Date</span>{{ page.year }}</div>
+      <div class="tb-cell tb-end"><span>Team</span>{{ page.team }}</div>
+      <div class="tb-cell tb-span-2"><span>My part</span>{{ page.role | default: "Team member" }}</div>
+      <div class="tb-cell tb-span-2 tb-end"><span>Kind</span>{{ page.type | default: "Report" }}</div>
+      <div class="tb-cell tb-last tb-span-2"><span>Filed by</span><em class="tb-hand">A. Valloyas</em></div>
+      <div class="tb-cell tb-last tb-span-2 tb-end"><span>Sheet</span>R-{{ i | plus: 1 }} of {{ all.size }}</div>
+    </div>
+  </header>
+
+  <div class="wrap prose report-body">
+    {% if page.finding %}
+    <aside class="short-version" aria-label="The short version">
+      <p class="sv-title">the short version</p>
+      <p>{{ page.finding }}</p>
+    </aside>
+    {% endif %}
+    {{ content }}
+  </div>
+
+  {% if page.sources %}
+  <section class="wrap report-sources" aria-labelledby="sources-heading">
+    <h2 id="sources-heading" class="scribble">Leaned on most</h2>
+    <ul>
+      {% for s in page.sources %}<li><span class="src-title">{{ s.title }}</span>{% if s.by %}<span class="src-by">{{ s.by }}</span>{% endif %}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <nav class="wrap next-project" aria-label="Next report">
+    <a class="back" href="{{ '/projects/' | relative_url }}#reports">All reports</a>
+    <a class="next" href="{{ next.url | relative_url }}"><span>next report →</span>{{ next.title }}</a>
+  </nav>
+</article>

@@ -88,14 +88,15 @@ description: Mechanical design, mechatronics and energy projects by Aldrich Vall
 </section>
 <p class="wrap filter-empty" hidden>Nothing filed under this one yet.</p>
 
-{% if site.data.coursework %}
+{% assign reports = site.reports | sort: "order" %}
+{% if reports.size > 0 %}
 <section class="wrap section" id="reports">
   <div class="section-head"><h2 class="scribble">School reports and research</h2></div>
   <ul class="report-list">
-    {% for r in site.data.coursework %}
+    {% for r in reports %}
     <li>
-      <span class="report-title">{% if r.file %}<a href="{{ r.file | relative_url }}">{{ r.title }}</a>{% else %}{{ r.title }}{% endif %}</span>
-      <span class="report-note">{{ r.note }}</span>
+      <span class="report-title"><a href="{{ r.url | relative_url }}">{{ r.title }}</a></span>
+      <span class="report-note">{{ r.summary }}</span>
       <span class="report-meta">{{ r.course }}, {{ r.year }}</span>
     </li>
     {% endfor %}

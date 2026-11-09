@@ -26,6 +26,9 @@ collections:
   journal:
     output: true
     permalink: /journal/:year/:month/:title/
+  reports:
+    output: true
+    permalink: /reports/:name/
 
 # Filter labels for the project index (key: label)
 themes:
@@ -42,6 +45,8 @@ defaults:
     values: { layout: post }
   - scope: { path: "", type: journal }
     values: { layout: journal-entry }
+  - scope: { path: "", type: reports }
+    values: { layout: report }
 
 permalink: /blog/:year/:title/
 markdown: kramdown

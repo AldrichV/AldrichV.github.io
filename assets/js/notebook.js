@@ -155,7 +155,7 @@
       // only show it once the title block has scrolled away
       // show it once the title block has scrolled away, and step aside while a full-width section
       // (cover, 3D model, videos, gallery) is on screen so it never sits on top of them
-      var head = document.querySelector('.project-head'), wide = article.querySelectorAll('.cover-plate, .model-section, .reel, .gallery');
+      var head = document.querySelector('.project-head'), wide = article.querySelectorAll('.cover-plate, .model-section, .reel, .gallery, .short-version');
       var headGone = false, wideOn = new Set();
       function sync() { nav.classList.toggle('is-shown', headGone && wideOn.size === 0); }
       new IntersectionObserver(function (es) { headGone = !es[0].isIntersecting; sync(); }).observe(head);

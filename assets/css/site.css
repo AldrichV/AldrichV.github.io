@@ -963,6 +963,68 @@ picture { display: contents; }
 .trip-map-fig figcaption { font-family: var(--hand); color: var(--red); font-size: 1rem; margin-top: 0.3rem; }
 
 /* =========================================================
+   Report pages (/reports/…): a lab-book sheet in four numbered steps
+   ========================================================= */
+.kicker { font-family: var(--hand); color: var(--red); font-size: 1.2rem; margin: 0 0 0.35rem; transform: rotate(-1deg); transform-origin: left; }
+.report-body { counter-reset: step; }
+.report-body > h2 { counter-increment: step; position: relative; padding-left: 2.9rem; }
+.report-body > h2::before {
+  content: counter(step);
+  position: absolute; left: 0; top: 50%; translate: 0 -52%;
+  width: 2.05rem; height: 2.05rem; display: grid; place-items: center;
+  font-family: var(--hand); font-size: 1.25rem; line-height: 1; color: var(--red);
+  border: 2px solid var(--red); border-radius: 52% 46% 55% 44% / 48% 55% 45% 52%;
+  rotate: -6deg;
+}
+.short-version {
+  background: #fff7c2; color: #2a2a1f; border-radius: 2px;
+  padding: 1rem 1.15rem 1.1rem; margin: 0 0 2rem; max-width: 24rem;
+  box-shadow: 0 10px 18px -12px rgba(20, 30, 40, 0.45);
+  rotate: 1.2deg; position: relative;
+}
+.short-version::before {
+  content: ""; position: absolute; top: -0.65rem; left: 50%; translate: -50% 0; rotate: -3deg;
+  width: 5.5rem; height: 1.3rem; background: var(--tape-pink);
+}
+.short-version p { margin: 0; font-family: var(--hand); font-size: 1.2rem; line-height: 1.35; }
+.short-version .sv-title { font-family: var(--draft); font-size: 0.95rem; text-transform: lowercase; color: #8a3b2f; margin-bottom: 0.35rem; }
+@media (min-width: 1100px) {
+  .report-body { position: relative; }
+  .short-version { position: absolute; right: var(--gutter); top: clamp(2.5rem, 5vw, 3.75rem); width: clamp(13rem, 22vw, 17rem); margin: 0; }
+}
+
+/* "tally" bars for a handful of numbers, drawn like pencil hatching */
+.tally { list-style: none; padding: 0 !important; margin: 1.5rem 0 1.75rem; display: grid; gap: 0.55rem; max-width: 34rem; }
+.tally li { display: grid; grid-template-columns: minmax(7rem, 12rem) 1fr auto; align-items: center; gap: 0.75rem; margin: 0; }
+.tally li::before { display: none; }
+.tally .t-label { font-size: var(--step--1); }
+.tally .t-bar { height: 0.95rem; border: 1.5px solid var(--ink); border-radius: 2px;
+  background: repeating-linear-gradient(-45deg, var(--ink-soft) 0 1.5px, transparent 1.5px 6px);
+  width: var(--w); min-width: 3px; }
+.tally .t-bar.hot { background: repeating-linear-gradient(-45deg, var(--red) 0 1.8px, transparent 1.8px 5px); border-color: var(--red); }
+.tally .t-val { font-family: var(--hand); font-size: 1.1rem; color: var(--red); }
+.tally-cap { font-family: var(--hand); color: var(--ink-soft); font-size: 1.05rem; margin-top: -0.75rem; }
+@media (max-width: 560px) { .tally li { grid-template-columns: 1fr auto; } .tally .t-bar { grid-column: 1 / -1; grid-row: 2; } }
+
+/* a dated timeline, like notes down a margin */
+.timeline { list-style: none; padding: 0 0 0 1.2rem !important; border-left: 2px dashed var(--rule); margin: 1.5rem 0; }
+.timeline li { position: relative; margin: 0 0 0.9rem; padding-left: 0.4rem; }
+.timeline li::before { content: "" !important; position: absolute; left: -1.72rem !important; top: 0.45em; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--paper); border: 2px solid var(--red); }
+.timeline b { font-family: var(--hand); font-weight: 400; color: var(--red); font-size: 1.1rem; margin-right: 0.5rem; }
+
+.report-body figure { margin: 2rem 0; }
+.report-body figure .plate { aspect-ratio: auto; }
+.report-body figcaption { font-family: var(--hand); color: var(--ink-soft); font-size: 1.05rem; margin-top: 0.5rem; }
+
+.report-sources { padding-top: clamp(2.5rem, 6vw, 4rem); }
+.report-sources ul { list-style: none; padding: 0; margin: 1rem 0 0; max-width: 46rem; }
+.report-sources li { display: grid; gap: 0.1rem; padding: 0.7rem 0; border-top: 1.5px dashed var(--rule); }
+.report-sources .src-title { font-style: italic; }
+.report-sources .src-by { font-family: var(--hand); color: var(--ink-soft); font-size: 1.02rem; }
+.report-list .report-title a { color: var(--ink); text-decoration-color: var(--pen); text-underline-offset: 0.2em; }
+.report-list .report-title a::after { content: " →"; color: var(--pen); }
+
+/* =========================================================
    Night mode: a cyanotype blueprint. The page turns deep blue with white linework;
    anything that is a physical piece of paper (photos, journal pages, the résumé,
    plots and renders, 3D viewers) keeps its daytime colours, as if taped onto the print.
@@ -990,7 +1052,7 @@ picture { display: contents; }
   --tape-blue: rgba(160, 196, 238, 0.9);
   color-scheme: dark;
 }
-:root[data-theme="night"] :is(.plate, .me, .polaroid, .stamp, .scrap-note, .blank-page, .diary-page, .diary-body p:has(> img), .torn, .resume, .lb-frame, .sheet-index, .redpen-note, .trip-map, .model3d-stage, .clip-frame) {
+:root[data-theme="night"] :is(.plate, .me, .polaroid, .stamp, .short-version, .scrap-note, .blank-page, .diary-page, .diary-body p:has(> img), .torn, .resume, .lb-frame, .sheet-index, .redpen-note, .trip-map, .model3d-stage, .clip-frame) {
   --paper: #f1f4f5;
   --grid: rgba(64, 112, 160, 0.11);
   --ink: #22292f;
@@ -1031,7 +1093,7 @@ picture { display: contents; }
   --tape-blue: rgba(160, 196, 238, 0.9);
   color-scheme: dark;
 }
-:root:not([data-theme="day"]) :is(.plate, .me, .polaroid, .stamp, .scrap-note, .blank-page, .diary-page, .diary-body p:has(> img), .torn, .resume, .lb-frame, .sheet-index, .redpen-note, .trip-map, .model3d-stage, .clip-frame) {
+:root:not([data-theme="day"]) :is(.plate, .me, .polaroid, .stamp, .short-version, .scrap-note, .blank-page, .diary-page, .diary-body p:has(> img), .torn, .resume, .lb-frame, .sheet-index, .redpen-note, .trip-map, .model3d-stage, .clip-frame) {
   --paper: #f1f4f5;
   --grid: rgba(64, 112, 160, 0.11);
   --ink: #22292f;
