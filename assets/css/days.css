@@ -282,9 +282,10 @@
 
 /* ---------- Shibuya: the JoJo store gets its menacing ゴゴゴ ---------- */
 .day-shibuya .stop-jojo .daylog-card { position: relative; }
-.day-shibuya .stop-jojo .daylog-card::after { content: "ゴ ゴ ゴ"; position: absolute; right: .2rem; top: 4.2rem; font: 700 2.1rem/1 'Shippori Mincho', serif; color: #6b2fa0; letter-spacing: -.05em; rotate: -10deg; text-shadow: 2px 2px 0 #f2c94c; pointer-events: none; }
+.day-shibuya .stop-jojo .daylog-card::after { content: "ゴ ゴ ゴ"; position: absolute; right: -1.6rem; bottom: 3.2rem; font: 700 2.1rem/1 'Shippori Mincho', serif; color: #6b2fa0; letter-spacing: -.05em; rotate: -10deg; text-shadow: 2px 2px 0 #f2c94c; pointer-events: none; }
 .day-shibuya .stop-jojo .polaroid { box-shadow: 0 0 0 3px #6b2fa0, 6px 6px 0 #f2c94c; }
 .day-shibuya .stop-jojo .polaroid-cap { color: #4a1f73; }
+.day-shibuya .stop-jojo .polaroid img { aspect-ratio: auto; object-fit: contain; background: #fff; }
 @media (prefers-reduced-motion: no-preference) {
   .day-shibuya .stop-jojo .daylog-card::after { animation: menace 1.6s ease-in-out infinite alternate; }
   @keyframes menace { to { translate: 0 -4px; rotate: -6deg; } }
