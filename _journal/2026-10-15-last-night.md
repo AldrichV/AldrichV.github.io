@@ -19,6 +19,10 @@ timeline:
     title: Akihabara at night
     photos:
       - { src: /assets/images/journal/2026-10-15-last-night/akihabara-at-night.jpg, caption: "lights up" }
+  - time: "7:33 pm"
+    title: "One last poster"
+    photos:
+      - { src: /assets/images/journal/2026-10-15-last-night/p-1625.jpg, caption: "a poster for a new game" }
 ---
 
 Day thirteen, the last full day of the Japan trip, spent back in Akihabara.
