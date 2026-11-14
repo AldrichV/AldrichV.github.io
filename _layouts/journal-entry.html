@@ -47,7 +47,7 @@ layout: default
       <li class="day-card{% if stop.style %}{% assign _w = stop.style | split: ' ' %}{% for w in _w %} card-{{ w }}{% endfor %}{% endif %}">
         <div class="day-card-in">
           {% if stop.card.kicker %}<span class="dc-kicker">{{ stop.card.kicker }}</span>{% endif %}
-          <span class="dc-title">{{ stop.card.title }}</span>
+          {% if stop.card.logo %}<img class="dc-title dc-logo" src="{{ stop.card.logo | relative_url }}" alt="{{ stop.card.title }}" loading="lazy" decoding="async">{% else %}<span class="dc-title">{{ stop.card.title }}</span>{% endif %}
           {% if stop.card.sub %}<span class="dc-sub">{{ stop.card.sub }}</span>{% endif %}
         </div>
       </li>

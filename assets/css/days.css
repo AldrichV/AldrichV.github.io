@@ -388,3 +388,13 @@
 .day-fair .daylog-stop:nth-child(3n+2) .daylog-title { background: #c0392b; } .day-fair .daylog-stop:nth-child(3n) .daylog-title { background: #c9a227; color: #2a1d0a; }
 .day-fair .daylog-stop::before { background: radial-gradient(circle, #fff8ef 0 35%, #2f6db5 36%); border-color: #1f4e9c; width: 1.1rem; height: 1.1rem; left: -1.58rem; }
 .day-fair .daylog::before { border-left-color: #8b2a1e; }
+
+/* Show logos on the MAPPA title cards (Aldrich's fan-made versions; `card.logo` in front matter). */
+.day-mappa .dc-logo { width: min(26rem, 82%); height: auto; margin: .35rem auto .2rem; }
+.day-mappa .card-aot .dc-logo { filter: drop-shadow(0 2px 0 #000) drop-shadow(0 0 10px #000c); }
+.day-mappa .card-jjk .dc-logo { filter: drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 12px #6f8cff); }
+.day-mappa .card-csm .dc-logo { width: min(28rem, 88%); filter: drop-shadow(3px 3px 0 #111); }
+/* The AoT logo keeps its white ground: it sits on a parchment panel and multiplies into it. */
+.day-mappa .card-aot .day-card-in { background: #eadfc6; box-shadow: inset 0 0 22px #a8875a88; }
+.day-mappa .card-aot .dc-logo { mix-blend-mode: multiply; filter: none; }
+.day-mappa .card-aot .dc-kicker, .day-mappa .card-aot .dc-sub { color: #7a2416; }
