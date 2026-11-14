@@ -4,7 +4,7 @@
 {%- endcomment -%}
 {%- assign _ca = site.journal | where: 'canada', true | sort: 'date' -%}
 <figure class="trip-map-fig">
-  <svg class="sketch-svg trip-map canada-map" viewBox="0 30 600 494" role="img" aria-label="Sketch map of Canada with the trips pinned: Banff, the Toronto area, and the road trip to the east coast" xmlns="http://www.w3.org/2000/svg">
+  <svg class="sketch-svg trip-map canada-map" viewBox="0 30 600 504" role="img" aria-label="Sketch map of Canada with the trips pinned: Banff, the Toronto area, and the road trip to the east coast" xmlns="http://www.w3.org/2000/svg">
     <g filter="url(#rough)">
       {% include canada-outline.svg %}
       {%- for p in site.data.canada.pins -%}
@@ -17,12 +17,12 @@
     </g>
     {%- for p in site.data.canada.pins -%}
     {%- for s in p.stops -%}{%- if s.name -%}<text class="tsm map-ref" x="{{ s.lx }}" y="{{ s.ly }}" text-anchor="{{ s.anchor | default: 'start' }}">{{ s.name }}</text>{%- endif -%}{%- endfor -%}
-    {%- assign _ly = p.ly -%}
+    {%- assign _ly = p.ly -%}{%- assign _lx = p.lx -%}
     {%- for slug in p.entries -%}
     {%- assign e = _ca | where_exp: "x", "x.slug == slug" | first -%}
     {%- if e -%}
-    <a href="{{ e.url | relative_url }}" class="pin-link"><text class="h" x="{{ p.lx }}" y="{{ _ly }}" text-anchor="{{ p.anchor | default: 'start' }}">{{ e.strip | default: e.title }}</text><text class="tsm" x="{{ p.lx }}" y="{{ _ly | plus: 16 }}" text-anchor="{{ p.anchor | default: 'start' }}">{{ e.date | date: "%b %Y" }}</text></a>
-    {%- assign _ly = _ly | plus: 42 -%}
+    <a href="{{ e.url | relative_url }}" class="pin-link"><text class="h" x="{{ _lx }}" y="{{ _ly }}" text-anchor="{{ p.anchor | default: 'start' }}">{{ e.strip | default: e.title }}</text><text class="tsm" x="{{ _lx }}" y="{{ _ly | plus: 16 }}" text-anchor="{{ p.anchor | default: 'start' }}">{{ e.date | date: "%b %Y" }}</text></a>
+    {%- if p.dx -%}{%- assign _lx = _lx | plus: p.dx -%}{%- else -%}{%- assign _ly = _ly | plus: 42 -%}{%- endif -%}
     {%- endif -%}
     {%- endfor -%}
     {%- endfor -%}
