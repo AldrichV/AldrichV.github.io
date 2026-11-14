@@ -47,6 +47,20 @@ gallery:
   - { src: /assets/images/projects/solar-thermal.jpg, caption: "Thermal study of the electronics enclosure in direct sun." }
   - { src: /assets/images/projects/solar-cad-side.jpg, caption: "Side view at the lowest panel position." }
   - { src: /assets/images/projects/solar-dashboard.jpg, caption: "IoT dashboard with live light and pH readings." }
+  - { src: /assets/images/projects/solar-build-cell.jpg, caption: "The 5 V solar cell, still in the bag." }
+  - { src: /assets/images/projects/solar-build-frame.jpg, caption: "First print of the red panel frame." }
+  - { src: /assets/images/projects/solar-build-panel-in.jpg, caption: "The cell seated in the frame." }
+  - { src: /assets/images/projects/solar-build-wired.jpg, caption: "Panel in, leads out the back." }
+  - { src: /assets/images/projects/solar-build-mast.jpg, caption: "The mast and tilt arm." }
+  - { src: /assets/images/projects/solar-build-bracket.jpg, caption: "Measuring the servo bracket." }
+  - { src: /assets/images/projects/solar-build-servo.jpg, caption: "The servo mounted on the bracket." }
+  - { src: /assets/images/projects/solar-build-mast-up.jpg, caption: "The mast standing on its base." }
+  - { src: /assets/images/projects/solar-build-on-float.jpg, caption: "First fit on the float board." }
+  - { src: /assets/images/projects/solar-build-breadboard.jpg, caption: "Labelled breadboard wiring for the light sensors." }
+  - { src: /assets/images/projects/solar-build-wiring.jpg, caption: "Everything wired up on the bench." }
+  - { src: /assets/images/projects/solar-build-schematic.jpg, caption: "Whiteboard sketch of the power path: panel, charger, Arduino." }
+  - { src: /assets/images/projects/solar-build-sealed.jpg, caption: "Electronics sealed in their box." }
+  - { src: /assets/images/projects/solar-build-final.jpg, caption: "The finished platform on its pool-noodle floats." }
 ---
 
 ## The problem
