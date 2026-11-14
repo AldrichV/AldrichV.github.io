@@ -46,7 +46,6 @@
 .bus-route li::after { content: ""; position: absolute; top: .48rem; left: 0; right: 0; border-top: 4px solid #2e8b57; }
 .bus-route li:first-child::after { left: 50%; } .bus-route li:last-child::after { right: 50%; }
 .route-label { margin: .4rem 1rem 0; font-family: var(--hand); color: #2e6b47; font-size: 1rem; }
-.day-fuji .diary-page { background-image: repeating-radial-gradient(ellipse at 85% 12%, transparent 0 22px, rgba(46,139,87,.09) 22px 23px), var(--lined-bg, none); }
 .day-fuji .daylog-title { display: inline-flex; align-items: center; gap: .55rem; }
 .day-fuji .daylog-title::before { content: ""; width: 1.6rem; height: 1.6rem; flex: none; border-radius: 50%; border: 3px solid #2e8b57; background: radial-gradient(circle, #fff 0 45%, #2e8b57 46% 52%, #fff 53%); }
 .day-fuji .daylog-stop::before { background: #2e8b57; border-color: #1f5e3b; }
@@ -122,7 +121,7 @@
 }
 .day-ryokan .daylog::before { border-left: 2px solid #8a5a33; opacity: .45; }
 .day-ryokan .daylog-stop::before { background: #f5efe2; border-color: #8a5a33; border-radius: 2px; transform: rotate(45deg); }
-.day-ryokan .daylog-time { justify-self: start; writing-mode: vertical-rl; font-family: 'Shippori Mincho', var(--draft); color: #fff; background: #b83a2b; padding: .55rem .3rem; border-radius: 4px; font-size: .95rem; letter-spacing: .08em; box-shadow: inset 0 0 0 2px #b83a2b, inset 0 0 0 3px #f5efe2; }
+.day-ryokan .daylog-time { justify-self: start; align-self: start; writing-mode: vertical-rl; font-family: 'Shippori Mincho', var(--draft); color: #fff; background: #b83a2b; padding: .55rem .3rem; border-radius: 4px; font-size: .95rem; letter-spacing: .08em; box-shadow: inset 0 0 0 2px #b83a2b, inset 0 0 0 3px #f5efe2; }
 .day-ryokan .daylog-title { font-family: 'Shippori Mincho', var(--hand); }
 .day-ryokan .polaroid { background: #fff; padding: .5rem; border: 6px solid #7a5232; box-shadow: inset 0 0 0 1px #c9a77f, 0 6px 14px -8px #3b2512; transform: none !important; margin-top: 0 !important; }
 .day-ryokan .polaroid::before { display: none; }
@@ -162,8 +161,9 @@
 .day-hakone .dc-sub { font-family: var(--hand); color: #d8cfbb; font-size: 1.05rem; }
 
 /* ---------- Oct 11 · Hiroshima, paper cranes ---------- */
-.dh-cranes svg { display: block; width: 100%; height: 5.5rem; }
+.dh-cranes svg { display: block; width: 100%; height: 6rem; overflow: visible; }
 .c-string, .c-thread { fill: none; stroke: #8a7f70; stroke-width: 1.2; }
+.c-fold { fill: none; stroke: #0003; stroke-width: 1; }
 .cr-line { margin: .2rem 0 0; text-align: center; font-family: var(--hand); color: var(--ink-soft); font-size: 1.05rem; }
 @media (prefers-reduced-motion: no-preference) {
   .dh-cranes g { transform-box: fill-box; animation: bob 4s ease-in-out infinite alternate; }
@@ -171,7 +171,7 @@
   @keyframes bob { to { translate: 0 3px; } }
 }
 .day-hiroshima .daylog-stop + .daylog-stop::after { content: ""; position: absolute; left: -1.9rem; top: calc(var(--line-step) * -0.95); width: 1.7rem; height: 1.2rem;
-  background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-17 -1 34 22'%3E%3Cpath fill='%23e0644f' d='M0 0 L-16 8 L-4 10 L0 20 L4 10 L16 8 Z'/%3E%3C/svg%3E"); }
+  background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-19 -15 38 24'%3E%3Cpath fill='%23e0644f' d='M-18 2 L-4 -14 L1 -1 L13 -11 L18 -9 L8 4 L-3 8 Z'/%3E%3C/svg%3E"); }
 .day-hiroshima .daylog-stop:nth-child(3n) + .daylog-stop::after { filter: hue-rotate(160deg); }
 .day-hiroshima .daylog-stop:nth-child(3n+1) + .daylog-stop::after { filter: hue-rotate(60deg); }
 .day-hiroshima .daylog-stop::before { background: #fff; }

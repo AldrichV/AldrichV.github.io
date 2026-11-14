@@ -15,7 +15,7 @@
       <svg viewBox="0 0 60 24" class="bp-plane"><path d="M2 12h44M40 5l12 7-12 7M18 12l-6-9h5l10 9-10 9h-5z"/></svg>
       <div><small>to</small><b>日本</b><span>Japan</span></div>
     </div>
-    <div class="bp-row"><div><small>date</small>{{ page.date | date: "%d %b %Y" | upcase }}</div><div><small>trip</small>13 days</div><div><small>class</small>excited</div></div>
+    <div class="bp-row"><div><small>date</small>{{ page.date | date: "%d %b %Y" | upcase }}</div><div><small>trip</small>13 days</div></div>
   </div>
   <div class="bp-stub"><small>day</small><b>01</b><span class="bp-bars"></span></div>
 </div>
@@ -28,7 +28,7 @@
     <path class="f-near" d="M0 120 C80 86 140 96 210 104 C300 112 380 90 460 98 C520 104 560 92 600 96 L600 120 Z"/>
   </svg>
   <ol class="bus-route">
-    {%- for s in page.timeline -%}{%- unless s.title contains "early" or s.title contains "Lunch" -%}<li>{{ s.title | remove: "Swans on " }}</li>{%- endunless -%}{%- endfor -%}
+    {%- for s in page.timeline -%}{%- unless s.title contains "early" or s.title contains "Lunch" or s.title contains "bus" -%}<li>{{ s.title | remove: "Swans on " }}</li>{%- endunless -%}{%- endfor -%}
   </ol>
   <p class="route-label">today's route · 本日の行程</p>
 </div>
@@ -79,11 +79,11 @@
 
 {%- when "hiroshima" -%}
 <div class="dh dh-cranes" aria-hidden="true">
-  <svg viewBox="0 0 600 90">
+  <svg viewBox="0 0 600 80">
     <path class="c-string" d="M10 14 Q300 40 590 14"/>
     {%- assign cols = "#e0644f,#f0b23c,#6bb48d,#5c8fd6,#c97bc1,#e0644f,#f0b23c,#6bb48d,#5c8fd6" | split: "," -%}
     {%- for c in cols -%}{%- assign x = forloop.index0 | times: 66 | plus: 36 -%}{%- assign dy = forloop.index0 | minus: 4 | abs -%}{%- assign y = 34 | minus: dy | minus: dy -%}
-    <g transform="translate({{ x }} {{ y }})"><path d="M0 0 v8" class="c-thread"/><path fill="{{ c }}" d="M0 10 L-16 18 L-4 20 L0 30 L4 20 L16 18 Z M0 10 L-6 4 L-3 12 Z"/></g>
+    <g transform="translate({{ x }} {{ y }})"><path d="M0 0 v10" class="c-thread"/><path fill="{{ c }}" transform="translate(0 22)" d="M-18 2 L-4 -14 L1 -1 L13 -11 L18 -9 L8 4 L-3 8 Z"/><path class="c-fold" transform="translate(0 22)" d="M-4 -14 L-1 6"/></g>
     {%- endfor -%}
   </svg>
   <p class="cr-line">折り鶴 · for peace</p>
