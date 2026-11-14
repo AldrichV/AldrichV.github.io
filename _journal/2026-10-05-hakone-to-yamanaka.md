@@ -4,7 +4,7 @@ date: 2026-10-05
 trip: japan-2026
 strip: "Fuji lakes"
 pin: [35.43, 138.85]
-pin_label: left
+pin_label: above-left
 where: "Hakone and the Fuji lakes"
 tape: mint
 cover: { src: /assets/images/journal/2026-10-05-hakone-to-yamanaka/oshino-hakkai.jpg, caption: "the water wheel at Oshino Hakkai" }
