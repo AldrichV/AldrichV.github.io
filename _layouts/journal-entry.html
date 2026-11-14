@@ -43,7 +43,7 @@ layout: default
     <ol class="daylog">
       {% for stop in page.timeline %}
       {% if stop.card %}
-      <li class="day-card" aria-hidden="false">
+      <li class="day-card{% if stop.style %}{% assign _w = stop.style | split: ' ' %}{% for w in _w %} card-{{ w }}{% endfor %}{% endif %}">
         <div class="day-card-in">
           {% if stop.card.kicker %}<span class="dc-kicker">{{ stop.card.kicker }}</span>{% endif %}
           <span class="dc-title">{{ stop.card.title }}</span>
@@ -51,7 +51,7 @@ layout: default
         </div>
       </li>
       {% endif %}
-      <li class="daylog-stop tape-{% cycle 'yellow', 'pink', 'mint', 'blue' %}{% if stop.style %} stop-{{ stop.style }}{% endif %}">
+      <li class="daylog-stop tape-{% cycle 'yellow', 'pink', 'mint', 'blue' %}{% if stop.style %}{% assign _w = stop.style | split: ' ' %}{% for w in _w %} stop-{{ w }}{% endfor %}{% endif %}">
         <p class="daylog-time"><time>{{ stop.time }}</time></p>
         <div class="daylog-card">
           {% if page.theme == "shibuya" %}{% assign _pi = forloop.index0 | minus: 1 %}{% assign _ni = forloop.index0 | plus: 1 %}

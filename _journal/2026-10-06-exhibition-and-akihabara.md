@@ -25,8 +25,8 @@ timeline:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1273.jpg, caption: "more sketches, pinned up" }
   - time: "11:36 am"
     title: "Attack on Titan: The Final Season"
-    card: { kicker: "EP.01", title: "ATTACK ON TITAN", sub: "The Final Season" }
-    style: panels
+    card: { kicker: "EP.01 · 進撃の巨人", title: "ATTACK ON TITAN", sub: "The Final Season" }
+    style: panels aot
     photos:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1274.jpg, caption: "the Attack on Titan room" }
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1275.jpg, caption: "a storyboard page" }
@@ -47,8 +47,8 @@ timeline:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1291.jpg, caption: "up close" }
   - time: "11:49 am"
     title: "Jujutsu Kaisen"
-    card: { kicker: "EP.02", title: "JUJUTSU KAISEN" }
-    style: panels
+    card: { kicker: "EP.02 · 呪術廻戦", title: "JUJUTSU KAISEN" }
+    style: panels jjk
     photos:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1292.jpg, caption: "the Jujutsu Kaisen wall" }
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1293.jpg, caption: "the title in the middle of it all" }
@@ -70,8 +70,8 @@ timeline:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1309.jpg, caption: "more character sketches" }
   - time: "11:59 am"
     title: "Chainsaw Man – The Movie: Reze Arc"
-    card: { kicker: "EP.03", title: "CHAINSAW MAN", sub: "The Movie: Reze Arc" }
-    style: panels
+    card: { kicker: "EP.03 · チェンソーマン", title: "CHAINSAW MAN", sub: "The Movie: Reze Arc" }
+    style: panels csm
     photos:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1310.jpg, caption: "a quiet room with a round window" }
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1311.jpg, caption: "a background painting, lit from behind" }

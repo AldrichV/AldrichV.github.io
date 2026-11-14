@@ -225,3 +225,67 @@
 
 /* themed art prints plainly */
 @media print { .day .dh { display: none; } }
+
+/* ---------- MAPPA, room by room: each show gets its own look (no logos, just the mood) ---------- */
+.day-mappa .day-card .dc-kicker { font-family: 'Bebas Neue', 'Shippori Mincho', var(--draft); }
+
+/* Attack on Titan: stone walls, rust and parchment */
+.day-mappa .card-aot { background:
+    linear-gradient(#0000 calc(100% - 3px), #231d18 0) 0 0 / 100% 2.6rem,
+    linear-gradient(90deg, #0000 calc(100% - 3px), #231d18 0) 0 0 / 5.2rem 5.2rem,
+    linear-gradient(90deg, #0000 calc(100% - 3px), #231d18 0) 2.6rem 2.6rem / 5.2rem 5.2rem,
+    radial-gradient(120% 90% at 50% 50%, #6a5d50, #3b322a); border-color: #231d18; }
+.day-mappa .card-aot::after { opacity: .08; }
+.day-mappa .card-aot .day-card-in { background: #000a; padding: .9rem 1.6rem 1rem; outline: 2px solid #b7412e; outline-offset: -6px; }
+.day-mappa .card-aot .dc-kicker { color: #e3c48f; }
+.day-mappa .card-aot .dc-title { color: #efe4cc; text-shadow: 3px 3px 0 #7a2416; }
+.day-mappa .card-aot .dc-sub { color: #e3c48f; font-family: 'Shippori Mincho', serif; letter-spacing: .25em; }
+.day-mappa .stop-aot .daylog-photos { background: #efe4cc; border-color: #3a2f25; }
+.day-mappa .stop-aot .polaroid { border-color: #3a2f25; }
+.day-mappa .stop-aot .polaroid-cap { background: #efe4cc; border-top-color: #3a2f25; color: #4a3a2a; font-family: 'Shippori Mincho', serif; }
+.day-mappa .stop-aot .daylog-title { color: #6b2e1f; }
+
+/* Jujutsu Kaisen: cursed-energy glow and paper talismans */
+.day-mappa .card-jjk { background: radial-gradient(60% 80% at 30% 40%, #3b2a8a88, transparent 70%), radial-gradient(50% 70% at 75% 60%, #1f5fd088, transparent 70%), #07071a; border-color: #07071a; }
+.day-mappa .card-jjk::after { background: repeating-conic-gradient(from 0deg at 50% 50%, #8fa8ff 0deg .5deg, transparent .5deg 7deg); opacity: .14; }
+.day-mappa .card-jjk .dc-title { color: #fff; text-shadow: 0 0 14px #6f8cff, 0 0 2px #fff, 3px 3px 0 #3b2a8a; }
+.day-mappa .card-jjk .dc-kicker { color: #9fb4ff; }
+.day-mappa .card-jjk .day-card-in::before, .day-mappa .card-jjk .day-card-in::after {
+  content: "封"; position: absolute; top: 50%; translate: 0 -50%; width: 1.9rem; padding: 1.3rem 0; text-align: center; writing-mode: vertical-rl;
+  font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: #b3261e; background: #f3ead2; box-shadow: inset 0 0 0 2px #f3ead2, inset 0 0 0 3px #b3261e; rotate: -6deg; }
+.day-mappa .card-jjk .day-card-in::before { left: -2.6rem; } .day-mappa .card-jjk .day-card-in::after { right: -2.6rem; rotate: 5deg; }
+@media (prefers-reduced-motion: no-preference) {
+  .js-days.day-mappa .card-jjk.seen .dc-title { animation: slam .45s cubic-bezier(.2,1.6,.4,1) both .1s, curse 2.8s ease-in-out .6s infinite alternate; }
+  @keyframes curse { to { text-shadow: 0 0 26px #8f6bff, 0 0 4px #fff, 3px 3px 0 #3b2a8a; } }
+}
+.day-mappa .stop-jjk .daylog-photos { background: #0d0d24; border-color: #0d0d24; }
+.day-mappa .stop-jjk .polaroid { border-color: #0d0d24; box-shadow: 0 0 14px -3px #6f8cff; }
+.day-mappa .stop-jjk .polaroid-cap { background: #f3ead2; color: #3a2a1a; border-top: 2px solid #b3261e; box-shadow: inset 0 -2px 0 #b3261e; font-family: 'Shippori Mincho', serif; }
+.day-mappa .stop-jjk .daylog-title { color: #2d2a7a; }
+
+/* Chainsaw Man: red, black and sawtooth edges */
+.day-mappa .card-csm { background: #c8102e; border: 0; min-height: 10.5rem;
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 1.4rem 51% repeat-x, conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / 1.4rem 51% repeat-x;
+          mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 1.4rem 51% repeat-x, conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / 1.4rem 51% repeat-x; }
+.day-mappa .card-csm::after { background: repeating-conic-gradient(from 0deg at 50% 50%, #000 0deg .9deg, transparent .9deg 6deg); opacity: .22; }
+.day-mappa .card-csm .dc-title { color: #fff; text-shadow: 4px 4px 0 #111, -1px -1px 0 #111; letter-spacing: .06em; }
+.day-mappa .card-csm .dc-kicker { color: #111; }
+.day-mappa .card-csm .dc-sub { color: #111; font-family: 'Bebas Neue', var(--draft); letter-spacing: .2em; font-size: 1.15rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .js-days.day-mappa .card-csm.seen .day-card-in { animation: rev .5s steps(6) both .15s; }
+  @keyframes rev { 0% { transform: translateX(-3px); } 20% { transform: translateX(3px); } 40% { transform: translateX(-2px); } 60% { transform: translateX(2px); } 100% { transform: none; } }
+}
+.day-mappa .stop-csm .daylog-photos { background: #c8102e; border-color: #111; position: relative; }
+.day-mappa .stop-csm .polaroid { border-color: #111; }
+.day-mappa .stop-csm .polaroid-cap { background: #111; color: #fff; border-top-color: #111; }
+.day-mappa .stop-csm .daylog-title { color: #c8102e; }
+
+/* ---------- Shibuya: the JoJo store gets its menacing ゴゴゴ ---------- */
+.day-shibuya .stop-jojo .daylog-card { position: relative; }
+.day-shibuya .stop-jojo .daylog-card::after { content: "ゴ ゴ ゴ"; position: absolute; right: .2rem; top: 4.2rem; font: 700 2.1rem/1 'Shippori Mincho', serif; color: #6b2fa0; letter-spacing: -.05em; rotate: -10deg; text-shadow: 2px 2px 0 #f2c94c; pointer-events: none; }
+.day-shibuya .stop-jojo .polaroid { box-shadow: 0 0 0 3px #6b2fa0, 6px 6px 0 #f2c94c; }
+.day-shibuya .stop-jojo .polaroid-cap { color: #4a1f73; }
+@media (prefers-reduced-motion: no-preference) {
+  .day-shibuya .stop-jojo .daylog-card::after { animation: menace 1.6s ease-in-out infinite alternate; }
+  @keyframes menace { to { translate: 0 -4px; rotate: -6deg; } }
+}
