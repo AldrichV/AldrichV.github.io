@@ -1,13 +1,13 @@
 ---
-title: An anime exhibition, then Akihabara
+title: The MAPPA Exhibition, then Akihabara
 date: 2026-10-06
 trip: japan-2026
 where: "Tokyo"
 tape: pink
-cover: { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/light-installation.jpg, caption: "inside the exhibition" }
+cover: { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/light-installation.jpg, caption: "inside the MAPPA Exhibition" }
 timeline:
   - time: "11:43 am"
-    title: The exhibition
+    title: The MAPPA Exhibition
     note: "Room after room of original drawings, storyboards and character sheets."
     photos:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/light-installation.jpg, video: /assets/images/journal/2026-10-06-exhibition-and-akihabara/light-installation.mp4, caption: "light and fire" }
@@ -24,4 +24,4 @@ timeline:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/card-haul.jpg, caption: "the day's cards, spread out" }
 ---
 
-Day four of the Japan trip. The morning went to an anime exhibition, and the afternoon to Akihabara's card shops. By the end of the night the cards were spread out on the table.
+Day four of the Japan trip. The morning went to the MAPPA Exhibition, and the afternoon to Akihabara's card shops. By the end of the night the cards were spread out on the table.
