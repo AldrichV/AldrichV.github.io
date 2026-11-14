@@ -2,6 +2,7 @@
 title: One last night in Akihabara
 date: 2026-10-15
 trip: japan-2026
+strip: "Akihabara"
 where: "Akihabara, Tokyo"
 tape: yellow
 cover: { src: /assets/images/journal/2026-10-15-last-night/akihabara-at-night.jpg, caption: "Akihabara at night" }

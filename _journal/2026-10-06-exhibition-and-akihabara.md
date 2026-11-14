@@ -2,6 +2,7 @@
 title: The MAPPA Exhibition, then Akihabara
 date: 2026-10-06
 trip: japan-2026
+strip: "MAPPA"
 where: "Tokyo"
 tape: pink
 cover: { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/light-installation.jpg, caption: "inside the MAPPA Exhibition" }

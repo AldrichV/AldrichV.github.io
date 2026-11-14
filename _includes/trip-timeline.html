@@ -21,7 +21,7 @@
       {% if hit %}<a href="{{ hit.url | relative_url }}" title="{{ hit.title | escape }}"{% if key == here_key %} aria-current="page"{% endif %}>{% endif %}
         <span class="trip-dot" aria-hidden="true"></span>
         <span class="trip-label"><b>{{ t | date: '%-d' }}</b><small>{{ t | date: '%a' }}</small></span>
-        {% if hit %}<span class="trip-place">{{ hit.title }}</span>{% endif %}
+        {% if hit %}<span class="trip-place">{{ hit.strip | default: hit.title }}</span>{% endif %}
       {% if hit %}</a>{% endif %}
     </li>
     {% endfor %}

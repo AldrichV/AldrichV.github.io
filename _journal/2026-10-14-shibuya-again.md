@@ -2,6 +2,7 @@
 title: Ramen and yakitori
 date: 2026-10-14
 trip: japan-2026
+strip: "Ramen"
 where: "Tokyo"
 tape: mint
 cover: { src: /assets/images/journal/2026-10-14-shibuya-again/ramen.jpg, caption: "ramen" }

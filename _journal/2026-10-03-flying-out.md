@@ -2,6 +2,7 @@
 title: Flying out
 date: 2026-10-03
 trip: japan-2026
+strip: "Flying out"
 where: "Toronto → Montreal → Japan"
 tape: blue
 cover: { src: /assets/images/journal/2026-10-03-flying-out/wing-at-pearson.jpg, caption: "the wing at Pearson" }

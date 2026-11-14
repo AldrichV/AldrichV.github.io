@@ -2,6 +2,7 @@
 title: Hiroshima
 date: 2026-10-11
 trip: japan-2026
+strip: "Hiroshima"
 pin: [34.395, 132.455]
 pin_label: above
 where: "Hiroshima"
