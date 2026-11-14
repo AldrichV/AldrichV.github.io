@@ -6,7 +6,7 @@ layout: default
 {% assign prev_i = idx | minus: 1 %}
 {% assign next_i = idx | plus: 1 %}
 
-<article class="wrap diary">
+<article class="wrap diary{% if page.theme %} day day-{{ page.theme }}{% endif %}">
   <div class="diary-page">
     <header class="diary-head">
       <time class="stamp stamp-lg" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d" }}<small>{{ page.date | date: "%Y" }}</small></time>
@@ -19,6 +19,8 @@ layout: default
       </ul>
       {% endif %}
     </header>
+
+    {% if page.theme %}{% include day-head.html %}{% endif %}
 
     {% if page.trip %}{% include trip-timeline.html trip=page.trip here=page.date %}{% endif %}
 
@@ -40,10 +42,27 @@ layout: default
     {% if page.timeline %}
     <ol class="daylog">
       {% for stop in page.timeline %}
-      <li class="daylog-stop tape-{% cycle 'yellow', 'pink', 'mint', 'blue' %}">
+      {% if stop.card %}
+      <li class="day-card" aria-hidden="false">
+        <div class="day-card-in">
+          {% if stop.card.kicker %}<span class="dc-kicker">{{ stop.card.kicker }}</span>{% endif %}
+          <span class="dc-title">{{ stop.card.title }}</span>
+          {% if stop.card.sub %}<span class="dc-sub">{{ stop.card.sub }}</span>{% endif %}
+        </div>
+      </li>
+      {% endif %}
+      <li class="daylog-stop tape-{% cycle 'yellow', 'pink', 'mint', 'blue' %}{% if stop.style %} stop-{{ stop.style }}{% endif %}">
         <p class="daylog-time"><time>{{ stop.time }}</time></p>
         <div class="daylog-card">
+          {% if page.theme == "shibuya" %}{% assign _pi = forloop.index0 | minus: 1 %}{% assign _ni = forloop.index0 | plus: 1 %}
+          <div class="station-sign">
+            <span class="ss-prev">{% if _pi >= 0 %}← {{ page.timeline[_pi].title }}{% endif %}</span>
+            <h2 class="daylog-title ss-name">{{ stop.title }}</h2>
+            <span class="ss-next">{% if _ni < page.timeline.size %}{{ page.timeline[_ni].title }} →{% endif %}</span>
+          </div>
+          {% else %}
           <h2 class="daylog-title">{{ stop.title }}</h2>
+          {% endif %}
           {% if stop.note %}<p class="daylog-note">{{ stop.note }}</p>{% endif %}
           {% if stop.photos %}
           <div class="daylog-photos n{{ stop.photos.size }}">
@@ -60,6 +79,9 @@ layout: default
       </li>
       {% endfor %}
     </ol>
+    {% endif %}
+    {% if page.end_card %}
+    <div class="day-end"><div class="day-card-in">{% if page.end_card.kicker %}<span class="dc-kicker">{{ page.end_card.kicker }}</span>{% endif %}<span class="dc-title">{{ page.end_card.title }}</span>{% if page.end_card.sub %}<span class="dc-sub">{{ page.end_card.sub }}</span>{% endif %}</div></div>
     {% endif %}
   </div>
 

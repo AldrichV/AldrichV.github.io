@@ -2,6 +2,7 @@
 title: Flying out
 date: 2026-10-03
 trip: japan-2026
+theme: boarding
 strip: "Flying out"
 where: "Toronto → Montreal → Japan"
 tape: blue

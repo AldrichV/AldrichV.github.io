@@ -2,6 +2,7 @@
 title: Ramen and yakitori
 date: 2026-10-14
 trip: japan-2026
+theme: izakaya
 strip: "Ramen"
 where: "Tokyo"
 tape: mint

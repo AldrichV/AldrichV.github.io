@@ -2,10 +2,12 @@
 title: One last night in Akihabara
 date: 2026-10-15
 trip: japan-2026
+theme: arcade
 strip: "Akihabara"
 where: "Akihabara, Tokyo"
 tape: yellow
 cover: { src: /assets/images/journal/2026-10-15-last-night/akihabara-at-night.jpg, caption: "Akihabara at night" }
+end_card: { kicker: "CONTINUE? 9 … 8 … 7", title: "GAME CLEAR", sub: "JAPAN · OCT 3–15 · THANKS FOR PLAYING" }
 timeline:
   - time: "5:21 pm"
     title: The arcade

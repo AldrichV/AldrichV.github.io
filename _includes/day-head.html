@@ -1,0 +1,125 @@
+{%- comment -%}
+  Header art for a themed journal day. Set `theme:` in an entry's front matter.
+  Everything here is decoration: aria-hidden, and the page reads the same without it.
+{%- endcomment -%}
+{%- case page.theme -%}
+
+{%- when "boarding" -%}
+<div class="dh dh-boarding" aria-hidden="true">
+  <div class="bp-main">
+    <p class="bp-label">boarding pass · 搭乗券</p>
+    <div class="bp-route">
+      <div><small>from</small><b>YYZ</b><span>Toronto</span></div>
+      <svg viewBox="0 0 60 24" class="bp-plane"><path d="M2 12h44M40 5l12 7-12 7M18 12l-6-9h5l10 9-10 9h-5z"/></svg>
+      <div><small>via</small><b>YUL</b><span>Montreal</span></div>
+      <svg viewBox="0 0 60 24" class="bp-plane"><path d="M2 12h44M40 5l12 7-12 7M18 12l-6-9h5l10 9-10 9h-5z"/></svg>
+      <div><small>to</small><b>日本</b><span>Japan</span></div>
+    </div>
+    <div class="bp-row"><div><small>date</small>{{ page.date | date: "%d %b %Y" | upcase }}</div><div><small>trip</small>13 days</div><div><small>class</small>excited</div></div>
+  </div>
+  <div class="bp-stub"><small>day</small><b>01</b><span class="bp-bars"></span></div>
+</div>
+
+{%- when "fuji" -%}
+<div class="dh dh-fuji" aria-hidden="true">
+  <svg class="fuji-art" viewBox="0 0 600 120" preserveAspectRatio="xMidYMax slice">
+    <path class="f-far" d="M0 120 L180 120 L300 18 Q306 13 312 18 L430 120 L600 120 Z"/>
+    <path class="f-snow" d="M276 40 L300 18 Q306 13 312 18 L336 40 L322 34 L311 44 L300 33 L289 42 Z"/>
+    <path class="f-near" d="M0 120 C80 86 140 96 210 104 C300 112 380 90 460 98 C520 104 560 92 600 96 L600 120 Z"/>
+  </svg>
+  <ol class="bus-route">
+    {%- for s in page.timeline -%}{%- unless s.title contains "early" or s.title contains "Lunch" -%}<li>{{ s.title | remove: "Swans on " }}</li>{%- endunless -%}{%- endfor -%}
+  </ol>
+  <p class="route-label">today's route · 本日の行程</p>
+</div>
+
+{%- when "mappa" -%}
+<div class="dh dh-mappa" aria-hidden="true">
+  <div class="mp-burst"></div>
+  <div class="mp-title">
+    <span class="mp-ep">EPISODE 04</span>
+    <span class="mp-name">THE EXHIBITION</span>
+    <span class="mp-sub">原画・絵コンテ・背景美術</span>
+  </div>
+</div>
+
+{%- when "teamlab" -%}
+<div class="dh dh-teamlab" aria-hidden="true">
+  <span class="tl-orb o1"></span><span class="tl-orb o2"></span><span class="tl-orb o3"></span><span class="tl-orb o4"></span>
+  <p class="tl-line">lights down. come in.</p>
+</div>
+
+{%- when "ryokan" -%}
+<div class="dh dh-noren" aria-hidden="true">
+  <div class="noren-rod"></div>
+  <div class="noren">
+    <span></span><span><b>ゆ</b></span><span></span>
+  </div>
+</div>
+
+{%- when "shibuya" -%}
+<div class="dh dh-crossing" aria-hidden="true">
+  <div class="zebra"></div>
+  <p class="xing-sign"><b>渋谷</b><span>Shibuya</span></p>
+</div>
+
+{%- when "hakone" -%}
+<div class="dh dh-ukiyo" aria-hidden="true">
+  <svg viewBox="0 0 600 150" preserveAspectRatio="xMidYMax slice">
+    <rect class="u-sky" width="600" height="150"/>
+    <circle class="u-sun" cx="470" cy="46" r="22"/>
+    <path class="u-m3" d="M0 110 L90 62 L150 84 L240 40 L330 92 L420 58 L520 96 L600 70 L600 150 L0 150 Z"/>
+    <path class="u-m2" d="M0 120 L120 86 L200 104 L300 78 L380 108 L470 90 L600 112 L600 150 L0 150 Z"/>
+    <rect class="u-lake" y="124" width="600" height="26"/>
+    <path class="u-wave" d="M0 132 q15 -6 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0"/>
+    <g class="u-torii" transform="translate(96 96)"><path d="M-22 0 h44 M-26 -6 q26 -6 52 0 M-14 0 v30 M14 0 v30 M-18 7 h36"/></g>
+  </svg>
+  <p class="u-cartouche">箱根</p>
+</div>
+
+{%- when "hiroshima" -%}
+<div class="dh dh-cranes" aria-hidden="true">
+  <svg viewBox="0 0 600 90">
+    <path class="c-string" d="M10 14 Q300 40 590 14"/>
+    {%- assign cols = "#e0644f,#f0b23c,#6bb48d,#5c8fd6,#c97bc1,#e0644f,#f0b23c,#6bb48d,#5c8fd6" | split: "," -%}
+    {%- for c in cols -%}{%- assign x = forloop.index0 | times: 66 | plus: 36 -%}{%- assign dy = forloop.index0 | minus: 4 | abs -%}{%- assign y = 34 | minus: dy | minus: dy -%}
+    <g transform="translate({{ x }} {{ y }})"><path d="M0 0 v8" class="c-thread"/><path fill="{{ c }}" d="M0 10 L-16 18 L-4 20 L0 30 L4 20 L16 18 Z M0 10 L-6 4 L-3 12 Z"/></g>
+    {%- endfor -%}
+  </svg>
+  <p class="cr-line">折り鶴 · for peace</p>
+</div>
+
+{%- when "miyajima" -%}
+<div class="dh dh-torii" aria-hidden="true">
+  <svg viewBox="0 0 600 160" preserveAspectRatio="xMidYMax slice">
+    <rect class="t-sky" width="600" height="160"/>
+    <circle class="t-sun" cx="300" cy="70" r="44"/>
+    <g class="t-gate" transform="translate(300 40)">
+      <path d="M-110 6 Q0 -10 110 6 L104 16 Q0 4 -104 16 Z"/>
+      <rect x="-92" y="24" width="184" height="9"/>
+      <rect x="-74" y="16" width="12" height="96"/><rect x="62" y="16" width="12" height="96"/>
+      <rect x="-5" y="16" width="10" height="10"/>
+    </g>
+    <rect class="t-sea" y="124" width="600" height="36"/>
+  </svg>
+  <div class="seigaiha"></div>
+</div>
+
+{%- when "izakaya" -%}
+<div class="dh dh-lanterns" aria-hidden="true">
+  <div class="lantern-wire"></div>
+  <div class="lanterns">
+    <span class="lantern"><b>ラーメン</b></span>
+    <span class="lantern"><b>焼き鳥</b></span>
+    <span class="lantern"><b>ラーメン</b></span>
+  </div>
+</div>
+
+{%- when "arcade" -%}
+<div class="dh dh-arcade" aria-hidden="true">
+  <p class="ar-top"><span>1UP</span><span>HI-SCORE 13 DAYS</span><span>CREDIT 01</span></p>
+  <p class="ar-title">FINAL STAGE</p>
+  <p class="ar-blink">PRESS START</p>
+</div>
+
+{%- endcase -%}

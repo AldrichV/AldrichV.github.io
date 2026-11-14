@@ -2,6 +2,7 @@
 title: Hakone to Lake Yamanaka
 date: 2026-10-05
 trip: japan-2026
+theme: fuji
 strip: "Fuji lakes"
 pin: [35.43, 138.85]
 pin_label: above-left

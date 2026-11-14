@@ -2,10 +2,12 @@
 title: The MAPPA Exhibition, then Akihabara
 date: 2026-10-06
 trip: japan-2026
+theme: mappa
 strip: "MAPPA"
 where: "Tokyo"
 tape: pink
 cover: { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/light-installation.jpg, caption: "inside the MAPPA Exhibition" }
+end_card: { kicker: "NEXT TIME", title: "TO BE CONTINUED" }
 timeline:
   - time: "8:58 am"
     title: "Breakfast"
@@ -13,6 +15,7 @@ timeline:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/p-1268.jpg, caption: "omurice to start the day" }
   - time: "11:14 am"
     title: "The MAPPA Exhibition"
+    style: panels
     note: "Under the glass roof of the hall, then in. The first room had a few of the studio's other shows."
     photos:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1269.jpg, caption: "the banner under the glass roof" }
@@ -22,6 +25,8 @@ timeline:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1273.jpg, caption: "more sketches, pinned up" }
   - time: "11:36 am"
     title: "Attack on Titan: The Final Season"
+    card: { kicker: "EP.01", title: "ATTACK ON TITAN", sub: "The Final Season" }
+    style: panels
     photos:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1274.jpg, caption: "the Attack on Titan room" }
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1275.jpg, caption: "a storyboard page" }
@@ -42,6 +47,8 @@ timeline:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1291.jpg, caption: "up close" }
   - time: "11:49 am"
     title: "Jujutsu Kaisen"
+    card: { kicker: "EP.02", title: "JUJUTSU KAISEN" }
+    style: panels
     photos:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1292.jpg, caption: "the Jujutsu Kaisen wall" }
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1293.jpg, caption: "the title in the middle of it all" }
@@ -63,6 +70,8 @@ timeline:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1309.jpg, caption: "more character sketches" }
   - time: "11:59 am"
     title: "Chainsaw Man – The Movie: Reze Arc"
+    card: { kicker: "EP.03", title: "CHAINSAW MAN", sub: "The Movie: Reze Arc" }
+    style: panels
     photos:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1310.jpg, caption: "a quiet room with a round window" }
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/mappa-1311.jpg, caption: "a background painting, lit from behind" }
@@ -86,6 +95,7 @@ timeline:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/p-1326.jpg, caption: "a Wind Breaker card set" }
   - time: "4:36 pm"
     title: "Akihabara"
+    card: { kicker: "AFTER THE CREDITS", title: "AKIHABARA" }
     photos:
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/akihabara-street.jpg, caption: "Akihabara" }
       - { src: /assets/images/journal/2026-10-06-exhibition-and-akihabara/p-1327.jpg, caption: "prices in the card cases" }
