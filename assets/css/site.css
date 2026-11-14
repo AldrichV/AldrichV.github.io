@@ -1069,6 +1069,7 @@ picture { display: contents; }
   --red: #c9372c;
   --on-pen: #ffffff;
   color-scheme: light;
+  color: var(--ink);
 }
 :root[data-theme="night"] .index-tabs button, .filed-under a { color: #16283b; }
 :root[data-theme="night"] .index-tabs .tab-n { color: #34495f; }
@@ -1110,6 +1111,7 @@ picture { display: contents; }
   --red: #c9372c;
   --on-pen: #ffffff;
   color-scheme: light;
+  color: var(--ink);
 }
 :root:not([data-theme="day"]) .index-tabs button, .filed-under a { color: #16283b; }
 :root:not([data-theme="day"]) .index-tabs .tab-n { color: #34495f; }

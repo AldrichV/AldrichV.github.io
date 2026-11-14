@@ -5,7 +5,7 @@
 .day .dh { position: relative; margin: 0 0 1.75rem; }
 .day .day-card, .day .day-end { list-style: none; }
 .day .day-card::before { display: none; }
-.dc-kicker, .dc-title, .dc-sub { display: block; }
+.dc-kicker, .dc-title, .dc-sub, .mp-title > span { display: block; }
 
 /* cards and photos ease in as they scroll into view (days.js adds .seen) */
 @media (prefers-reduced-motion: no-preference) {
