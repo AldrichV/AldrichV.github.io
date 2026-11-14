@@ -122,4 +122,69 @@
   <p class="ar-blink">PRESS START</p>
 </div>
 
+
+{%- when "postcard" -%}
+<div class="dh dh-postcard" aria-hidden="true">
+  <div class="pc-front">
+    <p class="pc-greet">Greetings from</p>
+    <p class="pc-big"><span>THE EAST COAST</span></p>
+    <svg class="pc-light" viewBox="0 0 60 110"><path d="M22 30 h16 l5 72 h-26 z" class="pl-tower"/><path d="M21 44 h18 M20 60 h20 M19 76 h22 M18 92 h24" class="pl-band"/><rect x="23" y="18" width="14" height="12" class="pl-lamp"/><path d="M20 18 h20 l-10 -10 z" class="pl-cap"/><path d="M37 22 L60 14 M37 26 L60 34" class="pl-beam"/></svg>
+  </div>
+  <div class="pc-back">
+    <div class="pc-stamps"><span>QC</span><span>NB</span><span>PE</span></div>
+    <p class="pc-postmark">{{ page.date | date: "%b %Y" | upcase }}</p>
+    <p class="pc-to">Montreal → New Brunswick →<br>Prince Edward Island → home</p>
+  </div>
+</div>
+
+{%- when "banff" -%}
+<div class="dh dh-banff" aria-hidden="true">
+  <svg viewBox="0 0 600 150" preserveAspectRatio="xMidYMax slice">
+    <rect width="600" height="150" class="bf-sky"/>
+    <path class="bf-far" d="M0 110 L60 60 L95 85 L150 25 L205 80 L240 55 L300 105 L350 40 L400 90 L450 30 L520 95 L560 65 L600 85 L600 150 L0 150 Z"/>
+    <path class="bf-snow" d="M150 25 L135 44 L148 40 L158 48 L165 38 Z M350 40 L338 55 L350 52 L360 58 Z M450 30 L436 48 L450 44 L462 52 L468 44 Z"/>
+    <g class="bf-pines">{%- for i in (0..24) -%}{%- assign x = i | times: 25 | plus: 4 -%}{%- assign h = i | modulo: 3 | times: 7 | plus: 26 -%}<path d="M{{ x }} 150 l9 -{{ h }} l9 {{ h }} z"/>{%- endfor -%}</g>
+  </svg>
+  <div class="bf-sign"><b>BANFF</b><span>Alberta</span></div>
+</div>
+
+{%- when "cntower" -%}
+<div class="dh dh-cn" aria-hidden="true">
+  <svg class="cn-art" viewBox="0 0 240 200">
+    <rect width="240" height="200" class="cn-sky"/>
+    <path class="cn-city" d="M0 200 V170 h14 v-12 h12 v18 h10 v-26 h14 v14 h10 v-8 h12 v20 h80 v-14 h12 v-20 h16 v24 h10 v-10 h14 v16 h12 v-6 h14 V200 Z"/>
+    <path class="cn-tower" d="M117 4 h2 v40 h3 l3 30 c10 2 12 6 12 10 c0 4 -4 6 -9 7 l3 105 h-26 l3 -105 c-5 -1 -9 -3 -9 -7 c0 -4 2 -8 12 -10 l3 -30 h3 z"/>
+  </svg>
+  <ol class="cn-levels">
+    <li><b>553 m</b> top of the tower</li>
+    <li><b>351 m</b> the restaurant</li>
+    <li class="here"><b>342 m</b> the glass floor</li>
+    <li><b>0 m</b> Front Street</li>
+  </ol>
+</div>
+
+{%- when "concert" -%}
+<div class="dh dh-ticket" aria-hidden="true">
+  <span class="beam b1"></span><span class="beam b2"></span><span class="beam b3"></span>
+  <div class="tk-main">
+    <p class="tk-admit">admit one · general admission</p>
+    <p class="tk-name">BRUNO MARS</p>
+    <p class="tk-tour">The Romantic Tour</p>
+    <p class="tk-where">Downsview Park · Toronto · {{ page.date | date: "%a %b %-d, %Y" }}</p>
+  </div>
+  <div class="tk-stub"><span>✿</span><small>{{ page.date | date: "%m.%d" }}</small></div>
+</div>
+
+{%- when "fair" -%}
+<div class="dh dh-fair" aria-hidden="true">
+  <div class="gingham"></div>
+  <svg class="rosette" viewBox="0 0 120 170">
+    <path class="rs-tail" d="M40 80 L28 165 L44 152 L54 168 L58 86 Z M80 80 L92 165 L76 152 L66 168 L62 86 Z"/>
+    <g class="rs-petals">{%- for i in (0..15) -%}{%- assign a = i | times: 22.5 -%}<ellipse cx="60" cy="22" rx="11" ry="20" transform="rotate({{ a }} 60 60)"/>{%- endfor -%}</g>
+    <circle cx="60" cy="60" r="27" class="rs-mid"/>
+    <text x="60" y="56" text-anchor="middle" class="rs-t1">FALL</text><text x="60" y="73" text-anchor="middle" class="rs-t2">FAIR</text>
+  </svg>
+  <p class="fair-banner"><b>Milton Fall Fair</b><span>{{ page.date | date: "%B %-d, %Y" }}</span></p>
+</div>
+
 {%- endcase -%}

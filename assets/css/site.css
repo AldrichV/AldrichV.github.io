@@ -963,6 +963,8 @@ picture { display: contents; }
 .trip-map-fig { margin: 0; max-width: 22rem; }
 .trip-map { overflow: hidden; width: 100%; height: auto; background: var(--lined); border: 1.5px solid var(--plate-edge); border-radius: var(--sketch); padding: 0.4rem; }
 .trip-map .pin { fill: var(--t, var(--tape-pink)); stroke-width: 2.2; }
+.trip-map .pin-sm { stroke-width: 1.6; }
+.canada-strip .trip-label b { font-size: 1rem; }
 .trip-map .pin-link text.h { font-size: 24px; }
 .trip-map .pin-link text.tsm { font-size: 15px; }
 .trip-map .pin-link:hover text.h, .trip-map .pin-link:focus text.h { text-decoration: underline; }

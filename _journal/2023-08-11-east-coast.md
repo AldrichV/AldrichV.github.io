@@ -4,6 +4,10 @@ date: 2023-08-11
 where: "Montreal → New Brunswick → PEI"
 tape: blue
 cover: { src: /assets/images/journal/2023-08-11-east-coast/point-prim.jpg, caption: "Point Prim Lighthouse" }
+canada: true
+strip: "East coast"
+theme: postcard
+end_card: { kicker: "P.S.", title: "Wish you were here" }
 timeline:
   - time: "Aug 11 · 4:44 pm"
     title: "Saint Joseph's Oratory, Montreal"
@@ -27,6 +31,7 @@ timeline:
       - { src: /assets/images/journal/2023-08-11-east-coast/night-street.jpg, caption: "a quiet street at night" }
   - time: "Aug 13 · 10:56 am"
     title: "Into Prince Edward Island"
+    card: { kicker: "Aug 13", title: "Prince Edward Island" }
     photos:
       - { src: /assets/images/journal/2023-08-11-east-coast/over-the-water.jpg, caption: "over the water" }
       - { src: /assets/images/journal/2023-08-11-east-coast/confederation-bridge.jpg, caption: "the Confederation Bridge" }
@@ -66,6 +71,7 @@ timeline:
       - { src: /assets/images/journal/2023-08-11-east-coast/point-prim-shore.jpg, caption: "the shore below" }
   - time: "Aug 14 · 8:23 am"
     title: "Hopewell Rocks"
+    card: { kicker: "Aug 14", title: "New Brunswick", sub: "on the way home" }
     photos:
       - { src: /assets/images/journal/2023-08-11-east-coast/hopewell-rocks.jpg, caption: "the rocks at low tide" }
       - { src: /assets/images/journal/2023-08-11-east-coast/flowerpot-rock.jpg, caption: "the flowerpot rock" }

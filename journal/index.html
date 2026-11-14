@@ -21,6 +21,13 @@ description: The other half of the notebook — everyday things, photos and what
     {% include trip-map.html trip=id %}
   </div>
   {% endfor %}
+  {% assign _ca = site.journal | where: 'canada', true %}
+  {% if _ca.size > 0 %}
+  <div class="trip-block">
+    {% include canada-strip.html %}
+    {% include canada-map.html %}
+  </div>
+  {% endif %}
 </section>
 {% endif %}
 

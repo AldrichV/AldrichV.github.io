@@ -1,0 +1,28 @@
+# Pins on the hand-drawn Canada map (_includes/canada-map.html).
+# x/y are positions on the sketch (600 wide); lx/ly place the labels; entries are journal file names without the date.
+pins:
+  - name: Banff
+    x: 101.5
+    y: 371.0
+    lx: 112
+    ly: 360
+    entries: [banff]
+  - name: Toronto area
+    x: 391.1
+    y: 486.2
+    lx: 378
+    ly: 432
+    anchor: end
+    entries: [cn-tower, concert, fall-fair]
+  - name: East coast
+    x: 516.7
+    y: 410.2
+    lx: 530
+    ly: 368
+    anchor: middle
+    route: "M391.1 486.2 L435.8 451.4 L494.5 409.7 L516.7 410.2 L507.7 420.2"
+    stops:
+      - { x: 435.8, y: 451.4, name: Montreal, lx: 440, ly: 474 }
+      - { x: 494.5, y: 409.7 }
+      - { x: 507.7, y: 420.2, name: Hopewell, lx: 500, ly: 444 }
+    entries: [east-coast]

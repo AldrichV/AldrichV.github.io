@@ -23,6 +23,7 @@ layout: default
     {% if page.theme %}{% include day-head.html %}{% endif %}
 
     {% if page.trip %}{% include trip-timeline.html trip=page.trip here=page.date %}{% endif %}
+    {% if page.canada %}{% include canada-strip.html %}{% endif %}
 
     {% if page.photos %}
     <div class="photo-spread">

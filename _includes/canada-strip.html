@@ -1,0 +1,19 @@
+{%- comment -%} A strip of the Canada trips in date order, styled like the Japan day strip. {%- endcomment -%}
+{%- assign _ca = site.journal | where: 'canada', true | sort: 'date' -%}
+{%- if _ca.size > 0 -%}
+{%- assign _first = _ca | first -%}{%- assign _last = _ca | last -%}
+<nav class="trip canada-strip" aria-label="Around Canada">
+  <p class="trip-head"><span class="trip-title">Around Canada</span> <span class="trip-dates">{{ _first.date | date: "%Y" }} – {{ _last.date | date: "%Y" }}</span></p>
+  <ol class="trip-days" style="--n: {{ _ca.size }}">
+    {%- for e in _ca -%}
+    <li class="trip-day has-entry{% if e.url == page.url %} is-here{% endif %}">
+      <a href="{{ e.url | relative_url }}" title="{{ e.title | escape }}"{% if e.url == page.url %} aria-current="page"{% endif %}>
+        <span class="trip-dot" aria-hidden="true"></span>
+        <span class="trip-label"><b>{{ e.date | date: "%Y" }}</b><small>{{ e.date | date: "%b" | downcase }}</small></span>
+        <span class="trip-place">{{ e.strip | default: e.title }}</span>
+      </a>
+    </li>
+    {%- endfor -%}
+  </ol>
+</nav>
+{%- endif -%}

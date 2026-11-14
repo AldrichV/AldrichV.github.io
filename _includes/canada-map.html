@@ -1,0 +1,31 @@
+{%- comment -%}
+  Hand-drawn map of Canada for the journal's Canada trips (entries with `canada: true`).
+  Pins are placed from `_data/canada.yml` (positions already projected onto the sketch).
+{%- endcomment -%}
+{%- assign _ca = site.journal | where: 'canada', true | sort: 'date' -%}
+<figure class="trip-map-fig">
+  <svg class="sketch-svg trip-map canada-map" viewBox="0 30 600 494" role="img" aria-label="Sketch map of Canada with the trips pinned: Banff, the Toronto area, and the road trip to the east coast" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#rough)">
+      {% include canada-outline.svg %}
+      {%- for p in site.data.canada.pins -%}
+      {%- if p.route -%}<path class="r dash" d="{{ p.route }}"/>{%- endif -%}
+      {%- endfor -%}
+      {%- for p in site.data.canada.pins -%}
+      {%- for s in p.stops -%}<circle class="r pin pin-sm" cx="{{ s.x }}" cy="{{ s.y }}" r="3.5"/>{%- endfor -%}
+      <circle class="r pin" cx="{{ p.x }}" cy="{{ p.y }}" r="6"/>
+      {%- endfor -%}
+    </g>
+    {%- for p in site.data.canada.pins -%}
+    {%- for s in p.stops -%}{%- if s.name -%}<text class="tsm map-ref" x="{{ s.lx }}" y="{{ s.ly }}" text-anchor="{{ s.anchor | default: 'start' }}">{{ s.name }}</text>{%- endif -%}{%- endfor -%}
+    {%- assign _ly = p.ly -%}
+    {%- for slug in p.entries -%}
+    {%- assign e = _ca | where_exp: "x", "x.slug == slug" | first -%}
+    {%- if e -%}
+    <a href="{{ e.url | relative_url }}" class="pin-link"><text class="h" x="{{ p.lx }}" y="{{ _ly }}" text-anchor="{{ p.anchor | default: 'start' }}">{{ e.strip | default: e.title }}</text><text class="tsm" x="{{ p.lx }}" y="{{ _ly | plus: 16 }}" text-anchor="{{ p.anchor | default: 'start' }}">{{ e.date | date: "%b %Y" }}</text></a>
+    {%- assign _ly = _ly | plus: 42 -%}
+    {%- endif -%}
+    {%- endfor -%}
+    {%- endfor -%}
+  </svg>
+  <figcaption>where the Canada trips happened · tap a name to open it</figcaption>
+</figure>
